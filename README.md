@@ -27,7 +27,7 @@
  
  Take Orders API as example, orders.ps1:
 
-\```
+```
 Import-Module .\generator.psm1
 Import-Module .\replace.psm1
 Import-Module .\factory.psm1
@@ -43,7 +43,7 @@ addcode $outputFolder'\'$clientname'.cs' 'HttpClient.SendAsync'  '            Pr
 
 createfactory '.\factory.template' $outputFolder $clientname'Factory.cs' $namespace $clientname
  
-\```
+```
 
 generate.psm1 uses AutoRest command to generate the Models and API interface.
 addcode.psm1 embeds one line code 'PrepareRequest(_httpRequest)' before the line of 'HttpClient.SendAsync', so we can chime in and add the required auth headers.
