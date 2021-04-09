@@ -21,7 +21,7 @@
 
   # run using command 'autorest' to check if installation worked
   autorest --help
- 
+ ```
 
  # Steps to generate client code
  
