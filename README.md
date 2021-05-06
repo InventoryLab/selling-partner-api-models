@@ -21,13 +21,13 @@
 
   # run using command 'autorest' to check if installation worked
   autorest --help
- 
+ ```
 
  # Steps to generate client code
  
  Take Orders API as example, orders.ps1:
 
-\```
+```
 Import-Module .\generator.psm1
 Import-Module .\replace.psm1
 Import-Module .\factory.psm1
@@ -43,12 +43,13 @@ addcode $outputFolder'\'$clientname'.cs' 'HttpClient.SendAsync'  '            Pr
 
 createfactory '.\factory.template' $outputFolder $clientname'Factory.cs' $namespace $clientname
  
-\```
+```
 
-generate.psm1 uses AutoRest command to generate the Models and API interface.
-addcode.psm1 embeds one line code 'PrepareRequest(_httpRequest)' before the line of 'HttpClient.SendAsync', so we can chime in and add the required auth headers.
-factory.psm1 generates another source code file that implements PrepareRequest and a static instance create function.
+* generate.psm1 uses AutoRest command to generate the Models and API interface.
+* addcode.psm1 embeds one line code 'PrepareRequest(_httpRequest)' before the line of 'HttpClient.SendAsync', so we can chime in and add the required auth headers.
+* factory.psm1 generates another source code file that implements PrepareRequest and a static instance create function.
 
+To generate the code for an API, such as Orders API, just execute orders.ps1, you will get all you need.
 
 ## Security
 
