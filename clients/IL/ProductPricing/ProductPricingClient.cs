@@ -312,7 +312,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -354,6 +354,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -372,6 +373,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -390,6 +392,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -408,6 +411,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -426,6 +430,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -444,6 +449,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -462,6 +468,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -480,6 +487,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -655,7 +663,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -697,6 +705,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -715,6 +724,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -733,6 +743,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -751,6 +762,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -769,6 +781,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -787,6 +800,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -805,6 +819,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -823,6 +838,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetPricingResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetPricingResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -972,7 +988,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1014,6 +1030,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1032,6 +1049,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1050,6 +1068,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1068,6 +1087,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1086,6 +1106,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1104,6 +1125,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1122,6 +1144,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1140,6 +1163,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1288,7 +1312,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1330,6 +1354,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1348,6 +1373,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1366,6 +1392,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1384,6 +1411,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1402,6 +1430,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1420,6 +1449,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1438,6 +1468,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1456,6 +1487,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOffersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOffersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {

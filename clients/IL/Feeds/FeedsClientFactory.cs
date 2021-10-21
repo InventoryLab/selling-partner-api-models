@@ -3,26 +3,22 @@ using System.Net.Http;
 
 namespace IL.Library.Amazon.SPAPI.Feeds
 {
-
     public partial class FeedsClient
     {
+        private readonly SPAPIUserKeyPair _sPAPIUserKeyPair;
         private readonly ISPAPIConfiguration _configuration;
-        private readonly IAccessTokenCredentials _accessTokenCredentials;
+        private readonly ITokenManagement _tokenManagement;
 
-        public FeedsClient(HttpClient client, ISPAPIConfiguration configuration, IAccessTokenCredentials accessTokenCredentials) : this(client,false)
+        public FeedsClient(SPAPIUserKeyPair sPAPIUserKeyPair, HttpClient client, ISPAPIConfiguration configuration, ITokenManagement tokenManagement) : this(client,false)
         {
+             _sPAPIUserKeyPair = sPAPIUserKeyPair;
             _configuration = configuration;
-            _accessTokenCredentials = accessTokenCredentials;
+            _tokenManagement = tokenManagement;
         }
 
-        public void PrepareRequest(HttpRequestMessage request)
+        public static IFeedsClient Create(SPAPIUserKeyPair sPAPIUserKeyPair, HttpClient httpClient, ISPAPIConfiguration configuration, ITokenManagement tokenManagement)
         {
-            AuthUtil.AddAuthorizationHeaders(new HttpRequestMessage().Headers, request, _configuration, _accessTokenCredentials);
-        }
-
-        public static IFeedsClient Create(HttpClient httpClient, ISPAPIConfiguration configuration, IAccessTokenCredentials accessTokenCredentials)
-        {
-            return new FeedsClient(httpClient, configuration, accessTokenCredentials);
+            return new FeedsClient(sPAPIUserKeyPair, httpClient, configuration, tokenManagement);
         }
     } 
 }

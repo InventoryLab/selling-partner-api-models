@@ -3,26 +3,22 @@ using System.Net.Http;
 
 namespace IL.Library.Amazon.SPAPI.Finances
 {
-
     public partial class FinancesClient
     {
+        private readonly SPAPIKeyPair _sPAPIKeyPair;
         private readonly ISPAPIConfiguration _configuration;
-        private readonly IAccessTokenCredentials _accessTokenCredentials;
+        private readonly ITokenManagement _tokenManagement;
 
-        public FinancesClient(HttpClient client, ISPAPIConfiguration configuration, IAccessTokenCredentials accessTokenCredentials) : this(client,false)
+        public FinancesClient(SPAPIKeyPair sPAPIKeyPair, HttpClient client, ISPAPIConfiguration configuration, ITokenManagement tokenManagement) : this(client,false)
         {
+             _sPAPIKeyPair = sPAPIKeyPair;
             _configuration = configuration;
-            _accessTokenCredentials = accessTokenCredentials;
+            _tokenManagement = tokenManagement;
         }
 
-        public void PrepareRequest(HttpRequestMessage request)
+        public static IFinancesClient Create(SPAPIKeyPair sPAPIKeyPair, HttpClient httpClient, ISPAPIConfiguration configuration, ITokenManagement tokenManagement)
         {
-            AuthUtil.AddAuthorizationHeaders(new HttpRequestMessage().Headers, request, _configuration, _accessTokenCredentials);
-        }
-
-        public static IFinancesClient Create(HttpClient httpClient, ISPAPIConfiguration configuration, IAccessTokenCredentials accessTokenCredentials)
-        {
-            return new FinancesClient(httpClient, configuration, accessTokenCredentials);
+            return new FinancesClient(sPAPIKeyPair, httpClient, configuration, tokenManagement);
         }
     } 
 }

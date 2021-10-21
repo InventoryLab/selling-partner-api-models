@@ -422,7 +422,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -464,6 +464,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrdersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrdersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -482,6 +483,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrdersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrdersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -500,6 +502,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrdersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrdersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -518,6 +521,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrdersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrdersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -536,6 +540,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrdersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrdersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -554,6 +559,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrdersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrdersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -572,6 +578,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrdersResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrdersResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -688,7 +695,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -730,6 +737,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -748,6 +756,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -766,6 +775,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -784,6 +794,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -802,6 +813,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -820,6 +832,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -838,6 +851,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -955,7 +969,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -997,6 +1011,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1015,6 +1030,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1033,6 +1049,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1051,6 +1068,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1069,6 +1087,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1087,6 +1106,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1105,6 +1125,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1222,7 +1243,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1264,6 +1285,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderAddressResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderAddressResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1282,6 +1304,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderAddressResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderAddressResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1300,6 +1323,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderAddressResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderAddressResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1318,6 +1342,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderAddressResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderAddressResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1336,6 +1361,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderAddressResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderAddressResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1354,6 +1380,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderAddressResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderAddressResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1372,6 +1399,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderAddressResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderAddressResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1512,7 +1540,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1554,6 +1582,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1572,6 +1601,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1590,6 +1620,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1608,6 +1639,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1626,6 +1658,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1644,6 +1677,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1662,6 +1696,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1792,7 +1827,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1834,6 +1869,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1852,6 +1888,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1870,6 +1907,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1888,6 +1926,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1906,6 +1945,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1924,6 +1964,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1942,6 +1983,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetOrderItemsBuyerInfoResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetOrderItemsBuyerInfoResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {

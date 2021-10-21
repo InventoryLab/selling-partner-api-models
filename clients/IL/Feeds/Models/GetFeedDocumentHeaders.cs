@@ -25,13 +25,10 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
         /// <summary>
         /// Initializes a new instance of the GetFeedDocumentHeaders class.
         /// </summary>
-        /// <param name="xAmznRateLimitLimit">Your rate limit (requests per
-        /// second) for this operation.</param>
-        /// <param name="xAmznRequestid">Unique request reference ID.</param>
-        public GetFeedDocumentHeaders(string xAmznRateLimitLimit = default(string), string xAmznRequestid = default(string))
+        /// <param name="xAmznRequestId">Unique request reference ID.</param>
+        public GetFeedDocumentHeaders(string xAmznRequestId = default(string))
         {
-            XAmznRateLimitLimit = xAmznRateLimitLimit;
-            XAmznRequestid = xAmznRequestid;
+            XAmznRequestId = xAmznRequestId;
             CustomInit();
         }
 
@@ -41,17 +38,10 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets your rate limit (requests per second) for this
-        /// operation.
-        /// </summary>
-        [JsonProperty(PropertyName = "x-amzn-RateLimit-Limit")]
-        public string XAmznRateLimitLimit { get; set; }
-
-        /// <summary>
         /// Gets or sets unique request reference ID.
         /// </summary>
-        [JsonProperty(PropertyName = "x-amzn-requestid")]
-        public string XAmznRequestid { get; set; }
+        [JsonProperty(PropertyName = "x-amzn-RequestId")]
+        public string XAmznRequestId { get; set; }
 
     }
 }

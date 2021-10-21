@@ -17,6 +17,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
         /// </summary>
         public FeedDocument()
         {
+            EncryptionDetails = new FeedDocumentEncryptionDetails();
             CustomInit();
         }
 
@@ -31,10 +32,11 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
         /// <param name="compressionAlgorithm">If present, the feed document
         /// contents are compressed using the indicated algorithm. Possible
         /// values include: 'GZIP'</param>
-        public FeedDocument(string feedDocumentId, string url, string compressionAlgorithm = default(string))
+        public FeedDocument(string feedDocumentId, string url, FeedDocumentEncryptionDetails encryptionDetails, string compressionAlgorithm = default(string))
         {
             FeedDocumentId = feedDocumentId;
             Url = url;
+            EncryptionDetails = encryptionDetails;
             CompressionAlgorithm = compressionAlgorithm;
             CustomInit();
         }
@@ -59,6 +61,11 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
         public string Url { get; set; }
 
         /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "encryptionDetails")]
+        public FeedDocumentEncryptionDetails EncryptionDetails { get; set; }
+
+        /// <summary>
         /// Gets or sets if present, the feed document contents are compressed
         /// using the indicated algorithm. Possible values include: 'GZIP'
         /// </summary>
@@ -80,6 +87,14 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
             if (Url == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Url");
+            }
+            if (EncryptionDetails == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "EncryptionDetails");
+            }
+            if (EncryptionDetails != null)
+            {
+                EncryptionDetails.Validate();
             }
         }
     }

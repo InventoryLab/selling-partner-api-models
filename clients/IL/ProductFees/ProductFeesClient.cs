@@ -274,7 +274,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -316,6 +316,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -334,6 +335,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -352,6 +354,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -370,6 +373,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -388,6 +392,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -406,6 +411,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -424,6 +430,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -442,6 +449,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -586,7 +594,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -628,6 +636,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -646,6 +655,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -664,6 +674,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -682,6 +693,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -700,6 +712,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -718,6 +731,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -736,6 +750,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -754,6 +769,7 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<GetMyFeesEstimateResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetMyFeesEstimateResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {

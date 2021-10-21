@@ -3,26 +3,22 @@ using System.Net.Http;
 
 namespace IL.Library.Amazon.SPAPI.Uploads
 {
-
     public partial class UploadsClient
     {
+        private readonly SPAPIKeyPair _sPAPIKeyPair;
         private readonly ISPAPIConfiguration _configuration;
-        private readonly IAccessTokenCredentials _accessTokenCredentials;
+        private readonly ITokenManagement _tokenManagement;
 
-        public UploadsClient(HttpClient client, ISPAPIConfiguration configuration, IAccessTokenCredentials accessTokenCredentials) : this(client,false)
+        public UploadsClient(SPAPIKeyPair sPAPIKeyPair, HttpClient client, ISPAPIConfiguration configuration, ITokenManagement tokenManagement) : this(client,false)
         {
+             _sPAPIKeyPair = sPAPIKeyPair;
             _configuration = configuration;
-            _accessTokenCredentials = accessTokenCredentials;
+            _tokenManagement = tokenManagement;
         }
 
-        public void PrepareRequest(HttpRequestMessage request)
+        public static IUploadsClient Create(SPAPIKeyPair sPAPIKeyPair, HttpClient httpClient, ISPAPIConfiguration configuration, ITokenManagement tokenManagement)
         {
-            AuthUtil.AddAuthorizationHeaders(new HttpRequestMessage().Headers, request, _configuration, _accessTokenCredentials);
-        }
-
-        public static IUploadsClient Create(HttpClient httpClient, ISPAPIConfiguration configuration, IAccessTokenCredentials accessTokenCredentials)
-        {
-            return new UploadsClient(httpClient, configuration, accessTokenCredentials);
+            return new UploadsClient(sPAPIKeyPair, httpClient, configuration, tokenManagement);
         }
     } 
 }

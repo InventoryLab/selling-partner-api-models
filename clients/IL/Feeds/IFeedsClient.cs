@@ -89,11 +89,11 @@ namespace IL.Library.Amazon.SPAPI.Feeds
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object,GetFeedsHeaders>> GetFeedsWithHttpMessagesAsync(IList<string> feedTypes = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, IList<string> processingStatuses = default(IList<string>), System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GetFeedsResponse,GetFeedsHeaders>> GetFeedsWithHttpMessagesAsync(IList<string> feedTypes = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, IList<string> processingStatuses = default(IList<string>), System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Creates a feed. Upload the contents of the feed document before
-        /// calling this operation.
+        /// Creates a feed. Encrypt and upload the contents of the feed
+        /// document before calling this operation.
         ///
         /// **Usage Plan:**
         ///
@@ -112,7 +112,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object,CreateFeedHeaders>> CreateFeedWithHttpMessagesAsync(CreateFeedSpecification body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<CreateFeedResponse,CreateFeedHeaders>> CreateFeedWithHttpMessagesAsync(CreateFeedSpecification body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Cancels the feed that you specify. Only feeds with
@@ -139,7 +139,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<ErrorList,CancelFeedHeaders>> CancelFeedWithHttpMessagesAsync(string feedId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<CancelFeedResponse,CancelFeedHeaders>> CancelFeedWithHttpMessagesAsync(string feedId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns feed details (including the resultDocumentId, if available)
@@ -164,13 +164,15 @@ namespace IL.Library.Amazon.SPAPI.Feeds
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object,GetFeedHeaders>> GetFeedWithHttpMessagesAsync(string feedId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GetFeedResponse,GetFeedHeaders>> GetFeedWithHttpMessagesAsync(string feedId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Creates a feed document for the feed type that you specify. This
-        /// operation returns a presigned URL for uploading the feed document
-        /// contents. It also returns a feedDocumentId value that you can pass
-        /// in with a subsequent call to the createFeed operation.
+        /// operation returns encryption details for encrypting the contents of
+        /// the document, as well as a presigned URL for uploading the
+        /// encrypted feed document contents. It also returns a feedDocumentId
+        /// value that you can pass in with a subsequent call to the createFeed
+        /// operation.
         ///
         /// **Usage Plan:**
         ///
@@ -189,10 +191,12 @@ namespace IL.Library.Amazon.SPAPI.Feeds
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object,CreateFeedDocumentHeaders>> CreateFeedDocumentWithHttpMessagesAsync(CreateFeedDocumentSpecification body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<CreateFeedDocumentResponse,CreateFeedDocumentHeaders>> CreateFeedDocumentWithHttpMessagesAsync(CreateFeedDocumentSpecification body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns the information required for retrieving a feed document's
+        /// contents. This includes a presigned URL for the feed document as
+        /// well as the information required to decrypt the document's
         /// contents.
         ///
         /// **Usage Plan:**
@@ -213,7 +217,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object,GetFeedDocumentHeaders>> GetFeedDocumentWithHttpMessagesAsync(string feedDocumentId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GetFeedDocumentResponse,GetFeedDocumentHeaders>> GetFeedDocumentWithHttpMessagesAsync(string feedDocumentId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

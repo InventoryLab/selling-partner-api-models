@@ -283,7 +283,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -325,6 +325,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventGroupsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventGroupsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -343,6 +344,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventGroupsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventGroupsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -361,6 +363,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventGroupsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventGroupsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -379,6 +382,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventGroupsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventGroupsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -397,6 +401,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventGroupsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventGroupsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -415,6 +420,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventGroupsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventGroupsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -433,6 +439,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventGroupsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventGroupsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -578,7 +585,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -620,6 +627,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -638,6 +646,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -656,6 +665,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -674,6 +684,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -692,6 +703,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -710,6 +722,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -728,6 +741,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -873,7 +887,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -915,6 +929,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -933,6 +948,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -951,6 +967,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -969,6 +986,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -987,6 +1005,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1005,6 +1024,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1023,6 +1043,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1176,7 +1197,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            PrepareRequest(_httpRequest);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1218,6 +1239,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1236,6 +1258,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1254,6 +1277,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1272,6 +1296,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1290,6 +1315,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1308,6 +1334,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1326,6 +1353,7 @@ namespace IL.Library.Amazon.SPAPI.Finances
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<ListFinancialEventsResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ListFinancialEventsResponse>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {

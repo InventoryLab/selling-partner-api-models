@@ -4,32 +4,38 @@
 // regenerated.
 // </auto-generated>
 
-namespace IL.Library.Amazon.SPAPI.Feeds.Models
+namespace IL.Library.Amazon.SPAPI.Notifications.Models
 {
-    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// A list of error responses returned when a request is unsuccessful.
+    /// The response schema for the getSubscriptionById operation.
     /// </summary>
-    public partial class ErrorList
+    public partial class GetSubscriptionByIdResponse
     {
         /// <summary>
-        /// Initializes a new instance of the ErrorList class.
+        /// Initializes a new instance of the GetSubscriptionByIdResponse
+        /// class.
         /// </summary>
-        public ErrorList()
+        public GetSubscriptionByIdResponse()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the ErrorList class.
+        /// Initializes a new instance of the GetSubscriptionByIdResponse
+        /// class.
         /// </summary>
-        public ErrorList(IList<Error> errors)
+        /// <param name="payload">The payload for the getSubscriptionById
+        /// operation.</param>
+        /// <param name="errors">An unexpected condition occurred during the
+        /// getSubscriptionById operation.</param>
+        public GetSubscriptionByIdResponse(Subscription payload = default(Subscription), IList<Error> errors = default(IList<Error>))
         {
+            Payload = payload;
             Errors = errors;
             CustomInit();
         }
@@ -40,6 +46,14 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets the payload for the getSubscriptionById operation.
+        /// </summary>
+        [JsonProperty(PropertyName = "payload")]
+        public Subscription Payload { get; set; }
+
+        /// <summary>
+        /// Gets or sets an unexpected condition occurred during the
+        /// getSubscriptionById operation.
         /// </summary>
         [JsonProperty(PropertyName = "errors")]
         public IList<Error> Errors { get; set; }
@@ -47,14 +61,14 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
-            if (Errors == null)
+            if (Payload != null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Errors");
+                Payload.Validate();
             }
             if (Errors != null)
             {

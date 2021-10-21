@@ -3,26 +3,22 @@ using System.Net.Http;
 
 namespace IL.Library.Amazon.SPAPI.Tokens
 {
-
     public partial class TokensClient
     {
+        private readonly SPAPIKeyPair _sPAPIKeyPair;
         private readonly ISPAPIConfiguration _configuration;
-        private readonly IAccessTokenCredentials _accessTokenCredentials;
+        private readonly ITokenManagement _tokenManagement;
 
-        public TokensClient(HttpClient client, ISPAPIConfiguration configuration, IAccessTokenCredentials accessTokenCredentials) : this(client,false)
+        public TokensClient(SPAPIKeyPair sPAPIKeyPair, HttpClient client, ISPAPIConfiguration configuration, ITokenManagement tokenManagement) : this(client,false)
         {
+             _sPAPIKeyPair = sPAPIKeyPair;
             _configuration = configuration;
-            _accessTokenCredentials = accessTokenCredentials;
+            _tokenManagement = tokenManagement;
         }
 
-        public void PrepareRequest(HttpRequestMessage request)
+        public static ITokensClient Create(SPAPIKeyPair sPAPIKeyPair, HttpClient httpClient, ISPAPIConfiguration configuration, ITokenManagement tokenManagement)
         {
-            AuthUtil.AddAuthorizationHeaders(new HttpRequestMessage().Headers, request, _configuration, _accessTokenCredentials);
-        }
-
-        public static ITokensClient Create(HttpClient httpClient, ISPAPIConfiguration configuration, IAccessTokenCredentials accessTokenCredentials)
-        {
-            return new TokensClient(httpClient, configuration, accessTokenCredentials);
+            return new TokensClient(sPAPIKeyPair, httpClient, configuration, tokenManagement);
         }
     } 
 }

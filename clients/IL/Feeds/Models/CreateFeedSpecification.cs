@@ -29,8 +29,8 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
         /// <param name="marketplaceIds">A list of identifiers for marketplaces
         /// that you want the feed to be applied to.</param>
         /// <param name="inputFeedDocumentId">The document identifier returned
-        /// by the createFeedDocument operation. Upload the feed document
-        /// contents before calling the createFeed operation.</param>
+        /// by the createFeedDocument operation. Encrypt and upload the feed
+        /// document contents before calling the createFeed operation.</param>
         public CreateFeedSpecification(string feedType, IList<string> marketplaceIds, string inputFeedDocumentId, IDictionary<string, string> feedOptions = default(IDictionary<string, string>))
         {
             FeedType = feedType;
@@ -60,8 +60,8 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
 
         /// <summary>
         /// Gets or sets the document identifier returned by the
-        /// createFeedDocument operation. Upload the feed document contents
-        /// before calling the createFeed operation.
+        /// createFeedDocument operation. Encrypt and upload the feed document
+        /// contents before calling the createFeed operation.
         /// </summary>
         [JsonProperty(PropertyName = "inputFeedDocumentId")]
         public string InputFeedDocumentId { get; set; }
