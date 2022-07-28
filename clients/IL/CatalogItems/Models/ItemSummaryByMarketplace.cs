@@ -28,33 +28,47 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
         /// Initializes a new instance of the ItemSummaryByMarketplace class.
         /// </summary>
         /// <param name="marketplaceId">Amazon marketplace identifier.</param>
-        /// <param name="brandName">Name of the brand associated with an Amazon
+        /// <param name="brand">Name of the brand associated with an Amazon
         /// catalog item.</param>
-        /// <param name="browseNode">Identifier of the browse node associated
-        /// with an Amazon catalog item.</param>
-        /// <param name="colorName">Name of the color associated with an Amazon
+        /// <param name="browseClassification">Classification (browse node)
+        /// associated with an Amazon catalog item.</param>
+        /// <param name="color">Name of the color associated with an Amazon
         /// catalog item.</param>
+        /// <param name="itemClassification">Classification type associated
+        /// with the Amazon catalog item. Possible values include:
+        /// 'BASE_PRODUCT', 'OTHER', 'PRODUCT_BUNDLE',
+        /// 'VARIATION_PARENT'</param>
         /// <param name="itemName">Name, or title, associated with an Amazon
         /// catalog item.</param>
         /// <param name="manufacturer">Name of the manufacturer associated with
         /// an Amazon catalog item.</param>
         /// <param name="modelNumber">Model number associated with an Amazon
         /// catalog item.</param>
-        /// <param name="sizeName">Name of the size associated with an Amazon
+        /// <param name="packageQuantity">Quantity of an Amazon catalog item in
+        /// one package.</param>
+        /// <param name="partNumber">Part number associated with an Amazon
         /// catalog item.</param>
-        /// <param name="styleName">Name of the style associated with an Amazon
+        /// <param name="size">Name of the size associated with an Amazon
         /// catalog item.</param>
-        public ItemSummaryByMarketplace(string marketplaceId, string brandName = default(string), string browseNode = default(string), string colorName = default(string), string itemName = default(string), string manufacturer = default(string), string modelNumber = default(string), string sizeName = default(string), string styleName = default(string))
+        /// <param name="style">Name of the style associated with an Amazon
+        /// catalog item.</param>
+        /// <param name="websiteDisplayGroup">Name of the website display group
+        /// associated with an Amazon catalog item.</param>
+        public ItemSummaryByMarketplace(string marketplaceId, string brand = default(string), ItemBrowseClassification browseClassification = default(ItemBrowseClassification), string color = default(string), string itemClassification = default(string), string itemName = default(string), string manufacturer = default(string), string modelNumber = default(string), int? packageQuantity = default(int?), string partNumber = default(string), string size = default(string), string style = default(string), string websiteDisplayGroup = default(string))
         {
             MarketplaceId = marketplaceId;
-            BrandName = brandName;
-            BrowseNode = browseNode;
-            ColorName = colorName;
+            Brand = brand;
+            BrowseClassification = browseClassification;
+            Color = color;
+            ItemClassification = itemClassification;
             ItemName = itemName;
             Manufacturer = manufacturer;
             ModelNumber = modelNumber;
-            SizeName = sizeName;
-            StyleName = styleName;
+            PackageQuantity = packageQuantity;
+            PartNumber = partNumber;
+            Size = size;
+            Style = style;
+            WebsiteDisplayGroup = websiteDisplayGroup;
             CustomInit();
         }
 
@@ -73,22 +87,30 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
         /// Gets or sets name of the brand associated with an Amazon catalog
         /// item.
         /// </summary>
-        [JsonProperty(PropertyName = "brandName")]
-        public string BrandName { get; set; }
+        [JsonProperty(PropertyName = "brand")]
+        public string Brand { get; set; }
 
         /// <summary>
-        /// Gets or sets identifier of the browse node associated with an
-        /// Amazon catalog item.
+        /// Gets or sets classification (browse node) associated with an Amazon
+        /// catalog item.
         /// </summary>
-        [JsonProperty(PropertyName = "browseNode")]
-        public string BrowseNode { get; set; }
+        [JsonProperty(PropertyName = "browseClassification")]
+        public ItemBrowseClassification BrowseClassification { get; set; }
 
         /// <summary>
         /// Gets or sets name of the color associated with an Amazon catalog
         /// item.
         /// </summary>
-        [JsonProperty(PropertyName = "colorName")]
-        public string ColorName { get; set; }
+        [JsonProperty(PropertyName = "color")]
+        public string Color { get; set; }
+
+        /// <summary>
+        /// Gets or sets classification type associated with the Amazon catalog
+        /// item. Possible values include: 'BASE_PRODUCT', 'OTHER',
+        /// 'PRODUCT_BUNDLE', 'VARIATION_PARENT'
+        /// </summary>
+        [JsonProperty(PropertyName = "itemClassification")]
+        public string ItemClassification { get; set; }
 
         /// <summary>
         /// Gets or sets name, or title, associated with an Amazon catalog
@@ -111,18 +133,37 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
         public string ModelNumber { get; set; }
 
         /// <summary>
+        /// Gets or sets quantity of an Amazon catalog item in one package.
+        /// </summary>
+        [JsonProperty(PropertyName = "packageQuantity")]
+        public int? PackageQuantity { get; set; }
+
+        /// <summary>
+        /// Gets or sets part number associated with an Amazon catalog item.
+        /// </summary>
+        [JsonProperty(PropertyName = "partNumber")]
+        public string PartNumber { get; set; }
+
+        /// <summary>
         /// Gets or sets name of the size associated with an Amazon catalog
         /// item.
         /// </summary>
-        [JsonProperty(PropertyName = "sizeName")]
-        public string SizeName { get; set; }
+        [JsonProperty(PropertyName = "size")]
+        public string Size { get; set; }
 
         /// <summary>
         /// Gets or sets name of the style associated with an Amazon catalog
         /// item.
         /// </summary>
-        [JsonProperty(PropertyName = "styleName")]
-        public string StyleName { get; set; }
+        [JsonProperty(PropertyName = "style")]
+        public string Style { get; set; }
+
+        /// <summary>
+        /// Gets or sets name of the website display group associated with an
+        /// Amazon catalog item.
+        /// </summary>
+        [JsonProperty(PropertyName = "websiteDisplayGroup")]
+        public string WebsiteDisplayGroup { get; set; }
 
         /// <summary>
         /// Validate the object.
@@ -135,6 +176,10 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
             if (MarketplaceId == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "MarketplaceId");
+            }
+            if (BrowseClassification != null)
+            {
+                BrowseClassification.Validate();
             }
         }
     }

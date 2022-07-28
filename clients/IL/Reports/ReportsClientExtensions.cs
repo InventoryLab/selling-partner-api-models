@@ -65,7 +65,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// include this token as the only parameter. Specifying nextToken with any
             /// other parameters will cause the request to fail.
             /// </param>
-            public static GetReportsResponse GetReports(this IReportsClient operations, IList<string> reportTypes = default(IList<string>), IList<string> processingStatuses = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string))
+            public static object GetReports(this IReportsClient operations, IList<string> reportTypes = default(IList<string>), IList<string> processingStatuses = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string))
             {
                 return operations.GetReportsAsync(reportTypes, processingStatuses, marketplaceIds, pageSize, createdSince, createdUntil, nextToken).GetAwaiter().GetResult();
             }
@@ -121,7 +121,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetReportsResponse> GetReportsAsync(this IReportsClient operations, IList<string> reportTypes = default(IList<string>), IList<string> processingStatuses = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetReportsAsync(this IReportsClient operations, IList<string> reportTypes = default(IList<string>), IList<string> processingStatuses = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetReportsWithHttpMessagesAsync(reportTypes, processingStatuses, marketplaceIds, pageSize, createdSince, createdUntil, nextToken, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -146,7 +146,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// </param>
             /// <param name='body'>
             /// </param>
-            public static CreateReportResponse CreateReport(this IReportsClient operations, CreateReportSpecification body)
+            public static object CreateReport(this IReportsClient operations, CreateReportSpecification body)
             {
                 return operations.CreateReportAsync(body).GetAwaiter().GetResult();
             }
@@ -171,7 +171,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CreateReportResponse> CreateReportAsync(this IReportsClient operations, CreateReportSpecification body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> CreateReportAsync(this IReportsClient operations, CreateReportSpecification body, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateReportWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -200,7 +200,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// The identifier for the report. This identifier is unique only in
             /// combination with a seller ID.
             /// </param>
-            public static CancelReportResponse CancelReport(this IReportsClient operations, string reportId)
+            public static ErrorList CancelReport(this IReportsClient operations, string reportId)
             {
                 return operations.CancelReportAsync(reportId).GetAwaiter().GetResult();
             }
@@ -229,7 +229,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CancelReportResponse> CancelReportAsync(this IReportsClient operations, string reportId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorList> CancelReportAsync(this IReportsClient operations, string reportId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CancelReportWithHttpMessagesAsync(reportId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -257,7 +257,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// The identifier for the report. This identifier is unique only in
             /// combination with a seller ID.
             /// </param>
-            public static GetReportResponse GetReport(this IReportsClient operations, string reportId)
+            public static object GetReport(this IReportsClient operations, string reportId)
             {
                 return operations.GetReportAsync(reportId).GetAwaiter().GetResult();
             }
@@ -285,7 +285,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetReportResponse> GetReportAsync(this IReportsClient operations, string reportId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetReportAsync(this IReportsClient operations, string reportId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetReportWithHttpMessagesAsync(reportId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -311,7 +311,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// <param name='reportTypes'>
             /// A list of report types used to filter report schedules.
             /// </param>
-            public static GetReportSchedulesResponse GetReportSchedules(this IReportsClient operations, IList<string> reportTypes)
+            public static object GetReportSchedules(this IReportsClient operations, IList<string> reportTypes)
             {
                 return operations.GetReportSchedulesAsync(reportTypes).GetAwaiter().GetResult();
             }
@@ -337,7 +337,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetReportSchedulesResponse> GetReportSchedulesAsync(this IReportsClient operations, IList<string> reportTypes, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetReportSchedulesAsync(this IReportsClient operations, IList<string> reportTypes, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetReportSchedulesWithHttpMessagesAsync(reportTypes, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -364,7 +364,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// </param>
             /// <param name='body'>
             /// </param>
-            public static CreateReportScheduleResponse CreateReportSchedule(this IReportsClient operations, CreateReportScheduleSpecification body)
+            public static object CreateReportSchedule(this IReportsClient operations, CreateReportScheduleSpecification body)
             {
                 return operations.CreateReportScheduleAsync(body).GetAwaiter().GetResult();
             }
@@ -391,7 +391,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CreateReportScheduleResponse> CreateReportScheduleAsync(this IReportsClient operations, CreateReportScheduleSpecification body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> CreateReportScheduleAsync(this IReportsClient operations, CreateReportScheduleSpecification body, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateReportScheduleWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -418,7 +418,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// The identifier for the report schedule. This identifier is unique only in
             /// combination with a seller ID.
             /// </param>
-            public static CancelReportScheduleResponse CancelReportSchedule(this IReportsClient operations, string reportScheduleId)
+            public static ErrorList CancelReportSchedule(this IReportsClient operations, string reportScheduleId)
             {
                 return operations.CancelReportScheduleAsync(reportScheduleId).GetAwaiter().GetResult();
             }
@@ -445,7 +445,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CancelReportScheduleResponse> CancelReportScheduleAsync(this IReportsClient operations, string reportScheduleId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorList> CancelReportScheduleAsync(this IReportsClient operations, string reportScheduleId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CancelReportScheduleWithHttpMessagesAsync(reportScheduleId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -472,7 +472,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// The identifier for the report schedule. This identifier is unique only in
             /// combination with a seller ID.
             /// </param>
-            public static GetReportScheduleResponse GetReportSchedule(this IReportsClient operations, string reportScheduleId)
+            public static object GetReportSchedule(this IReportsClient operations, string reportScheduleId)
             {
                 return operations.GetReportScheduleAsync(reportScheduleId).GetAwaiter().GetResult();
             }
@@ -499,7 +499,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetReportScheduleResponse> GetReportScheduleAsync(this IReportsClient operations, string reportScheduleId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetReportScheduleAsync(this IReportsClient operations, string reportScheduleId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetReportScheduleWithHttpMessagesAsync(reportScheduleId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -509,8 +509,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
 
             /// <summary>
             /// Returns the information required for retrieving a report document's
-            /// contents. This includes a presigned URL for the report document as well as
-            /// the information required to decrypt the document's contents.
+            /// contents.
             ///
             /// **Usage Plan:**
             ///
@@ -527,15 +526,14 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// <param name='reportDocumentId'>
             /// The identifier for the report document.
             /// </param>
-            public static GetReportDocumentResponse GetReportDocument(this IReportsClient operations, string reportDocumentId)
+            public static object GetReportDocument(this IReportsClient operations, string reportDocumentId)
             {
                 return operations.GetReportDocumentAsync(reportDocumentId).GetAwaiter().GetResult();
             }
 
             /// <summary>
             /// Returns the information required for retrieving a report document's
-            /// contents. This includes a presigned URL for the report document as well as
-            /// the information required to decrypt the document's contents.
+            /// contents.
             ///
             /// **Usage Plan:**
             ///
@@ -555,7 +553,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetReportDocumentResponse> GetReportDocumentAsync(this IReportsClient operations, string reportDocumentId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetReportDocumentAsync(this IReportsClient operations, string reportDocumentId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetReportDocumentWithHttpMessagesAsync(reportDocumentId, null, cancellationToken).ConfigureAwait(false))
                 {

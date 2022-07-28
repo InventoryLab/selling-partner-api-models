@@ -8,6 +8,8 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
 {
     using Microsoft.Rest;
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     public partial class OfferType
@@ -42,10 +44,18 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// Box, or Other.</param>
         /// <param name="sellerSKU">The seller stock keeping unit (SKU) of the
         /// item.</param>
-        public OfferType(PriceType buyingPrice, MoneyType regularPrice, string fulfillmentChannel, string itemCondition, string itemSubCondition, string sellerSKU)
+        /// <param name="offerTypeProperty">Indicates the type of customer that
+        /// the offer is valid for. Possible values include: 'B2C',
+        /// 'B2B'</param>
+        /// <param name="businessPrice">The current listing price for Business
+        /// buyers.</param>
+        public OfferType(PriceType buyingPrice, MoneyType regularPrice, string fulfillmentChannel, string itemCondition, string itemSubCondition, string sellerSKU, string offerTypeProperty = default(string), MoneyType businessPrice = default(MoneyType), IList<QuantityDiscountPriceType> quantityDiscountPrices = default(IList<QuantityDiscountPriceType>))
         {
+            OfferTypeProperty = offerTypeProperty;
             BuyingPrice = buyingPrice;
             RegularPrice = regularPrice;
+            BusinessPrice = businessPrice;
+            QuantityDiscountPrices = quantityDiscountPrices;
             FulfillmentChannel = fulfillmentChannel;
             ItemCondition = itemCondition;
             ItemSubCondition = itemSubCondition;
@@ -57,6 +67,13 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// Gets or sets indicates the type of customer that the offer is valid
+        /// for. Possible values include: 'B2C', 'B2B'
+        /// </summary>
+        [JsonProperty(PropertyName = "offerType")]
+        public string OfferTypeProperty { get; set; }
 
         /// <summary>
         /// Gets or sets contains pricing information that includes promotions
@@ -71,6 +88,17 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// </summary>
         [JsonProperty(PropertyName = "RegularPrice")]
         public MoneyType RegularPrice { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current listing price for Business buyers.
+        /// </summary>
+        [JsonProperty(PropertyName = "businessPrice")]
+        public MoneyType BusinessPrice { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "quantityDiscountPrices")]
+        public IList<QuantityDiscountPriceType> QuantityDiscountPrices { get; set; }
 
         /// <summary>
         /// Gets or sets the fulfillment channel for the offer listing.
@@ -138,6 +166,16 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
             if (BuyingPrice != null)
             {
                 BuyingPrice.Validate();
+            }
+            if (QuantityDiscountPrices != null)
+            {
+                foreach (var element in QuantityDiscountPrices)
+                {
+                    if (element != null)
+                    {
+                        element.Validate();
+                    }
+                }
             }
         }
     }

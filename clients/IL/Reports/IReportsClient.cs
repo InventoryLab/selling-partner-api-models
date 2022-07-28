@@ -90,7 +90,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<GetReportsResponse,GetReportsHeaders>> GetReportsWithHttpMessagesAsync(IList<string> reportTypes = default(IList<string>), IList<string> processingStatuses = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object,GetReportsHeaders>> GetReportsWithHttpMessagesAsync(IList<string> reportTypes = default(IList<string>), IList<string> processingStatuses = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Creates a report.
@@ -112,7 +112,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<CreateReportResponse,CreateReportHeaders>> CreateReportWithHttpMessagesAsync(CreateReportSpecification body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object,CreateReportHeaders>> CreateReportWithHttpMessagesAsync(CreateReportSpecification body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Cancels the report that you specify. Only reports with
@@ -139,7 +139,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<CancelReportResponse,CancelReportHeaders>> CancelReportWithHttpMessagesAsync(string reportId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<ErrorList,CancelReportHeaders>> CancelReportWithHttpMessagesAsync(string reportId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns report details (including the reportDocumentId, if
@@ -164,7 +164,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<GetReportResponse,GetReportHeaders>> GetReportWithHttpMessagesAsync(string reportId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object,GetReportHeaders>> GetReportWithHttpMessagesAsync(string reportId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns report schedule details that match the filters that you
@@ -188,7 +188,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<GetReportSchedulesResponse,GetReportSchedulesHeaders>> GetReportSchedulesWithHttpMessagesAsync(IList<string> reportTypes, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object,GetReportSchedulesHeaders>> GetReportSchedulesWithHttpMessagesAsync(IList<string> reportTypes, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Creates a report schedule. If a report schedule with the same
@@ -212,7 +212,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<CreateReportScheduleResponse,CreateReportScheduleHeaders>> CreateReportScheduleWithHttpMessagesAsync(CreateReportScheduleSpecification body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object,CreateReportScheduleHeaders>> CreateReportScheduleWithHttpMessagesAsync(CreateReportScheduleSpecification body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Cancels the report schedule that you specify.
@@ -236,7 +236,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<CancelReportScheduleResponse,CancelReportScheduleHeaders>> CancelReportScheduleWithHttpMessagesAsync(string reportScheduleId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<ErrorList,CancelReportScheduleHeaders>> CancelReportScheduleWithHttpMessagesAsync(string reportScheduleId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns report schedule details for the report schedule that you
@@ -261,12 +261,10 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<GetReportScheduleResponse,GetReportScheduleHeaders>> GetReportScheduleWithHttpMessagesAsync(string reportScheduleId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object,GetReportScheduleHeaders>> GetReportScheduleWithHttpMessagesAsync(string reportScheduleId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns the information required for retrieving a report document's
-        /// contents. This includes a presigned URL for the report document as
-        /// well as the information required to decrypt the document's
         /// contents.
         ///
         /// **Usage Plan:**
@@ -287,7 +285,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<GetReportDocumentResponse,GetReportDocumentHeaders>> GetReportDocumentWithHttpMessagesAsync(string reportDocumentId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object,GetReportDocumentHeaders>> GetReportDocumentWithHttpMessagesAsync(string reportDocumentId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

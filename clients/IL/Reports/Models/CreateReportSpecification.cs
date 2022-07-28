@@ -12,6 +12,9 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Information required to create the report.
+    /// </summary>
     public partial class CreateReportSpecification
     {
         /// <summary>

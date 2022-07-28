@@ -18,54 +18,175 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
     public static partial class CatalogItemsClientExtensions
     {
             /// <summary>
-            /// Retrieves details for an item in the Amazon catalog.
+            /// Search for and return a list of Amazon catalog items and associated
+            /// information either by identifier or by keywords.
             ///
             /// **Usage Plans:**
             ///
-            /// | Plan type | Rate (requests per second) | Burst |
-            /// | ---- | ---- | ---- |
-            /// |Default| 5 | 5 |
-            /// |Selling partner specific| Variable | Variable |
+            /// | Rate (requests per second) | Burst |
+            /// | ---- | ---- |
+            /// | 5 | 5 |
             ///
-            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
-            /// limits that were applied to the requested operation. Rate limits for some
-            /// selling partners will vary from the default rate and burst shown in the
-            /// table above. For more information, see "Usage Plans and Rate Limits" in the
-            /// Selling Partner API documentation.
+            /// The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+            /// limits that were applied to the requested operation, when available. The
+            /// table above indicates the default rate and burst values for this operation.
+            /// Selling partners whose business demands require higher throughput may
+            /// observe higher rate and burst values than those shown here. For more
+            /// information, refer to the [Usage Plans and Rate Limits in the Selling
+            /// Partner API](doc:usage-plans-and-rate-limits-in-the-sp-api).
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='asin'>
-            /// The Amazon Standard Identification Number (ASIN) of the item.
-            /// </param>
             /// <param name='marketplaceIds'>
-            /// A comma-delimited list of Amazon marketplace identifiers. Data sets in the
-            /// response contain data only for the specified marketplaces.
+            /// A comma-delimited list of Amazon marketplace identifiers for the request.
+            /// </param>
+            /// <param name='identifiers'>
+            /// A comma-delimited list of product identifiers to search the Amazon catalog
+            /// for. **Note:** Cannot be used with `keywords`.
+            /// </param>
+            /// <param name='identifiersType'>
+            /// Type of product identifiers to search the Amazon catalog for. **Note:**
+            /// Required when `identifiers` are provided. Possible values include: 'ASIN',
+            /// 'EAN', 'GTIN', 'ISBN', 'JAN', 'MINSAN', 'SKU', 'UPC'
             /// </param>
             /// <param name='includedData'>
-            /// A comma-delimited list of data sets to include in the response.
+            /// A comma-delimited list of data sets to include in the response. Default:
+            /// `summaries`.
             /// </param>
-            public static object GetCatalogItem(this ICatalogItemsClient operations, string asin, IList<string> marketplaceIds, IList<string> includedData = default(IList<string>))
+            /// <param name='locale'>
+            /// Locale for retrieving localized summaries. Defaults to the primary locale
+            /// of the marketplace.
+            /// </param>
+            /// <param name='sellerId'>
+            /// A selling partner identifier, such as a seller account or vendor code.
+            /// **Note:** Required when `identifiersType` is `SKU`.
+            /// </param>
+            /// <param name='keywords'>
+            /// A comma-delimited list of words to search the Amazon catalog for. **Note:**
+            /// Cannot be used with `identifiers`.
+            /// </param>
+            /// <param name='brandNames'>
+            /// A comma-delimited list of brand names to limit the search for
+            /// `keywords`-based queries. **Note:** Cannot be used with `identifiers`.
+            /// </param>
+            /// <param name='classificationIds'>
+            /// A comma-delimited list of classification identifiers to limit the search
+            /// for `keywords`-based queries. **Note:** Cannot be used with `identifiers`.
+            /// </param>
+            /// <param name='pageSize'>
+            /// Number of results to be returned per page.
+            /// </param>
+            /// <param name='pageToken'>
+            /// A token to fetch a certain page when there are multiple pages worth of
+            /// results.
+            /// </param>
+            /// <param name='keywordsLocale'>
+            /// The language of the keywords provided for `keywords`-based queries.
+            /// Defaults to the primary locale of the marketplace. **Note:** Cannot be used
+            /// with `identifiers`.
+            /// </param>
+            public static object SearchCatalogItems(this ICatalogItemsClient operations, IList<string> marketplaceIds, IList<string> identifiers = default(IList<string>), string identifiersType = default(string), IList<string> includedData = default(IList<string>), string locale = default(string), string sellerId = default(string), IList<string> keywords = default(IList<string>), IList<string> brandNames = default(IList<string>), IList<string> classificationIds = default(IList<string>), int? pageSize = 10, string pageToken = default(string), string keywordsLocale = default(string))
             {
-                return operations.GetCatalogItemAsync(asin, marketplaceIds, includedData).GetAwaiter().GetResult();
+                return operations.SearchCatalogItemsAsync(marketplaceIds, identifiers, identifiersType, includedData, locale, sellerId, keywords, brandNames, classificationIds, pageSize, pageToken, keywordsLocale).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Search for and return a list of Amazon catalog items and associated
+            /// information either by identifier or by keywords.
+            ///
+            /// **Usage Plans:**
+            ///
+            /// | Rate (requests per second) | Burst |
+            /// | ---- | ---- |
+            /// | 5 | 5 |
+            ///
+            /// The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+            /// limits that were applied to the requested operation, when available. The
+            /// table above indicates the default rate and burst values for this operation.
+            /// Selling partners whose business demands require higher throughput may
+            /// observe higher rate and burst values than those shown here. For more
+            /// information, refer to the [Usage Plans and Rate Limits in the Selling
+            /// Partner API](doc:usage-plans-and-rate-limits-in-the-sp-api).
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='marketplaceIds'>
+            /// A comma-delimited list of Amazon marketplace identifiers for the request.
+            /// </param>
+            /// <param name='identifiers'>
+            /// A comma-delimited list of product identifiers to search the Amazon catalog
+            /// for. **Note:** Cannot be used with `keywords`.
+            /// </param>
+            /// <param name='identifiersType'>
+            /// Type of product identifiers to search the Amazon catalog for. **Note:**
+            /// Required when `identifiers` are provided. Possible values include: 'ASIN',
+            /// 'EAN', 'GTIN', 'ISBN', 'JAN', 'MINSAN', 'SKU', 'UPC'
+            /// </param>
+            /// <param name='includedData'>
+            /// A comma-delimited list of data sets to include in the response. Default:
+            /// `summaries`.
+            /// </param>
+            /// <param name='locale'>
+            /// Locale for retrieving localized summaries. Defaults to the primary locale
+            /// of the marketplace.
+            /// </param>
+            /// <param name='sellerId'>
+            /// A selling partner identifier, such as a seller account or vendor code.
+            /// **Note:** Required when `identifiersType` is `SKU`.
+            /// </param>
+            /// <param name='keywords'>
+            /// A comma-delimited list of words to search the Amazon catalog for. **Note:**
+            /// Cannot be used with `identifiers`.
+            /// </param>
+            /// <param name='brandNames'>
+            /// A comma-delimited list of brand names to limit the search for
+            /// `keywords`-based queries. **Note:** Cannot be used with `identifiers`.
+            /// </param>
+            /// <param name='classificationIds'>
+            /// A comma-delimited list of classification identifiers to limit the search
+            /// for `keywords`-based queries. **Note:** Cannot be used with `identifiers`.
+            /// </param>
+            /// <param name='pageSize'>
+            /// Number of results to be returned per page.
+            /// </param>
+            /// <param name='pageToken'>
+            /// A token to fetch a certain page when there are multiple pages worth of
+            /// results.
+            /// </param>
+            /// <param name='keywordsLocale'>
+            /// The language of the keywords provided for `keywords`-based queries.
+            /// Defaults to the primary locale of the marketplace. **Note:** Cannot be used
+            /// with `identifiers`.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> SearchCatalogItemsAsync(this ICatalogItemsClient operations, IList<string> marketplaceIds, IList<string> identifiers = default(IList<string>), string identifiersType = default(string), IList<string> includedData = default(IList<string>), string locale = default(string), string sellerId = default(string), IList<string> keywords = default(IList<string>), IList<string> brandNames = default(IList<string>), IList<string> classificationIds = default(IList<string>), int? pageSize = 10, string pageToken = default(string), string keywordsLocale = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.SearchCatalogItemsWithHttpMessagesAsync(marketplaceIds, identifiers, identifiersType, includedData, locale, sellerId, keywords, brandNames, classificationIds, pageSize, pageToken, keywordsLocale, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
             /// Retrieves details for an item in the Amazon catalog.
             ///
-            /// **Usage Plans:**
+            /// **Usage Plan:**
             ///
-            /// | Plan type | Rate (requests per second) | Burst |
-            /// | ---- | ---- | ---- |
-            /// |Default| 5 | 5 |
-            /// |Selling partner specific| Variable | Variable |
+            /// | Rate (requests per second) | Burst |
+            /// | ---- | ---- |
+            /// | 5 | 5 |
             ///
-            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
-            /// limits that were applied to the requested operation. Rate limits for some
-            /// selling partners will vary from the default rate and burst shown in the
-            /// table above. For more information, see "Usage Plans and Rate Limits" in the
-            /// Selling Partner API documentation.
+            /// The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+            /// limits that were applied to the requested operation, when available. The
+            /// table above indicates the default rate and burst values for this operation.
+            /// Selling partners whose business demands require higher throughput may
+            /// observe higher rate and burst values than those shown here. For more
+            /// information, refer to the [Usage Plans and Rate Limits in the Selling
+            /// Partner API](doc:usage-plans-and-rate-limits-in-the-sp-api).
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -78,14 +199,59 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
             /// response contain data only for the specified marketplaces.
             /// </param>
             /// <param name='includedData'>
-            /// A comma-delimited list of data sets to include in the response.
+            /// A comma-delimited list of data sets to include in the response. Default:
+            /// `summaries`.
+            /// </param>
+            /// <param name='locale'>
+            /// Locale for retrieving localized summaries. Defaults to the primary locale
+            /// of the marketplace.
+            /// </param>
+            public static object GetCatalogItem(this ICatalogItemsClient operations, string asin, IList<string> marketplaceIds, IList<string> includedData = default(IList<string>), string locale = default(string))
+            {
+                return operations.GetCatalogItemAsync(asin, marketplaceIds, includedData, locale).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Retrieves details for an item in the Amazon catalog.
+            ///
+            /// **Usage Plan:**
+            ///
+            /// | Rate (requests per second) | Burst |
+            /// | ---- | ---- |
+            /// | 5 | 5 |
+            ///
+            /// The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+            /// limits that were applied to the requested operation, when available. The
+            /// table above indicates the default rate and burst values for this operation.
+            /// Selling partners whose business demands require higher throughput may
+            /// observe higher rate and burst values than those shown here. For more
+            /// information, refer to the [Usage Plans and Rate Limits in the Selling
+            /// Partner API](doc:usage-plans-and-rate-limits-in-the-sp-api).
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='asin'>
+            /// The Amazon Standard Identification Number (ASIN) of the item.
+            /// </param>
+            /// <param name='marketplaceIds'>
+            /// A comma-delimited list of Amazon marketplace identifiers. Data sets in the
+            /// response contain data only for the specified marketplaces.
+            /// </param>
+            /// <param name='includedData'>
+            /// A comma-delimited list of data sets to include in the response. Default:
+            /// `summaries`.
+            /// </param>
+            /// <param name='locale'>
+            /// Locale for retrieving localized summaries. Defaults to the primary locale
+            /// of the marketplace.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> GetCatalogItemAsync(this ICatalogItemsClient operations, string asin, IList<string> marketplaceIds, IList<string> includedData = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetCatalogItemAsync(this ICatalogItemsClient operations, string asin, IList<string> marketplaceIds, IList<string> includedData = default(IList<string>), string locale = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetCatalogItemWithHttpMessagesAsync(asin, marketplaceIds, includedData, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetCatalogItemWithHttpMessagesAsync(asin, marketplaceIds, includedData, locale, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

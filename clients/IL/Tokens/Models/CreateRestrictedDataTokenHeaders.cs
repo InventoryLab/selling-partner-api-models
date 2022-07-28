@@ -28,7 +28,9 @@ namespace IL.Library.Amazon.SPAPI.Tokens.Models
         /// class.
         /// </summary>
         /// <param name="xAmznRateLimitLimit">Your rate limit (requests per
-        /// second) for this operation.</param>
+        /// second) for this operation.
+        /// _Note:_ For this status code, the rate limit header is deprecated
+        /// and no longer returned.</param>
         /// <param name="xAmznRequestId">Unique request reference
         /// identifier.</param>
         public CreateRestrictedDataTokenHeaders(string xAmznRateLimitLimit = default(string), string xAmznRequestId = default(string))
@@ -46,6 +48,8 @@ namespace IL.Library.Amazon.SPAPI.Tokens.Models
         /// <summary>
         /// Gets or sets your rate limit (requests per second) for this
         /// operation.
+        /// _Note:_ For this status code, the rate limit header is deprecated
+        /// and no longer returned.
         /// </summary>
         [JsonProperty(PropertyName = "x-amzn-RateLimit-Limit")]
         public string XAmznRateLimitLimit { get; set; }

@@ -6,13 +6,12 @@
 
 namespace IL.Library.Amazon.SPAPI.Feeds.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// The response for the createFeedDocument operation.
+    /// Information required to upload a feed document's contents.
     /// </summary>
     public partial class CreateFeedDocumentResponse
     {
@@ -27,10 +26,14 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
         /// <summary>
         /// Initializes a new instance of the CreateFeedDocumentResponse class.
         /// </summary>
-        public CreateFeedDocumentResponse(CreateFeedDocumentResult payload = default(CreateFeedDocumentResult), IList<Error> errors = default(IList<Error>))
+        /// <param name="feedDocumentId">The identifier of the feed
+        /// document.</param>
+        /// <param name="url">The presigned URL for uploading the feed
+        /// contents. This URL expires after 5 minutes.</param>
+        public CreateFeedDocumentResponse(string feedDocumentId, string url)
         {
-            Payload = payload;
-            Errors = errors;
+            FeedDocumentId = feedDocumentId;
+            Url = url;
             CustomInit();
         }
 
@@ -40,36 +43,33 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets the identifier of the feed document.
         /// </summary>
-        [JsonProperty(PropertyName = "payload")]
-        public CreateFeedDocumentResult Payload { get; set; }
+        [JsonProperty(PropertyName = "feedDocumentId")]
+        public string FeedDocumentId { get; set; }
 
         /// <summary>
+        /// Gets or sets the presigned URL for uploading the feed contents.
+        /// This URL expires after 5 minutes.
         /// </summary>
-        [JsonProperty(PropertyName = "errors")]
-        public IList<Error> Errors { get; set; }
+        [JsonProperty(PropertyName = "url")]
+        public string Url { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
-            if (Payload != null)
+            if (FeedDocumentId == null)
             {
-                Payload.Validate();
+                throw new ValidationException(ValidationRules.CannotBeNull, "FeedDocumentId");
             }
-            if (Errors != null)
+            if (Url == null)
             {
-                foreach (var element in Errors)
-                {
-                    if (element != null)
-                    {
-                        element.Validate();
-                    }
-                }
+                throw new ValidationException(ValidationRules.CannotBeNull, "Url");
             }
         }
     }

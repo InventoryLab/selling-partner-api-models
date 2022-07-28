@@ -93,15 +93,18 @@ namespace IL.Library.Amazon.SPAPI.Orders.Models
         /// Returned only for Amazon Easy Ship orders.</param>
         /// <param name="isTransparency">When true, transparency codes are
         /// required.</param>
-        /// <param name="iossNumber">The IOSS number of the seller. Sellers
-        /// selling in the EU will be assigned a unique IOSS number that must
-        /// be listed on all packages sent to the EU.</param>
+        /// <param name="iossNumber">The IOSS number for the marketplace.
+        /// Sellers shipping to the European Union (EU) from outside of the EU
+        /// must provide this IOSS number to their carrier when Amazon has
+        /// collected the VAT on the sale.</param>
+        /// <param name="storeChainStoreId">The store chain store identifier.
+        /// Linked to a specific store in a store chain.</param>
         /// <param name="deemedResellerCategory">The category of deemed
         /// reseller. This applies to selling partners that are not based in
         /// the EU and is used to help them meet the VAT Deemed Reseller tax
         /// laws in the EU and UK. Possible values include: 'IOSS',
         /// 'UOSS'</param>
-        public OrderItem(string aSIN, string orderItemId, int quantityOrdered, string sellerSKU = default(string), string title = default(string), int? quantityShipped = default(int?), ProductInfoDetail productInfo = default(ProductInfoDetail), PointsGrantedDetail pointsGranted = default(PointsGrantedDetail), Money itemPrice = default(Money), Money shippingPrice = default(Money), Money itemTax = default(Money), Money shippingTax = default(Money), Money shippingDiscount = default(Money), Money shippingDiscountTax = default(Money), Money promotionDiscount = default(Money), Money promotionDiscountTax = default(Money), IList<string> promotionIds = default(IList<string>), Money cODFee = default(Money), Money cODFeeDiscount = default(Money), bool? isGift = default(bool?), string conditionNote = default(string), string conditionId = default(string), string conditionSubtypeId = default(string), string scheduledDeliveryStartDate = default(string), string scheduledDeliveryEndDate = default(string), string priceDesignation = default(string), TaxCollection taxCollection = default(TaxCollection), bool? serialNumberRequired = default(bool?), bool? isTransparency = default(bool?), string iossNumber = default(string), string deemedResellerCategory = default(string))
+        public OrderItem(string aSIN, string orderItemId, int quantityOrdered, string sellerSKU = default(string), string title = default(string), int? quantityShipped = default(int?), ProductInfoDetail productInfo = default(ProductInfoDetail), PointsGrantedDetail pointsGranted = default(PointsGrantedDetail), Money itemPrice = default(Money), Money shippingPrice = default(Money), Money itemTax = default(Money), Money shippingTax = default(Money), Money shippingDiscount = default(Money), Money shippingDiscountTax = default(Money), Money promotionDiscount = default(Money), Money promotionDiscountTax = default(Money), IList<string> promotionIds = default(IList<string>), Money cODFee = default(Money), Money cODFeeDiscount = default(Money), bool? isGift = default(bool?), string conditionNote = default(string), string conditionId = default(string), string conditionSubtypeId = default(string), string scheduledDeliveryStartDate = default(string), string scheduledDeliveryEndDate = default(string), string priceDesignation = default(string), TaxCollection taxCollection = default(TaxCollection), bool? serialNumberRequired = default(bool?), bool? isTransparency = default(bool?), string iossNumber = default(string), string storeChainStoreId = default(string), string deemedResellerCategory = default(string), ItemBuyerInfo buyerInfo = default(ItemBuyerInfo))
         {
             ASIN = aSIN;
             SellerSKU = sellerSKU;
@@ -133,7 +136,9 @@ namespace IL.Library.Amazon.SPAPI.Orders.Models
             SerialNumberRequired = serialNumberRequired;
             IsTransparency = isTransparency;
             IossNumber = iossNumber;
+            StoreChainStoreId = storeChainStoreId;
             DeemedResellerCategory = deemedResellerCategory;
+            BuyerInfo = buyerInfo;
             CustomInit();
         }
 
@@ -342,12 +347,20 @@ namespace IL.Library.Amazon.SPAPI.Orders.Models
         public bool? IsTransparency { get; set; }
 
         /// <summary>
-        /// Gets or sets the IOSS number of the seller. Sellers selling in the
-        /// EU will be assigned a unique IOSS number that must be listed on all
-        /// packages sent to the EU.
+        /// Gets or sets the IOSS number for the marketplace. Sellers shipping
+        /// to the European Union (EU) from outside of the EU must provide this
+        /// IOSS number to their carrier when Amazon has collected the VAT on
+        /// the sale.
         /// </summary>
         [JsonProperty(PropertyName = "IossNumber")]
         public string IossNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the store chain store identifier. Linked to a specific
+        /// store in a store chain.
+        /// </summary>
+        [JsonProperty(PropertyName = "StoreChainStoreId")]
+        public string StoreChainStoreId { get; set; }
 
         /// <summary>
         /// Gets or sets the category of deemed reseller. This applies to
@@ -357,6 +370,11 @@ namespace IL.Library.Amazon.SPAPI.Orders.Models
         /// </summary>
         [JsonProperty(PropertyName = "DeemedResellerCategory")]
         public string DeemedResellerCategory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BuyerInfo")]
+        public ItemBuyerInfo BuyerInfo { get; set; }
 
         /// <summary>
         /// Validate the object.

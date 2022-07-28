@@ -3,7 +3,7 @@ Import-Module .\modules\prepareresponse.psm1
 Import-Module .\modules\preparerequest.psm1
 Import-Module .\modules\factory.psm1
 
-$templatFile = '..\models\reports-api-model\reports_2020-09-04.json'
+$templatFile = '..\models\reports-api-model\reports_2021-06-30.json'
 $outputFolder = '..\clients\IL\Reports'
 $namespace = 'IL.Library.Amazon.SPAPI.Reports'
 $clientname = 'ReportsClient'

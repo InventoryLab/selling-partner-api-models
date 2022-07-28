@@ -17,6 +17,9 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
     /// <summary>
     /// The Selling Partner API for Catalog Items provides programmatic access
     /// to information about items in the Amazon catalog.
+    ///
+    /// For more information, refer to the [Catalog Items API Use Case
+    /// Guide](doc:catalog-items-api-v2022-04-01-use-case-guide).
     /// </summary>
     public partial interface ICatalogItemsClient : System.IDisposable
     {
@@ -37,21 +40,101 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
 
 
         /// <summary>
-        /// Retrieves details for an item in the Amazon catalog.
+        /// Search for and return a list of Amazon catalog items and associated
+        /// information either by identifier or by keywords.
         ///
         /// **Usage Plans:**
         ///
-        /// | Plan type | Rate (requests per second) | Burst |
-        /// | ---- | ---- | ---- |
-        /// |Default| 5 | 5 |
-        /// |Selling partner specific| Variable | Variable |
+        /// | Rate (requests per second) | Burst |
+        /// | ---- | ---- |
+        /// | 5 | 5 |
         ///
-        /// The x-amzn-RateLimit-Limit response header returns the usage plan
-        /// rate limits that were applied to the requested operation. Rate
-        /// limits for some selling partners will vary from the default rate
-        /// and burst shown in the table above. For more information, see
-        /// "Usage Plans and Rate Limits" in the Selling Partner API
-        /// documentation.
+        /// The `x-amzn-RateLimit-Limit` response header returns the usage plan
+        /// rate limits that were applied to the requested operation, when
+        /// available. The table above indicates the default rate and burst
+        /// values for this operation. Selling partners whose business demands
+        /// require higher throughput may observe higher rate and burst values
+        /// than those shown here. For more information, refer to the [Usage
+        /// Plans and Rate Limits in the Selling Partner
+        /// API](doc:usage-plans-and-rate-limits-in-the-sp-api).
+        /// </summary>
+        /// <param name='marketplaceIds'>
+        /// A comma-delimited list of Amazon marketplace identifiers for the
+        /// request.
+        /// </param>
+        /// <param name='identifiers'>
+        /// A comma-delimited list of product identifiers to search the Amazon
+        /// catalog for. **Note:** Cannot be used with `keywords`.
+        /// </param>
+        /// <param name='identifiersType'>
+        /// Type of product identifiers to search the Amazon catalog for.
+        /// **Note:** Required when `identifiers` are provided. Possible values
+        /// include: 'ASIN', 'EAN', 'GTIN', 'ISBN', 'JAN', 'MINSAN', 'SKU',
+        /// 'UPC'
+        /// </param>
+        /// <param name='includedData'>
+        /// A comma-delimited list of data sets to include in the response.
+        /// Default: `summaries`.
+        /// </param>
+        /// <param name='locale'>
+        /// Locale for retrieving localized summaries. Defaults to the primary
+        /// locale of the marketplace.
+        /// </param>
+        /// <param name='sellerId'>
+        /// A selling partner identifier, such as a seller account or vendor
+        /// code. **Note:** Required when `identifiersType` is `SKU`.
+        /// </param>
+        /// <param name='keywords'>
+        /// A comma-delimited list of words to search the Amazon catalog for.
+        /// **Note:** Cannot be used with `identifiers`.
+        /// </param>
+        /// <param name='brandNames'>
+        /// A comma-delimited list of brand names to limit the search for
+        /// `keywords`-based queries. **Note:** Cannot be used with
+        /// `identifiers`.
+        /// </param>
+        /// <param name='classificationIds'>
+        /// A comma-delimited list of classification identifiers to limit the
+        /// search for `keywords`-based queries. **Note:** Cannot be used with
+        /// `identifiers`.
+        /// </param>
+        /// <param name='pageSize'>
+        /// Number of results to be returned per page.
+        /// </param>
+        /// <param name='pageToken'>
+        /// A token to fetch a certain page when there are multiple pages worth
+        /// of results.
+        /// </param>
+        /// <param name='keywordsLocale'>
+        /// The language of the keywords provided for `keywords`-based queries.
+        /// Defaults to the primary locale of the marketplace. **Note:** Cannot
+        /// be used with `identifiers`.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object,SearchCatalogItemsHeaders>> SearchCatalogItemsWithHttpMessagesAsync(IList<string> marketplaceIds, IList<string> identifiers = default(IList<string>), string identifiersType = default(string), IList<string> includedData = default(IList<string>), string locale = default(string), string sellerId = default(string), IList<string> keywords = default(IList<string>), IList<string> brandNames = default(IList<string>), IList<string> classificationIds = default(IList<string>), int? pageSize = 10, string pageToken = default(string), string keywordsLocale = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Retrieves details for an item in the Amazon catalog.
+        ///
+        /// **Usage Plan:**
+        ///
+        /// | Rate (requests per second) | Burst |
+        /// | ---- | ---- |
+        /// | 5 | 5 |
+        ///
+        /// The `x-amzn-RateLimit-Limit` response header returns the usage plan
+        /// rate limits that were applied to the requested operation, when
+        /// available. The table above indicates the default rate and burst
+        /// values for this operation. Selling partners whose business demands
+        /// require higher throughput may observe higher rate and burst values
+        /// than those shown here. For more information, refer to the [Usage
+        /// Plans and Rate Limits in the Selling Partner
+        /// API](doc:usage-plans-and-rate-limits-in-the-sp-api).
         /// </summary>
         /// <param name='asin'>
         /// The Amazon Standard Identification Number (ASIN) of the item.
@@ -62,6 +145,11 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
         /// </param>
         /// <param name='includedData'>
         /// A comma-delimited list of data sets to include in the response.
+        /// Default: `summaries`.
+        /// </param>
+        /// <param name='locale'>
+        /// Locale for retrieving localized summaries. Defaults to the primary
+        /// locale of the marketplace.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -69,7 +157,7 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object,GetCatalogItemHeaders>> GetCatalogItemWithHttpMessagesAsync(string asin, IList<string> marketplaceIds, IList<string> includedData = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object,GetCatalogItemHeaders>> GetCatalogItemWithHttpMessagesAsync(string asin, IList<string> marketplaceIds, IList<string> includedData = default(IList<string>), string locale = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

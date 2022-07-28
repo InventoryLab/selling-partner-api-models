@@ -162,14 +162,18 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// Returns pricing information for a seller's offer listings based on seller
         /// SKU or ASIN.
         ///
-        /// **Usage Plan:**
+        /// **Usage Plans:**
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 10 | 20 |
+        /// |Selling partner specific| Variable | Variable |
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the Selling
-        /// Partner API documentation.
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+        /// limits that were applied to the requested operation. Rate limits for some
+        /// selling partners will vary from the default rate and burst shown in the
+        /// table above. For more information, see "Usage Plans and Rate Limits" in the
+        /// Selling Partner API documentation.
         /// </summary>
         /// <param name='marketplaceId'>
         /// A marketplace identifier. Specifies the marketplace for which prices are
@@ -196,6 +200,10 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// Used, Collectible, Refurbished, Club. Possible values include: 'New',
         /// 'Used', 'Collectible', 'Refurbished', 'Club'
         /// </param>
+        /// <param name='offerType'>
+        /// Indicates whether to request pricing information for the seller's B2C or
+        /// B2B offers. Default is B2C. Possible values include: 'B2C', 'B2B'
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -217,7 +225,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetPricingResponse,GetPricingHeaders>> GetPricingWithHttpMessagesAsync(string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), string itemCondition = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<GetPricingResponse,GetPricingHeaders>> GetPricingWithHttpMessagesAsync(string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), string itemCondition = default(string), string offerType = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (marketplaceId == null)
             {
@@ -253,6 +261,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 tracingParameters.Add("skus", skus);
                 tracingParameters.Add("itemType", itemType);
                 tracingParameters.Add("itemCondition", itemCondition);
+                tracingParameters.Add("offerType", offerType);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "GetPricing", tracingParameters);
             }
@@ -279,6 +288,10 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             if (itemCondition != null)
             {
                 _queryParameters.Add(string.Format("ItemCondition={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(itemCondition, SerializationSettings).Trim('"'))));
+            }
+            if (offerType != null)
+            {
+                _queryParameters.Add(string.Format("OfferType={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(offerType, SerializationSettings).Trim('"'))));
             }
             if (_queryParameters.Count > 0)
             {
@@ -312,7 +325,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -523,14 +536,18 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// Returns competitive pricing information for a seller's offer listings based
         /// on seller SKU or ASIN.
         ///
-        /// **Usage Plan:**
+        /// **Usage Plans:**
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 10 | 20 |
+        /// |Selling partner specific| Variable | Variable |
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the Selling
-        /// Partner API documentation.
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+        /// limits that were applied to the requested operation. Rate limits for some
+        /// selling partners will vary from the default rate and burst shown in the
+        /// table above. For more information, see "Usage Plans and Rate Limits" in the
+        /// Selling Partner API documentation.
         /// </summary>
         /// <param name='marketplaceId'>
         /// A marketplace identifier. Specifies the marketplace for which prices are
@@ -551,6 +568,11 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// <param name='skus'>
         /// A list of up to twenty seller SKU values used to identify items in the
         /// given marketplace.
+        /// </param>
+        /// <param name='customerType'>
+        /// Indicates whether to request pricing information from the point of view of
+        /// Consumer or Business buyers. Default is Consumer. Possible values include:
+        /// 'Consumer', 'Business'
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -573,7 +595,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetPricingResponse,GetCompetitivePricingHeaders>> GetCompetitivePricingWithHttpMessagesAsync(string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<GetPricingResponse,GetCompetitivePricingHeaders>> GetCompetitivePricingWithHttpMessagesAsync(string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), string customerType = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (marketplaceId == null)
             {
@@ -608,6 +630,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 tracingParameters.Add("asins", asins);
                 tracingParameters.Add("skus", skus);
                 tracingParameters.Add("itemType", itemType);
+                tracingParameters.Add("customerType", customerType);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "GetCompetitivePricing", tracingParameters);
             }
@@ -630,6 +653,10 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             if (itemType != null)
             {
                 _queryParameters.Add(string.Format("ItemType={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(itemType, SerializationSettings).Trim('"'))));
+            }
+            if (customerType != null)
+            {
+                _queryParameters.Add(string.Format("CustomerType={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(customerType, SerializationSettings).Trim('"'))));
             }
             if (_queryParameters.Count > 0)
             {
@@ -663,7 +690,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -873,14 +900,18 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// <summary>
         /// Returns the lowest priced offers for a single SKU listing.
         ///
-        /// **Usage Plan:**
+        /// **Usage Plans:**
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 5 | 10 |
+        /// |Selling partner specific| Variable | Variable |
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the Selling
-        /// Partner API documentation.
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+        /// limits that were applied to the requested operation. Rate limits for some
+        /// selling partners will vary from the default rate and burst shown in the
+        /// table above. For more information, see "Usage Plans and Rate Limits" in the
+        /// Selling Partner API documentation.
         /// </summary>
         /// <param name='marketplaceId'>
         /// A marketplace identifier. Specifies the marketplace for which prices are
@@ -894,6 +925,10 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// <param name='sellerSKU'>
         /// Identifies an item in the given marketplace. SellerSKU is qualified by the
         /// seller's SellerId, which is included with every operation that you submit.
+        /// </param>
+        /// <param name='customerType'>
+        /// Indicates whether to request Consumer or Business offers. Default is
+        /// Consumer. Possible values include: 'Consumer', 'Business'
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -916,7 +951,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetOffersResponse,GetListingOffersHeaders>> GetListingOffersWithHttpMessagesAsync(string marketplaceId, string itemCondition, string sellerSKU, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<GetOffersResponse,GetListingOffersHeaders>> GetListingOffersWithHttpMessagesAsync(string marketplaceId, string itemCondition, string sellerSKU, string customerType = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (marketplaceId == null)
             {
@@ -940,6 +975,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 tracingParameters.Add("marketplaceId", marketplaceId);
                 tracingParameters.Add("itemCondition", itemCondition);
                 tracingParameters.Add("sellerSKU", sellerSKU);
+                tracingParameters.Add("customerType", customerType);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "GetListingOffers", tracingParameters);
             }
@@ -955,6 +991,10 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             if (itemCondition != null)
             {
                 _queryParameters.Add(string.Format("ItemCondition={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(itemCondition, SerializationSettings).Trim('"'))));
+            }
+            if (customerType != null)
+            {
+                _queryParameters.Add(string.Format("CustomerType={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(customerType, SerializationSettings).Trim('"'))));
             }
             if (_queryParameters.Count > 0)
             {
@@ -988,7 +1028,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1198,14 +1238,18 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// <summary>
         /// Returns the lowest priced offers for a single item based on ASIN.
         ///
-        /// **Usage Plan:**
+        /// **Usage Plans:**
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 5 | 10 |
+        /// |Selling partner specific| Variable | Variable |
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the Selling
-        /// Partner API documentation.
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+        /// limits that were applied to the requested operation. Rate limits for some
+        /// selling partners will vary from the default rate and burst shown in the
+        /// table above. For more information, see "Usage Plans and Rate Limits" in the
+        /// Selling Partner API documentation.
         /// </summary>
         /// <param name='marketplaceId'>
         /// A marketplace identifier. Specifies the marketplace for which prices are
@@ -1218,6 +1262,10 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// </param>
         /// <param name='asin'>
         /// The Amazon Standard Identification Number (ASIN) of the item.
+        /// </param>
+        /// <param name='customerType'>
+        /// Indicates whether to request Consumer or Business offers. Default is
+        /// Consumer. Possible values include: 'Consumer', 'Business'
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1240,7 +1288,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetOffersResponse,GetItemOffersHeaders>> GetItemOffersWithHttpMessagesAsync(string marketplaceId, string itemCondition, string asin, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<GetOffersResponse,GetItemOffersHeaders>> GetItemOffersWithHttpMessagesAsync(string marketplaceId, string itemCondition, string asin, string customerType = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (marketplaceId == null)
             {
@@ -1264,6 +1312,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 tracingParameters.Add("marketplaceId", marketplaceId);
                 tracingParameters.Add("itemCondition", itemCondition);
                 tracingParameters.Add("asin", asin);
+                tracingParameters.Add("customerType", customerType);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "GetItemOffers", tracingParameters);
             }
@@ -1279,6 +1328,10 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             if (itemCondition != null)
             {
                 _queryParameters.Add(string.Format("ItemCondition={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(itemCondition, SerializationSettings).Trim('"'))));
+            }
+            if (customerType != null)
+            {
+                _queryParameters.Add(string.Format("CustomerType={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(customerType, SerializationSettings).Trim('"'))));
             }
             if (_queryParameters.Count > 0)
             {
@@ -1312,7 +1365,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {

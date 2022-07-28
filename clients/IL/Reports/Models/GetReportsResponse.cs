@@ -6,6 +6,7 @@
 
 namespace IL.Library.Amazon.SPAPI.Reports.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -27,16 +28,14 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
         /// <summary>
         /// Initializes a new instance of the GetReportsResponse class.
         /// </summary>
-        /// <param name="payload">The payload for the getReports
-        /// operation.</param>
+        /// <param name="reports">The reports.</param>
         /// <param name="nextToken">Returned when the number of results exceeds
         /// pageSize. To get the next page of results, call getReports with
         /// this token as the only parameter.</param>
-        public GetReportsResponse(IList<Report> payload = default(IList<Report>), string nextToken = default(string), IList<Error> errors = default(IList<Error>))
+        public GetReportsResponse(IList<Report> reports, string nextToken = default(string))
         {
-            Payload = payload;
+            Reports = reports;
             NextToken = nextToken;
-            Errors = errors;
             CustomInit();
         }
 
@@ -46,10 +45,10 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the payload for the getReports operation.
+        /// Gets or sets the reports.
         /// </summary>
-        [JsonProperty(PropertyName = "payload")]
-        public IList<Report> Payload { get; set; }
+        [JsonProperty(PropertyName = "reports")]
+        public IList<Report> Reports { get; set; }
 
         /// <summary>
         /// Gets or sets returned when the number of results exceeds pageSize.
@@ -60,9 +59,27 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
         public string NextToken { get; set; }
 
         /// <summary>
+        /// Validate the object.
         /// </summary>
-        [JsonProperty(PropertyName = "errors")]
-        public IList<Error> Errors { get; set; }
-
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
+        public virtual void Validate()
+        {
+            if (Reports == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Reports");
+            }
+            if (Reports != null)
+            {
+                foreach (var element in Reports)
+                {
+                    if (element != null)
+                    {
+                        element.Validate();
+                    }
+                }
+            }
+        }
     }
 }

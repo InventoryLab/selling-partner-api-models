@@ -20,6 +20,9 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
     /// <summary>
     /// The Selling Partner API for Catalog Items provides programmatic access
     /// to information about items in the Amazon catalog.
+    ///
+    /// For more information, refer to the [Catalog Items API Use Case
+    /// Guide](doc:catalog-items-api-v2022-04-01-use-case-guide).
     /// </summary>
     public partial class CatalogItemsClient : ServiceClient<CatalogItemsClient>, ICatalogItemsClient
     {
@@ -159,30 +162,70 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
             CustomInitialize();
         }
         /// <summary>
-        /// Retrieves details for an item in the Amazon catalog.
+        /// Search for and return a list of Amazon catalog items and associated
+        /// information either by identifier or by keywords.
         ///
         /// **Usage Plans:**
         ///
-        /// | Plan type | Rate (requests per second) | Burst |
-        /// | ---- | ---- | ---- |
-        /// |Default| 5 | 5 |
-        /// |Selling partner specific| Variable | Variable |
+        /// | Rate (requests per second) | Burst |
+        /// | ---- | ---- |
+        /// | 5 | 5 |
         ///
-        /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
-        /// limits that were applied to the requested operation. Rate limits for some
-        /// selling partners will vary from the default rate and burst shown in the
-        /// table above. For more information, see "Usage Plans and Rate Limits" in the
-        /// Selling Partner API documentation.
+        /// The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        /// limits that were applied to the requested operation, when available. The
+        /// table above indicates the default rate and burst values for this operation.
+        /// Selling partners whose business demands require higher throughput may
+        /// observe higher rate and burst values than those shown here. For more
+        /// information, refer to the [Usage Plans and Rate Limits in the Selling
+        /// Partner API](doc:usage-plans-and-rate-limits-in-the-sp-api).
         /// </summary>
-        /// <param name='asin'>
-        /// The Amazon Standard Identification Number (ASIN) of the item.
-        /// </param>
         /// <param name='marketplaceIds'>
-        /// A comma-delimited list of Amazon marketplace identifiers. Data sets in the
-        /// response contain data only for the specified marketplaces.
+        /// A comma-delimited list of Amazon marketplace identifiers for the request.
+        /// </param>
+        /// <param name='identifiers'>
+        /// A comma-delimited list of product identifiers to search the Amazon catalog
+        /// for. **Note:** Cannot be used with `keywords`.
+        /// </param>
+        /// <param name='identifiersType'>
+        /// Type of product identifiers to search the Amazon catalog for. **Note:**
+        /// Required when `identifiers` are provided. Possible values include: 'ASIN',
+        /// 'EAN', 'GTIN', 'ISBN', 'JAN', 'MINSAN', 'SKU', 'UPC'
         /// </param>
         /// <param name='includedData'>
-        /// A comma-delimited list of data sets to include in the response.
+        /// A comma-delimited list of data sets to include in the response. Default:
+        /// `summaries`.
+        /// </param>
+        /// <param name='locale'>
+        /// Locale for retrieving localized summaries. Defaults to the primary locale
+        /// of the marketplace.
+        /// </param>
+        /// <param name='sellerId'>
+        /// A selling partner identifier, such as a seller account or vendor code.
+        /// **Note:** Required when `identifiersType` is `SKU`.
+        /// </param>
+        /// <param name='keywords'>
+        /// A comma-delimited list of words to search the Amazon catalog for. **Note:**
+        /// Cannot be used with `identifiers`.
+        /// </param>
+        /// <param name='brandNames'>
+        /// A comma-delimited list of brand names to limit the search for
+        /// `keywords`-based queries. **Note:** Cannot be used with `identifiers`.
+        /// </param>
+        /// <param name='classificationIds'>
+        /// A comma-delimited list of classification identifiers to limit the search
+        /// for `keywords`-based queries. **Note:** Cannot be used with `identifiers`.
+        /// </param>
+        /// <param name='pageSize'>
+        /// Number of results to be returned per page.
+        /// </param>
+        /// <param name='pageToken'>
+        /// A token to fetch a certain page when there are multiple pages worth of
+        /// results.
+        /// </param>
+        /// <param name='keywordsLocale'>
+        /// The language of the keywords provided for `keywords`-based queries.
+        /// Defaults to the primary locale of the marketplace. **Note:** Cannot be used
+        /// with `identifiers`.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -205,15 +248,36 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<object,GetCatalogItemHeaders>> GetCatalogItemWithHttpMessagesAsync(string asin, IList<string> marketplaceIds, IList<string> includedData = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<object,SearchCatalogItemsHeaders>> SearchCatalogItemsWithHttpMessagesAsync(IList<string> marketplaceIds, IList<string> identifiers = default(IList<string>), string identifiersType = default(string), IList<string> includedData = default(IList<string>), string locale = default(string), string sellerId = default(string), IList<string> keywords = default(IList<string>), IList<string> brandNames = default(IList<string>), IList<string> classificationIds = default(IList<string>), int? pageSize = 10, string pageToken = default(string), string keywordsLocale = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (asin == null)
+            if (identifiers != null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "asin");
+                if (identifiers.Count > 20)
+                {
+                    throw new ValidationException(ValidationRules.MaxItems, "identifiers", 20);
+                }
             }
             if (marketplaceIds == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "marketplaceIds");
+            }
+            if (marketplaceIds != null)
+            {
+                if (marketplaceIds.Count > 1)
+                {
+                    throw new ValidationException(ValidationRules.MaxItems, "marketplaceIds", 1);
+                }
+            }
+            if (keywords != null)
+            {
+                if (keywords.Count > 20)
+                {
+                    throw new ValidationException(ValidationRules.MaxItems, "keywords", 20);
+                }
+            }
+            if (pageSize > 20)
+            {
+                throw new ValidationException(ValidationRules.InclusiveMaximum, "pageSize", 20);
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -222,17 +286,33 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("asin", asin);
+                tracingParameters.Add("identifiers", identifiers);
+                tracingParameters.Add("identifiersType", identifiersType);
                 tracingParameters.Add("marketplaceIds", marketplaceIds);
                 tracingParameters.Add("includedData", includedData);
+                tracingParameters.Add("locale", locale);
+                tracingParameters.Add("sellerId", sellerId);
+                tracingParameters.Add("keywords", keywords);
+                tracingParameters.Add("brandNames", brandNames);
+                tracingParameters.Add("classificationIds", classificationIds);
+                tracingParameters.Add("pageSize", pageSize);
+                tracingParameters.Add("pageToken", pageToken);
+                tracingParameters.Add("keywordsLocale", keywordsLocale);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "GetCatalogItem", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "SearchCatalogItems", tracingParameters);
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "catalog/2020-12-01/items/{asin}").ToString();
-            _url = _url.Replace("{asin}", System.Uri.EscapeDataString(asin));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "catalog/2022-04-01/items").ToString();
             List<string> _queryParameters = new List<string>();
+            if (identifiers != null)
+            {
+                _queryParameters.Add(string.Format("identifiers={0}", System.Uri.EscapeDataString(string.Join(",", identifiers))));
+            }
+            if (identifiersType != null)
+            {
+                _queryParameters.Add(string.Format("identifiersType={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(identifiersType, SerializationSettings).Trim('"'))));
+            }
             if (marketplaceIds != null)
             {
                 _queryParameters.Add(string.Format("marketplaceIds={0}", System.Uri.EscapeDataString(string.Join(",", marketplaceIds))));
@@ -240,6 +320,38 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
             if (includedData != null)
             {
                 _queryParameters.Add(string.Format("includedData={0}", System.Uri.EscapeDataString(string.Join(",", includedData))));
+            }
+            if (locale != null)
+            {
+                _queryParameters.Add(string.Format("locale={0}", System.Uri.EscapeDataString(locale)));
+            }
+            if (sellerId != null)
+            {
+                _queryParameters.Add(string.Format("sellerId={0}", System.Uri.EscapeDataString(sellerId)));
+            }
+            if (keywords != null)
+            {
+                _queryParameters.Add(string.Format("keywords={0}", System.Uri.EscapeDataString(string.Join(",", keywords))));
+            }
+            if (brandNames != null)
+            {
+                _queryParameters.Add(string.Format("brandNames={0}", System.Uri.EscapeDataString(string.Join(",", brandNames))));
+            }
+            if (classificationIds != null)
+            {
+                _queryParameters.Add(string.Format("classificationIds={0}", System.Uri.EscapeDataString(string.Join(",", classificationIds))));
+            }
+            if (pageSize != null)
+            {
+                _queryParameters.Add(string.Format("pageSize={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(pageSize, SerializationSettings).Trim('"'))));
+            }
+            if (pageToken != null)
+            {
+                _queryParameters.Add(string.Format("pageToken={0}", System.Uri.EscapeDataString(pageToken)));
+            }
+            if (keywordsLocale != null)
+            {
+                _queryParameters.Add(string.Format("keywordsLocale={0}", System.Uri.EscapeDataString(keywordsLocale)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -273,7 +385,359 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(amazonUserKeyPair, _httpRequest, _configuration, _tokenManagement);
+            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
+            if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 403 && (int)_statusCode != 404 && (int)_statusCode != 413 && (int)_statusCode != 415 && (int)_statusCode != 429 && (int)_statusCode != 500 && (int)_statusCode != 503)
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Error(_invocationId, ex);
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+            // Create Result
+            var _result = new HttpOperationResponse<object,SearchCatalogItemsHeaders>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            // Deserialize Response
+            if ((int)_statusCode == 200)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<ItemSearchResults>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ItemSearchResults>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 400)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 403)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 404)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 413)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 415)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 429)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 500)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 503)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            try
+            {
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<SearchCatalogItemsHeaders>(JsonSerializer.Create(DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
+            }
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
+        }
+
+        /// <summary>
+        /// Retrieves details for an item in the Amazon catalog.
+        ///
+        /// **Usage Plan:**
+        ///
+        /// | Rate (requests per second) | Burst |
+        /// | ---- | ---- |
+        /// | 5 | 5 |
+        ///
+        /// The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        /// limits that were applied to the requested operation, when available. The
+        /// table above indicates the default rate and burst values for this operation.
+        /// Selling partners whose business demands require higher throughput may
+        /// observe higher rate and burst values than those shown here. For more
+        /// information, refer to the [Usage Plans and Rate Limits in the Selling
+        /// Partner API](doc:usage-plans-and-rate-limits-in-the-sp-api).
+        /// </summary>
+        /// <param name='asin'>
+        /// The Amazon Standard Identification Number (ASIN) of the item.
+        /// </param>
+        /// <param name='marketplaceIds'>
+        /// A comma-delimited list of Amazon marketplace identifiers. Data sets in the
+        /// response contain data only for the specified marketplaces.
+        /// </param>
+        /// <param name='includedData'>
+        /// A comma-delimited list of data sets to include in the response. Default:
+        /// `summaries`.
+        /// </param>
+        /// <param name='locale'>
+        /// Locale for retrieving localized summaries. Defaults to the primary locale
+        /// of the marketplace.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<HttpOperationResponse<object,GetCatalogItemHeaders>> GetCatalogItemWithHttpMessagesAsync(string asin, IList<string> marketplaceIds, IList<string> includedData = default(IList<string>), string locale = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (asin == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "asin");
+            }
+            if (marketplaceIds == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "marketplaceIds");
+            }
+            // Tracing
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
+            {
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("asin", asin);
+                tracingParameters.Add("marketplaceIds", marketplaceIds);
+                tracingParameters.Add("includedData", includedData);
+                tracingParameters.Add("locale", locale);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(_invocationId, this, "GetCatalogItem", tracingParameters);
+            }
+            // Construct URL
+            var _baseUrl = BaseUri.AbsoluteUri;
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "catalog/2022-04-01/items/{asin}").ToString();
+            _url = _url.Replace("{asin}", System.Uri.EscapeDataString(asin));
+            List<string> _queryParameters = new List<string>();
+            if (marketplaceIds != null)
+            {
+                _queryParameters.Add(string.Format("marketplaceIds={0}", System.Uri.EscapeDataString(string.Join(",", marketplaceIds))));
+            }
+            if (includedData != null)
+            {
+                _queryParameters.Add(string.Format("includedData={0}", System.Uri.EscapeDataString(string.Join(",", includedData))));
+            }
+            if (locale != null)
+            {
+                _queryParameters.Add(string.Format("locale={0}", System.Uri.EscapeDataString(locale)));
+            }
+            if (_queryParameters.Count > 0)
+            {
+                _url += "?" + string.Join("&", _queryParameters);
+            }
+            // Create HTTP transport objects
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new System.Uri(_url);
+            // Set Headers
+
+
+            if (customHeaders != null)
+            {
+                foreach(var _header in customHeaders)
+                {
+                    if (_httpRequest.Headers.Contains(_header.Key))
+                    {
+                        _httpRequest.Headers.Remove(_header.Key);
+                    }
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                }
+            }
+
+            // Serialize Request
+            string _requestContent = null;
+            // Send Request
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(amazonUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {

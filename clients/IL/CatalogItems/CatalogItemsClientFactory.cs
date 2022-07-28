@@ -5,20 +5,13 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems
 {
     public partial class CatalogItemsClient
     {
-        private readonly SPAPIKeyPair _sPAPIKeyPair;
         private readonly ISPAPIConfiguration _configuration;
         private readonly ITokenManagement _tokenManagement;
 
-        public CatalogItemsClient(SPAPIKeyPair sPAPIKeyPair, HttpClient client, ISPAPIConfiguration configuration, ITokenManagement tokenManagement) : this(client,false)
+        public CatalogItemsClient(HttpClient client, ISPAPIConfiguration configuration, ITokenManagement tokenManagement) : this(client,false)
         {
-             _sPAPIKeyPair = sPAPIKeyPair;
             _configuration = configuration;
             _tokenManagement = tokenManagement;
-        }
-
-        public static ICatalogItemsClient Create(SPAPIKeyPair sPAPIKeyPair, HttpClient httpClient, ISPAPIConfiguration configuration, ITokenManagement tokenManagement)
-        {
-            return new CatalogItemsClient(sPAPIKeyPair, httpClient, configuration, tokenManagement);
         }
     } 
 }

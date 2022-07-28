@@ -8,6 +8,8 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
 {
     using Microsoft.Rest;
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     public partial class OfferDetail
@@ -35,6 +37,11 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// by Amazon.</param>
         /// <param name="myOffer">When true, this is the seller's
         /// offer.</param>
+        /// <param name="offerType">Indicates the type of customer that the
+        /// offer is valid for. Possible values include: 'B2C', 'B2B'</param>
+        /// <param name="sellerId">The seller identifier for the offer.</param>
+        /// <param name="conditionNotes">Information about the condition of the
+        /// item.</param>
         /// <param name="sellerFeedbackRating">Information about the seller's
         /// feedback, including the percentage of positive feedback, and the
         /// total number of ratings received.</param>
@@ -42,23 +49,29 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// purchase of an item.</param>
         /// <param name="shipsFrom">The state and country from where the item
         /// is shipped.</param>
+        /// <param name="primeInformation">Amazon Prime information.</param>
         /// <param name="isBuyBoxWinner">When true, the offer is currently in
         /// the Buy Box. There can be up to two Buy Box winners at any time per
         /// ASIN, one that is eligible for Prime and one that is not eligible
         /// for Prime.</param>
         /// <param name="isFeaturedMerchant">When true, the seller of the item
         /// is eligible to win the Buy Box.</param>
-        public OfferDetail(string subCondition, DetailedShippingTimeType shippingTime, MoneyType listingPrice, MoneyType shipping, bool isFulfilledByAmazon, bool? myOffer = default(bool?), SellerFeedbackType sellerFeedbackRating = default(SellerFeedbackType), Points points = default(Points), ShipsFromType shipsFrom = default(ShipsFromType), bool? isBuyBoxWinner = default(bool?), bool? isFeaturedMerchant = default(bool?))
+        public OfferDetail(string subCondition, DetailedShippingTimeType shippingTime, MoneyType listingPrice, MoneyType shipping, bool isFulfilledByAmazon, bool? myOffer = default(bool?), string offerType = default(string), string sellerId = default(string), string conditionNotes = default(string), SellerFeedbackType sellerFeedbackRating = default(SellerFeedbackType), IList<QuantityDiscountPriceType> quantityDiscountPrices = default(IList<QuantityDiscountPriceType>), Points points = default(Points), ShipsFromType shipsFrom = default(ShipsFromType), PrimeInformationType primeInformation = default(PrimeInformationType), bool? isBuyBoxWinner = default(bool?), bool? isFeaturedMerchant = default(bool?))
         {
             MyOffer = myOffer;
+            OfferType = offerType;
             SubCondition = subCondition;
+            SellerId = sellerId;
+            ConditionNotes = conditionNotes;
             SellerFeedbackRating = sellerFeedbackRating;
             ShippingTime = shippingTime;
             ListingPrice = listingPrice;
+            QuantityDiscountPrices = quantityDiscountPrices;
             Points = points;
             Shipping = shipping;
             ShipsFrom = shipsFrom;
             IsFulfilledByAmazon = isFulfilledByAmazon;
+            PrimeInformation = primeInformation;
             IsBuyBoxWinner = isBuyBoxWinner;
             IsFeaturedMerchant = isFeaturedMerchant;
             CustomInit();
@@ -76,12 +89,31 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         public bool? MyOffer { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates the type of customer that the offer is valid
+        /// for. Possible values include: 'B2C', 'B2B'
+        /// </summary>
+        [JsonProperty(PropertyName = "offerType")]
+        public string OfferType { get; set; }
+
+        /// <summary>
         /// Gets or sets the subcondition of the item. Subcondition values:
         /// New, Mint, Very Good, Good, Acceptable, Poor, Club, OEM, Warranty,
         /// Refurbished Warranty, Refurbished, Open Box, or Other.
         /// </summary>
         [JsonProperty(PropertyName = "SubCondition")]
         public string SubCondition { get; set; }
+
+        /// <summary>
+        /// Gets or sets the seller identifier for the offer.
+        /// </summary>
+        [JsonProperty(PropertyName = "SellerId")]
+        public string SellerId { get; set; }
+
+        /// <summary>
+        /// Gets or sets information about the condition of the item.
+        /// </summary>
+        [JsonProperty(PropertyName = "ConditionNotes")]
+        public string ConditionNotes { get; set; }
 
         /// <summary>
         /// Gets or sets information about the seller's feedback, including the
@@ -103,6 +135,11 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// </summary>
         [JsonProperty(PropertyName = "ListingPrice")]
         public MoneyType ListingPrice { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "quantityDiscountPrices")]
+        public IList<QuantityDiscountPriceType> QuantityDiscountPrices { get; set; }
 
         /// <summary>
         /// Gets or sets the number of Amazon Points offered with the purchase
@@ -128,6 +165,12 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// </summary>
         [JsonProperty(PropertyName = "IsFulfilledByAmazon")]
         public bool IsFulfilledByAmazon { get; set; }
+
+        /// <summary>
+        /// Gets or sets amazon Prime information.
+        /// </summary>
+        [JsonProperty(PropertyName = "PrimeInformation")]
+        public PrimeInformationType PrimeInformation { get; set; }
 
         /// <summary>
         /// Gets or sets when true, the offer is currently in the Buy Box.
@@ -171,6 +214,20 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
             if (SellerFeedbackRating != null)
             {
                 SellerFeedbackRating.Validate();
+            }
+            if (QuantityDiscountPrices != null)
+            {
+                foreach (var element in QuantityDiscountPrices)
+                {
+                    if (element != null)
+                    {
+                        element.Validate();
+                    }
+                }
+            }
+            if (PrimeInformation != null)
+            {
+                PrimeInformation.Validate();
             }
         }
     }

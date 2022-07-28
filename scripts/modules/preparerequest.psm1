@@ -12,7 +12,7 @@ function addPrepareRequest($fileName, $pattern)
 	}
 
 	#Now loop the recorded array positions and insert the new text
-	$insert | Sort-Object -Descending | ForEach-Object { $file.insert($_,'            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIUserKeyPair, _httpRequest, _configuration, _tokenManagement);') }
+	$insert | Sort-Object -Descending | ForEach-Object { $file.insert($_,'            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(amazonUserKeyPair, _httpRequest, _configuration, _tokenManagement);') }
 
 	Set-Content $FileName $file
 }

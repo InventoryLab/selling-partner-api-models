@@ -10,6 +10,9 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// Specifies the content type for the createFeedDocument operation.
+    /// </summary>
     public partial class CreateFeedDocumentSpecification
     {
         /// <summary>

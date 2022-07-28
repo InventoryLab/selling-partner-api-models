@@ -32,12 +32,15 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
         /// class.
         /// </summary>
         /// <param name="marketplaceId">Amazon marketplace identifier.</param>
-        /// <param name="ranks">Sales ranks of an Amazon catalog item for an
-        /// Amazon marketplace.</param>
-        public ItemSalesRanksByMarketplace(string marketplaceId, IList<ItemSalesRank> ranks)
+        /// <param name="classificationRanks">Sales ranks of an Amazon catalog
+        /// item for an Amazon marketplace by classification.</param>
+        /// <param name="displayGroupRanks">Sales ranks of an Amazon catalog
+        /// item for an Amazon marketplace by website display group.</param>
+        public ItemSalesRanksByMarketplace(string marketplaceId, IList<ItemClassificationSalesRank> classificationRanks = default(IList<ItemClassificationSalesRank>), IList<ItemDisplayGroupSalesRank> displayGroupRanks = default(IList<ItemDisplayGroupSalesRank>))
         {
             MarketplaceId = marketplaceId;
-            Ranks = ranks;
+            ClassificationRanks = classificationRanks;
+            DisplayGroupRanks = displayGroupRanks;
             CustomInit();
         }
 
@@ -54,10 +57,17 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
 
         /// <summary>
         /// Gets or sets sales ranks of an Amazon catalog item for an Amazon
-        /// marketplace.
+        /// marketplace by classification.
         /// </summary>
-        [JsonProperty(PropertyName = "ranks")]
-        public IList<ItemSalesRank> Ranks { get; set; }
+        [JsonProperty(PropertyName = "classificationRanks")]
+        public IList<ItemClassificationSalesRank> ClassificationRanks { get; set; }
+
+        /// <summary>
+        /// Gets or sets sales ranks of an Amazon catalog item for an Amazon
+        /// marketplace by website display group.
+        /// </summary>
+        [JsonProperty(PropertyName = "displayGroupRanks")]
+        public IList<ItemDisplayGroupSalesRank> DisplayGroupRanks { get; set; }
 
         /// <summary>
         /// Validate the object.
@@ -71,17 +81,23 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "MarketplaceId");
             }
-            if (Ranks == null)
+            if (ClassificationRanks != null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Ranks");
-            }
-            if (Ranks != null)
-            {
-                foreach (var element in Ranks)
+                foreach (var element in ClassificationRanks)
                 {
                     if (element != null)
                     {
                         element.Validate();
+                    }
+                }
+            }
+            if (DisplayGroupRanks != null)
+            {
+                foreach (var element1 in DisplayGroupRanks)
+                {
+                    if (element1 != null)
+                    {
+                        element1.Validate();
                     }
                 }
             }

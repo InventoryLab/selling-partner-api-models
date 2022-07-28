@@ -166,18 +166,26 @@ namespace IL.Library.Amazon.SPAPI.Orders
         /// narrow the list of orders returned. If NextToken is present, that will be
         /// used to retrieve the orders instead of other criteria.
         ///
-        /// **Usage Plan:**
+        /// **Usage Plans:**
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 0.0055 | 20 |
+        /// |Selling partner specific| Variable | Variable |
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the Selling
-        /// Partner API documentation.
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+        /// limits that were applied to the requested operation. Rate limits for some
+        /// selling partners will vary from the default rate and burst shown in the
+        /// table above. For more information, see "Usage Plans and Rate Limits" in the
+        /// Selling Partner API documentation.
         /// </summary>
         /// <param name='marketplaceIds'>
         /// A list of MarketplaceId values. Used to select orders that were placed in
         /// the specified marketplaces.
+        ///
+        /// See the [Selling Partner API Developer
+        /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md#marketplaceid-values)
+        /// for a complete list of marketplaceId values.
         /// </param>
         /// <param name='createdAfter'>
         /// A date used for selecting orders created after (or at) a specified time.
@@ -265,6 +273,17 @@ namespace IL.Library.Amazon.SPAPI.Orders
         /// A list of AmazonOrderId values. An AmazonOrderId is an Amazon-defined order
         /// identifier, in 3-7-7 format.
         /// </param>
+        /// <param name='actualFulfillmentSupplySourceId'>
+        /// Denotes the recommended sourceId where the order should be fulfilled from.
+        /// </param>
+        /// <param name='isISPU'>
+        /// When true, this order is marked to be picked up from a store rather than
+        /// delivered.
+        /// </param>
+        /// <param name='storeChainStoreId'>
+        /// The store chain store identifier. Linked to a specific store in a store
+        /// chain.
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -286,7 +305,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetOrdersResponse,GetOrdersHeaders>> GetOrdersWithHttpMessagesAsync(IList<string> marketplaceIds, string createdAfter = default(string), string createdBefore = default(string), string lastUpdatedAfter = default(string), string lastUpdatedBefore = default(string), IList<string> orderStatuses = default(IList<string>), IList<string> fulfillmentChannels = default(IList<string>), IList<string> paymentMethods = default(IList<string>), string buyerEmail = default(string), string sellerOrderId = default(string), int? maxResultsPerPage = default(int?), IList<string> easyShipShipmentStatuses = default(IList<string>), string nextToken = default(string), IList<string> amazonOrderIds = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<GetOrdersResponse,GetOrdersHeaders>> GetOrdersWithHttpMessagesAsync(IList<string> marketplaceIds, string createdAfter = default(string), string createdBefore = default(string), string lastUpdatedAfter = default(string), string lastUpdatedBefore = default(string), IList<string> orderStatuses = default(IList<string>), IList<string> fulfillmentChannels = default(IList<string>), IList<string> paymentMethods = default(IList<string>), string buyerEmail = default(string), string sellerOrderId = default(string), int? maxResultsPerPage = default(int?), IList<string> easyShipShipmentStatuses = default(IList<string>), string nextToken = default(string), IList<string> amazonOrderIds = default(IList<string>), string actualFulfillmentSupplySourceId = default(string), bool? isISPU = default(bool?), string storeChainStoreId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (marketplaceIds == null)
             {
@@ -327,6 +346,9 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 tracingParameters.Add("easyShipShipmentStatuses", easyShipShipmentStatuses);
                 tracingParameters.Add("nextToken", nextToken);
                 tracingParameters.Add("amazonOrderIds", amazonOrderIds);
+                tracingParameters.Add("actualFulfillmentSupplySourceId", actualFulfillmentSupplySourceId);
+                tracingParameters.Add("isISPU", isISPU);
+                tracingParameters.Add("storeChainStoreId", storeChainStoreId);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "GetOrders", tracingParameters);
             }
@@ -390,6 +412,18 @@ namespace IL.Library.Amazon.SPAPI.Orders
             {
                 _queryParameters.Add(string.Format("AmazonOrderIds={0}", System.Uri.EscapeDataString(string.Join(",", amazonOrderIds))));
             }
+            if (actualFulfillmentSupplySourceId != null)
+            {
+                _queryParameters.Add(string.Format("ActualFulfillmentSupplySourceId={0}", System.Uri.EscapeDataString(actualFulfillmentSupplySourceId)));
+            }
+            if (isISPU != null)
+            {
+                _queryParameters.Add(string.Format("IsISPU={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(isISPU, SerializationSettings).Trim('"'))));
+            }
+            if (storeChainStoreId != null)
+            {
+                _queryParameters.Add(string.Format("StoreChainStoreId={0}", System.Uri.EscapeDataString(storeChainStoreId)));
+            }
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -422,7 +456,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -613,14 +647,18 @@ namespace IL.Library.Amazon.SPAPI.Orders
         /// <summary>
         /// Returns the order indicated by the specified order ID.
         ///
-        /// **Usage Plan:**
+        /// **Usage Plans:**
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 0.0055 | 20 |
+        /// |Selling partner specific| Variable | Variable |
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the Selling
-        /// Partner API documentation.
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+        /// limits that were applied to the requested operation. Rate limits for some
+        /// selling partners will vary from the default rate and burst shown in the
+        /// table above. For more information, see "Usage Plans and Rate Limits" in the
+        /// Selling Partner API documentation.
         /// </summary>
         /// <param name='orderId'>
         /// An Amazon-defined order identifier, in 3-7-7 format.
@@ -695,7 +733,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -884,17 +922,26 @@ namespace IL.Library.Amazon.SPAPI.Orders
         }
 
         /// <summary>
-        /// Returns buyer information for the order indicated by the specified order
-        /// ID.
+        /// Returns buyer information for the specified order.
         ///
-        /// **Usage Plan:**
+        /// **Important.** We recommend using the getOrders operation to get buyer
+        /// information for an order, as the getOrderBuyerInfo operation is scheduled
+        /// for deprecation on January 12, 2022. For more information, see the [Tokens
+        /// API Use Case
+        /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md).
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// **Usage Plans:**
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the Selling
-        /// Partner API documentation.
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 0.0055 | 20 |
+        /// |Selling partner specific| Variable | Variable |
+        ///
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+        /// limits that were applied to the requested operation. Rate limits for some
+        /// selling partners will vary from the default rate and burst shown in the
+        /// table above. For more information, see "Usage Plans and Rate Limits" in the
+        /// Selling Partner API documentation.
         /// </summary>
         /// <param name='orderId'>
         /// An orderId is an Amazon-defined order identifier, in 3-7-7 format.
@@ -969,7 +1016,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1158,17 +1205,26 @@ namespace IL.Library.Amazon.SPAPI.Orders
         }
 
         /// <summary>
-        /// Returns the shipping address for the order indicated by the specified order
-        /// ID.
+        /// Returns the shipping address for the specified order.
         ///
-        /// **Usage Plan:**
+        /// **Important.** We recommend using the getOrders operation to get shipping
+        /// address information for an order, as the getOrderAddress operation is
+        /// scheduled for deprecation on January 12, 2022. For more information, see
+        /// the [Tokens API Use Case
+        /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md).
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// **Usage Plans:**
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the Selling
-        /// Partner API documentation.
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 0.0055 | 20 |
+        /// |Selling partner specific| Variable | Variable |
+        ///
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+        /// limits that were applied to the requested operation. Rate limits for some
+        /// selling partners will vary from the default rate and burst shown in the
+        /// table above. For more information, see "Usage Plans and Rate Limits" in the
+        /// Selling Partner API documentation.
         /// </summary>
         /// <param name='orderId'>
         /// An orderId is an Amazon-defined order identifier, in 3-7-7 format.
@@ -1243,7 +1299,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1445,14 +1501,18 @@ namespace IL.Library.Amazon.SPAPI.Orders
         /// returns information about pricing, taxes, shipping charges, gift status and
         /// promotions for the order items in the order.
         ///
-        /// **Usage Plan:**
+        /// **Usage Plans:**
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 0.0055 | 20 |
+        /// |Selling partner specific| Variable | Variable |
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the Selling
-        /// Partner API documentation.
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+        /// limits that were applied to the requested operation. Rate limits for some
+        /// selling partners will vary from the default rate and burst shown in the
+        /// table above. For more information, see "Usage Plans and Rate Limits" in the
+        /// Selling Partner API documentation.
         /// </summary>
         /// <param name='orderId'>
         /// An Amazon-defined order identifier, in 3-7-7 format.
@@ -1540,7 +1600,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1729,17 +1789,26 @@ namespace IL.Library.Amazon.SPAPI.Orders
         }
 
         /// <summary>
-        /// Returns buyer information in the order items of the order indicated by the
-        /// specified order ID.
+        /// Returns buyer information for the order items in the specified order.
         ///
-        /// **Usage Plan:**
+        /// **Important.** We recommend using the getOrderItems operation to get buyer
+        /// information for the order items in an order, as the getOrderItemsBuyerInfo
+        /// operation is scheduled for deprecation on January 12, 2022. For more
+        /// information, see the [Tokens API Use Case
+        /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md).
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// **Usage Plans:**
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the Selling
-        /// Partner API documentation.
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 0.0055 | 20 |
+        /// |Selling partner specific| Variable | Variable |
+        ///
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+        /// limits that were applied to the requested operation. Rate limits for some
+        /// selling partners will vary from the default rate and burst shown in the
+        /// table above. For more information, see "Usage Plans and Rate Limits" in the
+        /// Selling Partner API documentation.
         /// </summary>
         /// <param name='orderId'>
         /// An Amazon-defined order identifier, in 3-7-7 format.
@@ -1827,7 +1896,7 @@ namespace IL.Library.Amazon.SPAPI.Orders
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1998,6 +2067,307 @@ namespace IL.Library.Amazon.SPAPI.Orders
             try
             {
                 _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<GetOrderItemsBuyerInfoHeaders>(JsonSerializer.Create(DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
+            }
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
+        }
+
+        /// <summary>
+        /// Update the shipment status.
+        /// </summary>
+        /// <param name='orderId'>
+        /// An Amazon-defined order identifier, in 3-7-7 format.
+        /// </param>
+        /// <param name='payload'>
+        /// Request to update the shipment status.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<HttpOperationResponse<UpdateShipmentStatusErrorResponse,UpdateShipmentStatusHeaders>> UpdateShipmentStatusWithHttpMessagesAsync(string orderId, UpdateShipmentStatusRequest payload, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (orderId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "orderId");
+            }
+            if (payload == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "payload");
+            }
+            if (payload != null)
+            {
+                payload.Validate();
+            }
+            // Tracing
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
+            {
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("orderId", orderId);
+                tracingParameters.Add("payload", payload);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(_invocationId, this, "UpdateShipmentStatus", tracingParameters);
+            }
+            // Construct URL
+            var _baseUrl = BaseUri.AbsoluteUri;
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "orders/v0/orders/{orderId}/shipment").ToString();
+            _url = _url.Replace("{orderId}", System.Uri.EscapeDataString(orderId));
+            // Create HTTP transport objects
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
+            _httpRequest.RequestUri = new System.Uri(_url);
+            // Set Headers
+
+
+            if (customHeaders != null)
+            {
+                foreach(var _header in customHeaders)
+                {
+                    if (_httpRequest.Headers.Contains(_header.Key))
+                    {
+                        _httpRequest.Headers.Remove(_header.Key);
+                    }
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                }
+            }
+
+            // Serialize Request
+            string _requestContent = null;
+            if(payload != null)
+            {
+                _requestContent = SafeJsonConvert.SerializeObject(payload, SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            }
+            // Send Request
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIUserKeyPair, _httpRequest, _configuration, _tokenManagement);
+            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
+            if ((int)_statusCode != 204 && (int)_statusCode != 400 && (int)_statusCode != 403 && (int)_statusCode != 404 && (int)_statusCode != 413 && (int)_statusCode != 415 && (int)_statusCode != 429 && (int)_statusCode != 500 && (int)_statusCode != 503)
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Error(_invocationId, ex);
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+            // Create Result
+            var _result = new HttpOperationResponse<UpdateShipmentStatusErrorResponse,UpdateShipmentStatusHeaders>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            // Deserialize Response
+            if ((int)_statusCode == 400)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<UpdateShipmentStatusErrorResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<UpdateShipmentStatusErrorResponse>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 403)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<UpdateShipmentStatusErrorResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<UpdateShipmentStatusErrorResponse>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 404)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<UpdateShipmentStatusErrorResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<UpdateShipmentStatusErrorResponse>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 413)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<UpdateShipmentStatusErrorResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<UpdateShipmentStatusErrorResponse>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 415)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<UpdateShipmentStatusErrorResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<UpdateShipmentStatusErrorResponse>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 429)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<UpdateShipmentStatusErrorResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<UpdateShipmentStatusErrorResponse>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 500)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<UpdateShipmentStatusErrorResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<UpdateShipmentStatusErrorResponse>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 503)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<UpdateShipmentStatusErrorResponse>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<UpdateShipmentStatusErrorResponse>((int)_statusCode, _result.Body, _httpResponse);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            try
+            {
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<UpdateShipmentStatusHeaders>(JsonSerializer.Create(DeserializationSettings));
             }
             catch (JsonException ex)
             {

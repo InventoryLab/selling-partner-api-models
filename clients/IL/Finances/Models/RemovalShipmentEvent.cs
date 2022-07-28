@@ -29,6 +29,7 @@ namespace IL.Library.Amazon.SPAPI.Finances.Models
         /// </summary>
         /// <param name="postedDate">The date and time when the financial event
         /// was posted.</param>
+        /// <param name="merchantOrderId">The merchant removal orderId.</param>
         /// <param name="orderId">The identifier for the removal shipment
         /// order.</param>
         /// <param name="transactionType">The type of removal order.
@@ -38,9 +39,10 @@ namespace IL.Library.Amazon.SPAPI.Finances.Models
         /// * WHOLESALE_LIQUIDATION</param>
         /// <param name="removalShipmentItemList">A list of removal shipment
         /// items.</param>
-        public RemovalShipmentEvent(System.DateTime? postedDate = default(System.DateTime?), string orderId = default(string), string transactionType = default(string), IList<RemovalShipmentItem> removalShipmentItemList = default(IList<RemovalShipmentItem>))
+        public RemovalShipmentEvent(System.DateTime? postedDate = default(System.DateTime?), string merchantOrderId = default(string), string orderId = default(string), string transactionType = default(string), IList<RemovalShipmentItem> removalShipmentItemList = default(IList<RemovalShipmentItem>))
         {
             PostedDate = postedDate;
+            MerchantOrderId = merchantOrderId;
             OrderId = orderId;
             TransactionType = transactionType;
             RemovalShipmentItemList = removalShipmentItemList;
@@ -57,6 +59,12 @@ namespace IL.Library.Amazon.SPAPI.Finances.Models
         /// </summary>
         [JsonProperty(PropertyName = "PostedDate")]
         public System.DateTime? PostedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the merchant removal orderId.
+        /// </summary>
+        [JsonProperty(PropertyName = "MerchantOrderId")]
+        public string MerchantOrderId { get; set; }
 
         /// <summary>
         /// Gets or sets the identifier for the removal shipment order.

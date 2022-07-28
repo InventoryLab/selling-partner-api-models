@@ -32,8 +32,11 @@ namespace IL.Library.Amazon.SPAPI.Tokens.Models
         /// </summary>
         /// <param name="restrictedResources">A list of restricted resources.
         /// Maximum: 50</param>
-        public CreateRestrictedDataTokenRequest(IList<RestrictedResource> restrictedResources)
+        /// <param name="targetApplication">The application ID for the target
+        /// application to which access is being delegated.</param>
+        public CreateRestrictedDataTokenRequest(IList<RestrictedResource> restrictedResources, string targetApplication = default(string))
         {
+            TargetApplication = targetApplication;
             RestrictedResources = restrictedResources;
             CustomInit();
         }
@@ -42,6 +45,13 @@ namespace IL.Library.Amazon.SPAPI.Tokens.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// Gets or sets the application ID for the target application to which
+        /// access is being delegated.
+        /// </summary>
+        [JsonProperty(PropertyName = "targetApplication")]
+        public string TargetApplication { get; set; }
 
         /// <summary>
         /// Gets or sets a list of restricted resources.

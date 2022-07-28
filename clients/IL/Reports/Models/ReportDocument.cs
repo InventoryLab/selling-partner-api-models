@@ -10,6 +10,9 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// Information required for the report document.
+    /// </summary>
     public partial class ReportDocument
     {
         /// <summary>
@@ -17,7 +20,6 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
         /// </summary>
         public ReportDocument()
         {
-            EncryptionDetails = new ReportDocumentEncryptionDetails();
             CustomInit();
         }
 
@@ -32,11 +34,10 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
         /// <param name="compressionAlgorithm">If present, the report document
         /// contents have been compressed with the provided algorithm. Possible
         /// values include: 'GZIP'</param>
-        public ReportDocument(string reportDocumentId, string url, ReportDocumentEncryptionDetails encryptionDetails, string compressionAlgorithm = default(string))
+        public ReportDocument(string reportDocumentId, string url, string compressionAlgorithm = default(string))
         {
             ReportDocumentId = reportDocumentId;
             Url = url;
-            EncryptionDetails = encryptionDetails;
             CompressionAlgorithm = compressionAlgorithm;
             CustomInit();
         }
@@ -61,11 +62,6 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
         public string Url { get; set; }
 
         /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "encryptionDetails")]
-        public ReportDocumentEncryptionDetails EncryptionDetails { get; set; }
-
-        /// <summary>
         /// Gets or sets if present, the report document contents have been
         /// compressed with the provided algorithm. Possible values include:
         /// 'GZIP'
@@ -88,14 +84,6 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
             if (Url == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Url");
-            }
-            if (EncryptionDetails == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "EncryptionDetails");
-            }
-            if (EncryptionDetails != null)
-            {
-                EncryptionDetails.Validate();
             }
         }
     }

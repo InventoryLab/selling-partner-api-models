@@ -28,10 +28,10 @@ namespace IL.Library.Amazon.SPAPI.Tokens.Models
         /// class.
         /// </summary>
         /// <param name="restrictedDataToken">A Restricted Data Token (RDT).
-        /// This is a short-lived access token that authorizes you to access
-        /// the restricted resources that you specified. Pass this value with
-        /// the x-amzn-access-token header when making subsequent calls to
-        /// these restricted resources.</param>
+        /// This is a short-lived access token that authorizes calls to
+        /// restricted operations. Pass this value with the x-amz-access-token
+        /// header when making subsequent calls to these restricted
+        /// resources.</param>
         /// <param name="expiresIn">The lifetime of the Restricted Data Token,
         /// in seconds.</param>
         public CreateRestrictedDataTokenResponse(string restrictedDataToken = default(string), int? expiresIn = default(int?))
@@ -48,9 +48,9 @@ namespace IL.Library.Amazon.SPAPI.Tokens.Models
 
         /// <summary>
         /// Gets or sets a Restricted Data Token (RDT). This is a short-lived
-        /// access token that authorizes you to access the restricted resources
-        /// that you specified. Pass this value with the x-amzn-access-token
-        /// header when making subsequent calls to these restricted resources.
+        /// access token that authorizes calls to restricted operations. Pass
+        /// this value with the x-amz-access-token header when making
+        /// subsequent calls to these restricted resources.
         /// </summary>
         [JsonProperty(PropertyName = "restrictedDataToken")]
         public string RestrictedDataToken { get; set; }

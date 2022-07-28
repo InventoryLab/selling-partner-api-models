@@ -3,7 +3,7 @@ Import-Module .\modules\prepareresponse.psm1
 Import-Module .\modules\preparerequest.psm1
 Import-Module .\modules\factory.psm1
 
-$templatFile = '..\models\feeds-api-model\feeds_2020-09-04.json'
+$templatFile = '..\models\feeds-api-model\feeds_2021-06-30.json'
 $outputFolder = '..\clients\IL\Feeds'
 $namespace = 'IL.Library.Amazon.SPAPI.Feeds'
 $clientname = 'FeedsClient'

@@ -20,6 +20,9 @@ namespace IL.Library.Amazon.SPAPI.Notifications
     /// this API you can create a destination to receive notifications,
     /// subscribe to notifications, delete notification subscriptions, and
     /// more.
+    ///
+    /// For more information, see the [Notifications Use Case
+    /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/notifications-api-use-case-guide/notifications-use-case-guide-v1.md)
     /// </summary>
     public partial interface INotificationsClient : System.IDisposable
     {
@@ -39,18 +42,44 @@ namespace IL.Library.Amazon.SPAPI.Notifications
         JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
-        /// The type of notification to which you want to subscribe.
+        /// The type of notification.
         ///
-        /// For more information about notification types, see the
-        /// Notifications API Use Case Guide. Possible values include:
-        /// 'ANY_OFFER_CHANGED', 'FEED_PROCESSING_FINISHED',
-        /// 'FBA_OUTBOUND_SHIPMENT_STATUS', 'FEE_PROMOTION',
-        /// 'FULFILLMENT_ORDER_STATUS', 'REPORT_PROCESSING_FINISHED',
-        /// 'BRANDED_ITEM_CONTENT_CHANGE', 'ITEM_PRODUCT_TYPE_CHANGE',
-        /// 'MFN_ORDER_STATUS_CHANGE', 'B2B_ANY_OFFER_CHANGED'
+        /// For more information about notification types, see [the
+        /// Notifications API Use Case
+        /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/notifications-api-use-case-guide/notifications-use-case-guide-v1.md).
+        /// Possible values include: 'ANY_OFFER_CHANGED',
+        /// 'FEED_PROCESSING_FINISHED', 'FBA_OUTBOUND_SHIPMENT_STATUS',
+        /// 'FEE_PROMOTION', 'FULFILLMENT_ORDER_STATUS',
+        /// 'REPORT_PROCESSING_FINISHED', 'BRANDED_ITEM_CONTENT_CHANGE',
+        /// 'ITEM_PRODUCT_TYPE_CHANGE', 'LISTINGS_ITEM_STATUS_CHANGE',
+        /// 'LISTINGS_ITEM_ISSUES_CHANGE', 'MFN_ORDER_STATUS_CHANGE',
+        /// 'B2B_ANY_OFFER_CHANGED', 'ACCOUNT_STATUS_CHANGED',
+        /// 'PRODUCT_TYPE_DEFINITIONS_CHANGE'
         /// </summary>
         string NotificationType { get; set; }
 
+
+        /// <summary>
+        /// Returns information about subscriptions of the specified
+        /// notification type. You can use this API to get subscription
+        /// information when you do not have a subscription identifier.
+        ///
+        /// **Usage Plan:**
+        ///
+        /// | Rate (requests per second) | Burst |
+        /// | ---- | ---- |
+        /// | 1 | 5 |
+        ///
+        /// For more information, see "Usage Plans and Rate Limits" in the
+        /// Selling Partner API documentation.
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<GetSubscriptionResponse,GetSubscriptionHeaders>> GetSubscriptionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Creates a subscription for the specified notification type to be
@@ -78,9 +107,10 @@ namespace IL.Library.Amazon.SPAPI.Notifications
         Task<HttpOperationResponse<CreateSubscriptionResponse,CreateSubscriptionHeaders>> CreateSubscriptionWithHttpMessagesAsync(CreateSubscriptionRequest body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Returns information about subscriptions of the specified
-        /// notification type. You can use this API to get subscription
-        /// information when you do not have a subscription identifier.
+        /// Returns information about a subscription for the specified
+        /// notification type. The getSubscriptionById API is grantless. For
+        /// more information, see "Grantless operations" in the Selling Partner
+        /// API Developer Guide.
         ///
         /// **Usage Plan:**
         ///
@@ -91,13 +121,16 @@ namespace IL.Library.Amazon.SPAPI.Notifications
         /// For more information, see "Usage Plans and Rate Limits" in the
         /// Selling Partner API documentation.
         /// </summary>
+        /// <param name='subscriptionId'>
+        /// The identifier for the subscription that you want to get.
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<GetSubscriptionResponse,GetSubscriptionHeaders>> GetSubscriptionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object,GetSubscriptionByIdHeaders>> GetSubscriptionByIdWithHttpMessagesAsync(string subscriptionId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Deletes the subscription indicated by the subscription identifier
@@ -129,10 +162,9 @@ namespace IL.Library.Amazon.SPAPI.Notifications
         Task<HttpOperationResponse<DeleteSubscriptionByIdResponse,DeleteSubscriptionByIdHeaders>> DeleteSubscriptionByIdWithHttpMessagesAsync(string subscriptionId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Returns information about a subscription for the specified
-        /// notification type. The getSubscriptionById API is grantless. For
-        /// more information, see "Grantless operations" in the Selling Partner
-        /// API Developer Guide.
+        /// Returns information about all destinations. The getDestinations API
+        /// is grantless. For more information, see "Grantless operations" in
+        /// the Selling Partner API Developer Guide.
         ///
         /// **Usage Plan:**
         ///
@@ -143,16 +175,13 @@ namespace IL.Library.Amazon.SPAPI.Notifications
         /// For more information, see "Usage Plans and Rate Limits" in the
         /// Selling Partner API documentation.
         /// </summary>
-        /// <param name='subscriptionId'>
-        /// The identifier for the subscription that you want to get.
-        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object,GetSubscriptionByIdHeaders>> GetSubscriptionByIdWithHttpMessagesAsync(string subscriptionId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GetDestinationsResponse,GetDestinationsHeaders>> GetDestinationsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Creates a destination resource to receive notifications. The
@@ -177,28 +206,6 @@ namespace IL.Library.Amazon.SPAPI.Notifications
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<CreateDestinationResponse,CreateDestinationHeaders>> CreateDestinationWithHttpMessagesAsync(CreateDestinationRequest body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-
-        /// <summary>
-        /// Returns information about all destinations. The getDestinations API
-        /// is grantless. For more information, see "Grantless operations" in
-        /// the Selling Partner API Developer Guide.
-        ///
-        /// **Usage Plan:**
-        ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 5 |
-        ///
-        /// For more information, see "Usage Plans and Rate Limits" in the
-        /// Selling Partner API documentation.
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<HttpOperationResponse<GetDestinationsResponse,GetDestinationsHeaders>> GetDestinationsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns information about the destination that you specify. The

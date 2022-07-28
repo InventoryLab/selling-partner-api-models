@@ -33,7 +33,7 @@ namespace IL.Library.Amazon.SPAPI.Finances.Models
         /// events.</param>
         /// <param name="chargebackEventList">A list of chargeback
         /// events.</param>
-        public FinancialEvents(IList<ShipmentEvent> shipmentEventList = default(IList<ShipmentEvent>), IList<ShipmentEvent> refundEventList = default(IList<ShipmentEvent>), IList<ShipmentEvent> guaranteeClaimEventList = default(IList<ShipmentEvent>), IList<ShipmentEvent> chargebackEventList = default(IList<ShipmentEvent>), IList<PayWithAmazonEvent> payWithAmazonEventList = default(IList<PayWithAmazonEvent>), IList<SolutionProviderCreditEvent> serviceProviderCreditEventList = default(IList<SolutionProviderCreditEvent>), IList<RetrochargeEvent> retrochargeEventList = default(IList<RetrochargeEvent>), IList<RentalTransactionEvent> rentalTransactionEventList = default(IList<RentalTransactionEvent>), IList<ProductAdsPaymentEvent> productAdsPaymentEventList = default(IList<ProductAdsPaymentEvent>), IList<ServiceFeeEvent> serviceFeeEventList = default(IList<ServiceFeeEvent>), IList<SellerDealPaymentEvent> sellerDealPaymentEventList = default(IList<SellerDealPaymentEvent>), IList<DebtRecoveryEvent> debtRecoveryEventList = default(IList<DebtRecoveryEvent>), IList<LoanServicingEvent> loanServicingEventList = default(IList<LoanServicingEvent>), IList<AdjustmentEvent> adjustmentEventList = default(IList<AdjustmentEvent>), IList<SAFETReimbursementEvent> sAFETReimbursementEventList = default(IList<SAFETReimbursementEvent>), IList<SellerReviewEnrollmentPaymentEvent> sellerReviewEnrollmentPaymentEventList = default(IList<SellerReviewEnrollmentPaymentEvent>), IList<FBALiquidationEvent> fBALiquidationEventList = default(IList<FBALiquidationEvent>), IList<CouponPaymentEvent> couponPaymentEventList = default(IList<CouponPaymentEvent>), IList<ImagingServicesFeeEvent> imagingServicesFeeEventList = default(IList<ImagingServicesFeeEvent>), IList<NetworkComminglingTransactionEvent> networkComminglingTransactionEventList = default(IList<NetworkComminglingTransactionEvent>), IList<AffordabilityExpenseEvent> affordabilityExpenseEventList = default(IList<AffordabilityExpenseEvent>), IList<AffordabilityExpenseEvent> affordabilityExpenseReversalEventList = default(IList<AffordabilityExpenseEvent>))
+        public FinancialEvents(IList<ShipmentEvent> shipmentEventList = default(IList<ShipmentEvent>), IList<ShipmentEvent> refundEventList = default(IList<ShipmentEvent>), IList<ShipmentEvent> guaranteeClaimEventList = default(IList<ShipmentEvent>), IList<ShipmentEvent> chargebackEventList = default(IList<ShipmentEvent>), IList<PayWithAmazonEvent> payWithAmazonEventList = default(IList<PayWithAmazonEvent>), IList<SolutionProviderCreditEvent> serviceProviderCreditEventList = default(IList<SolutionProviderCreditEvent>), IList<RetrochargeEvent> retrochargeEventList = default(IList<RetrochargeEvent>), IList<RentalTransactionEvent> rentalTransactionEventList = default(IList<RentalTransactionEvent>), IList<ProductAdsPaymentEvent> productAdsPaymentEventList = default(IList<ProductAdsPaymentEvent>), IList<ServiceFeeEvent> serviceFeeEventList = default(IList<ServiceFeeEvent>), IList<SellerDealPaymentEvent> sellerDealPaymentEventList = default(IList<SellerDealPaymentEvent>), IList<DebtRecoveryEvent> debtRecoveryEventList = default(IList<DebtRecoveryEvent>), IList<LoanServicingEvent> loanServicingEventList = default(IList<LoanServicingEvent>), IList<AdjustmentEvent> adjustmentEventList = default(IList<AdjustmentEvent>), IList<SAFETReimbursementEvent> sAFETReimbursementEventList = default(IList<SAFETReimbursementEvent>), IList<SellerReviewEnrollmentPaymentEvent> sellerReviewEnrollmentPaymentEventList = default(IList<SellerReviewEnrollmentPaymentEvent>), IList<FBALiquidationEvent> fBALiquidationEventList = default(IList<FBALiquidationEvent>), IList<CouponPaymentEvent> couponPaymentEventList = default(IList<CouponPaymentEvent>), IList<ImagingServicesFeeEvent> imagingServicesFeeEventList = default(IList<ImagingServicesFeeEvent>), IList<NetworkComminglingTransactionEvent> networkComminglingTransactionEventList = default(IList<NetworkComminglingTransactionEvent>), IList<AffordabilityExpenseEvent> affordabilityExpenseEventList = default(IList<AffordabilityExpenseEvent>), IList<AffordabilityExpenseEvent> affordabilityExpenseReversalEventList = default(IList<AffordabilityExpenseEvent>), IList<TrialShipmentEvent> trialShipmentEventList = default(IList<TrialShipmentEvent>), IList<ShipmentEvent> shipmentSettleEventList = default(IList<ShipmentEvent>), IList<TaxWithholdingEvent> taxWithholdingEventList = default(IList<TaxWithholdingEvent>), IList<RemovalShipmentEvent> removalShipmentEventList = default(IList<RemovalShipmentEvent>), IList<RemovalShipmentAdjustmentEvent> removalShipmentAdjustmentEventList = default(IList<RemovalShipmentAdjustmentEvent>))
         {
             ShipmentEventList = shipmentEventList;
             RefundEventList = refundEventList;
@@ -57,6 +57,11 @@ namespace IL.Library.Amazon.SPAPI.Finances.Models
             NetworkComminglingTransactionEventList = networkComminglingTransactionEventList;
             AffordabilityExpenseEventList = affordabilityExpenseEventList;
             AffordabilityExpenseReversalEventList = affordabilityExpenseReversalEventList;
+            TrialShipmentEventList = trialShipmentEventList;
+            ShipmentSettleEventList = shipmentSettleEventList;
+            TaxWithholdingEventList = taxWithholdingEventList;
+            RemovalShipmentEventList = removalShipmentEventList;
+            RemovalShipmentAdjustmentEventList = removalShipmentAdjustmentEventList;
             CustomInit();
         }
 
@@ -178,6 +183,31 @@ namespace IL.Library.Amazon.SPAPI.Finances.Models
         /// </summary>
         [JsonProperty(PropertyName = "AffordabilityExpenseReversalEventList")]
         public IList<AffordabilityExpenseEvent> AffordabilityExpenseReversalEventList { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "TrialShipmentEventList")]
+        public IList<TrialShipmentEvent> TrialShipmentEventList { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ShipmentSettleEventList")]
+        public IList<ShipmentEvent> ShipmentSettleEventList { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "TaxWithholdingEventList")]
+        public IList<TaxWithholdingEvent> TaxWithholdingEventList { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "RemovalShipmentEventList")]
+        public IList<RemovalShipmentEvent> RemovalShipmentEventList { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "RemovalShipmentAdjustmentEventList")]
+        public IList<RemovalShipmentAdjustmentEvent> RemovalShipmentAdjustmentEventList { get; set; }
 
     }
 }

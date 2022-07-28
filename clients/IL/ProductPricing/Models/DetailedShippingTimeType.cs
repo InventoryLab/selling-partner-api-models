@@ -41,7 +41,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// that the item will be available for shipping. Possible values: NOW,
         /// FUTURE_WITHOUT_DATE, FUTURE_WITH_DATE. Possible values include:
         /// 'NOW', 'FUTURE_WITHOUT_DATE', 'FUTURE_WITH_DATE'</param>
-        public DetailedShippingTimeType(long? minimumHours = default(long?), long? maximumHours = default(long?), double? availableDate = default(double?), string availabilityType = default(string))
+        public DetailedShippingTimeType(long? minimumHours = default(long?), long? maximumHours = default(long?), string availableDate = default(string), string availabilityType = default(string))
         {
             MinimumHours = minimumHours;
             MaximumHours = maximumHours;
@@ -75,7 +75,7 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// shipping.
         /// </summary>
         [JsonProperty(PropertyName = "availableDate")]
-        public double? AvailableDate { get; set; }
+        public string AvailableDate { get; set; }
 
         /// <summary>
         /// Gets or sets indicates whether the item is available for shipping

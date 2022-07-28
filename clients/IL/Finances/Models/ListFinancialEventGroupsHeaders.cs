@@ -29,9 +29,14 @@ namespace IL.Library.Amazon.SPAPI.Finances.Models
         /// </summary>
         /// <param name="xAmznRequestId">Unique request reference
         /// identifier.</param>
-        public ListFinancialEventGroupsHeaders(string xAmznRequestId = default(string))
+        /// <param name="xAmznRateLimitLimit">Your rate limit (requests per
+        /// second) for this operation.
+        /// _Note:_ For this status code, the rate limit header is deprecated
+        /// and no longer returned.</param>
+        public ListFinancialEventGroupsHeaders(string xAmznRequestId = default(string), string xAmznRateLimitLimit = default(string))
         {
             XAmznRequestId = xAmznRequestId;
+            XAmznRateLimitLimit = xAmznRateLimitLimit;
             CustomInit();
         }
 
@@ -45,6 +50,15 @@ namespace IL.Library.Amazon.SPAPI.Finances.Models
         /// </summary>
         [JsonProperty(PropertyName = "x-amzn-RequestId")]
         public string XAmznRequestId { get; set; }
+
+        /// <summary>
+        /// Gets or sets your rate limit (requests per second) for this
+        /// operation.
+        /// _Note:_ For this status code, the rate limit header is deprecated
+        /// and no longer returned.
+        /// </summary>
+        [JsonProperty(PropertyName = "x-amzn-RateLimit-Limit")]
+        public string XAmznRateLimitLimit { get; set; }
 
     }
 }

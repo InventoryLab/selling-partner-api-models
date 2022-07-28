@@ -64,7 +64,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             /// include this token as the only parameter. Specifying nextToken with any
             /// other parameters will cause the request to fail.
             /// </param>
-            public static GetFeedsResponse GetFeeds(this IFeedsClient operations, IList<string> feedTypes = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, IList<string> processingStatuses = default(IList<string>), System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string))
+            public static object GetFeeds(this IFeedsClient operations, IList<string> feedTypes = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, IList<string> processingStatuses = default(IList<string>), System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string))
             {
                 return operations.GetFeedsAsync(feedTypes, marketplaceIds, pageSize, processingStatuses, createdSince, createdUntil, nextToken).GetAwaiter().GetResult();
             }
@@ -119,7 +119,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetFeedsResponse> GetFeedsAsync(this IFeedsClient operations, IList<string> feedTypes = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, IList<string> processingStatuses = default(IList<string>), System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetFeedsAsync(this IFeedsClient operations, IList<string> feedTypes = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, IList<string> processingStatuses = default(IList<string>), System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetFeedsWithHttpMessagesAsync(feedTypes, marketplaceIds, pageSize, processingStatuses, createdSince, createdUntil, nextToken, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -128,8 +128,8 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             }
 
             /// <summary>
-            /// Creates a feed. Encrypt and upload the contents of the feed document before
-            /// calling this operation.
+            /// Creates a feed. Upload the contents of the feed document before calling
+            /// this operation.
             ///
             /// **Usage Plan:**
             ///
@@ -145,14 +145,14 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             /// </param>
             /// <param name='body'>
             /// </param>
-            public static CreateFeedResponse CreateFeed(this IFeedsClient operations, CreateFeedSpecification body)
+            public static object CreateFeed(this IFeedsClient operations, CreateFeedSpecification body)
             {
                 return operations.CreateFeedAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Creates a feed. Encrypt and upload the contents of the feed document before
-            /// calling this operation.
+            /// Creates a feed. Upload the contents of the feed document before calling
+            /// this operation.
             ///
             /// **Usage Plan:**
             ///
@@ -171,7 +171,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CreateFeedResponse> CreateFeedAsync(this IFeedsClient operations, CreateFeedSpecification body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> CreateFeedAsync(this IFeedsClient operations, CreateFeedSpecification body, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateFeedWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -200,7 +200,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             /// The identifier for the feed. This identifier is unique only in combination
             /// with a seller ID.
             /// </param>
-            public static CancelFeedResponse CancelFeed(this IFeedsClient operations, string feedId)
+            public static ErrorList CancelFeed(this IFeedsClient operations, string feedId)
             {
                 return operations.CancelFeedAsync(feedId).GetAwaiter().GetResult();
             }
@@ -229,7 +229,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CancelFeedResponse> CancelFeedAsync(this IFeedsClient operations, string feedId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorList> CancelFeedAsync(this IFeedsClient operations, string feedId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CancelFeedWithHttpMessagesAsync(feedId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -257,7 +257,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             /// The identifier for the feed. This identifier is unique only in combination
             /// with a seller ID.
             /// </param>
-            public static GetFeedResponse GetFeed(this IFeedsClient operations, string feedId)
+            public static object GetFeed(this IFeedsClient operations, string feedId)
             {
                 return operations.GetFeedAsync(feedId).GetAwaiter().GetResult();
             }
@@ -285,7 +285,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetFeedResponse> GetFeedAsync(this IFeedsClient operations, string feedId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetFeedAsync(this IFeedsClient operations, string feedId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetFeedWithHttpMessagesAsync(feedId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -295,10 +295,9 @@ namespace IL.Library.Amazon.SPAPI.Feeds
 
             /// <summary>
             /// Creates a feed document for the feed type that you specify. This operation
-            /// returns encryption details for encrypting the contents of the document, as
-            /// well as a presigned URL for uploading the encrypted feed document contents.
-            /// It also returns a feedDocumentId value that you can pass in with a
-            /// subsequent call to the createFeed operation.
+            /// returns a presigned URL for uploading the feed document contents. It also
+            /// returns a feedDocumentId value that you can pass in with a subsequent call
+            /// to the createFeed operation.
             ///
             /// **Usage Plan:**
             ///
@@ -314,17 +313,16 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             /// </param>
             /// <param name='body'>
             /// </param>
-            public static CreateFeedDocumentResponse CreateFeedDocument(this IFeedsClient operations, CreateFeedDocumentSpecification body)
+            public static object CreateFeedDocument(this IFeedsClient operations, CreateFeedDocumentSpecification body)
             {
                 return operations.CreateFeedDocumentAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
             /// Creates a feed document for the feed type that you specify. This operation
-            /// returns encryption details for encrypting the contents of the document, as
-            /// well as a presigned URL for uploading the encrypted feed document contents.
-            /// It also returns a feedDocumentId value that you can pass in with a
-            /// subsequent call to the createFeed operation.
+            /// returns a presigned URL for uploading the feed document contents. It also
+            /// returns a feedDocumentId value that you can pass in with a subsequent call
+            /// to the createFeed operation.
             ///
             /// **Usage Plan:**
             ///
@@ -343,7 +341,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CreateFeedDocumentResponse> CreateFeedDocumentAsync(this IFeedsClient operations, CreateFeedDocumentSpecification body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> CreateFeedDocumentAsync(this IFeedsClient operations, CreateFeedDocumentSpecification body, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateFeedDocumentWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -353,8 +351,6 @@ namespace IL.Library.Amazon.SPAPI.Feeds
 
             /// <summary>
             /// Returns the information required for retrieving a feed document's contents.
-            /// This includes a presigned URL for the feed document as well as the
-            /// information required to decrypt the document's contents.
             ///
             /// **Usage Plan:**
             ///
@@ -371,15 +367,13 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             /// <param name='feedDocumentId'>
             /// The identifier of the feed document.
             /// </param>
-            public static GetFeedDocumentResponse GetFeedDocument(this IFeedsClient operations, string feedDocumentId)
+            public static object GetFeedDocument(this IFeedsClient operations, string feedDocumentId)
             {
                 return operations.GetFeedDocumentAsync(feedDocumentId).GetAwaiter().GetResult();
             }
 
             /// <summary>
             /// Returns the information required for retrieving a feed document's contents.
-            /// This includes a presigned URL for the feed document as well as the
-            /// information required to decrypt the document's contents.
             ///
             /// **Usage Plan:**
             ///
@@ -399,7 +393,7 @@ namespace IL.Library.Amazon.SPAPI.Feeds
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetFeedDocumentResponse> GetFeedDocumentAsync(this IFeedsClient operations, string feedDocumentId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> GetFeedDocumentAsync(this IFeedsClient operations, string feedDocumentId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetFeedDocumentWithHttpMessagesAsync(feedDocumentId, null, cancellationToken).ConfigureAwait(false))
                 {

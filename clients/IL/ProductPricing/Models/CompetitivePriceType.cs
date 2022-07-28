@@ -39,17 +39,33 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// whose pricing information is returned. Possible values are: New,
         /// Mint, Very Good, Good, Acceptable, Poor, Club, OEM, Warranty,
         /// Refurbished Warranty, Refurbished, Open Box, or Other.</param>
+        /// <param name="offerType">Indicates the type of customer that the
+        /// offer is valid for.&lt;br&gt;&lt;br&gt;When the offer type is B2C
+        /// in a quantity discount, the seller is winning the Buy Box because
+        /// others do not have inventory at that quantity, not because they
+        /// have a quantity discount on the ASIN. Possible values include:
+        /// 'B2C', 'B2B'</param>
+        /// <param name="quantityTier">Indicates at what quantity this price
+        /// becomes active.</param>
+        /// <param name="quantityDiscountType">Indicates the type of quantity
+        /// discount this price applies to. Possible values include:
+        /// 'QUANTITY_DISCOUNT'</param>
+        /// <param name="sellerId">The seller identifier for the offer.</param>
         /// <param name="belongsToRequester"> Indicates whether or not the
         /// pricing information is for an offer listing that belongs to the
         /// requester. The requester is the seller associated with the SellerId
         /// that was submitted with the request. Possible values are: true and
         /// false.</param>
-        public CompetitivePriceType(string competitivePriceId, PriceType price, string condition = default(string), string subcondition = default(string), bool? belongsToRequester = default(bool?))
+        public CompetitivePriceType(string competitivePriceId, PriceType price, string condition = default(string), string subcondition = default(string), string offerType = default(string), int? quantityTier = default(int?), string quantityDiscountType = default(string), string sellerId = default(string), bool? belongsToRequester = default(bool?))
         {
             CompetitivePriceId = competitivePriceId;
             Price = price;
             Condition = condition;
             Subcondition = subcondition;
+            OfferType = offerType;
+            QuantityTier = quantityTier;
+            QuantityDiscountType = quantityDiscountType;
+            SellerId = sellerId;
             BelongsToRequester = belongsToRequester;
             CustomInit();
         }
@@ -93,6 +109,36 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// </summary>
         [JsonProperty(PropertyName = "subcondition")]
         public string Subcondition { get; set; }
+
+        /// <summary>
+        /// Gets or sets indicates the type of customer that the offer is valid
+        /// for.&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;When the offer type is B2C
+        /// in a quantity discount, the seller is winning the Buy Box because
+        /// others do not have inventory at that quantity, not because they
+        /// have a quantity discount on the ASIN. Possible values include:
+        /// 'B2C', 'B2B'
+        /// </summary>
+        [JsonProperty(PropertyName = "offerType")]
+        public string OfferType { get; set; }
+
+        /// <summary>
+        /// Gets or sets indicates at what quantity this price becomes active.
+        /// </summary>
+        [JsonProperty(PropertyName = "quantityTier")]
+        public int? QuantityTier { get; set; }
+
+        /// <summary>
+        /// Gets or sets indicates the type of quantity discount this price
+        /// applies to. Possible values include: 'QUANTITY_DISCOUNT'
+        /// </summary>
+        [JsonProperty(PropertyName = "quantityDiscountType")]
+        public string QuantityDiscountType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the seller identifier for the offer.
+        /// </summary>
+        [JsonProperty(PropertyName = "sellerId")]
+        public string SellerId { get; set; }
 
         /// <summary>
         /// Gets or sets  Indicates whether or not the pricing information is

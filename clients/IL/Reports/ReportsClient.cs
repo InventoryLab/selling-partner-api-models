@@ -219,7 +219,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetReportsResponse,GetReportsHeaders>> GetReportsWithHttpMessagesAsync(IList<string> reportTypes = default(IList<string>), IList<string> processingStatuses = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<object,GetReportsHeaders>> GetReportsWithHttpMessagesAsync(IList<string> reportTypes = default(IList<string>), IList<string> processingStatuses = default(IList<string>), IList<string> marketplaceIds = default(IList<string>), int? pageSize = 10, System.DateTime? createdSince = default(System.DateTime?), System.DateTime? createdUntil = default(System.DateTime?), string nextToken = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (reportTypes != null)
             {
@@ -277,7 +277,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2020-09-04/reports").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2021-06-30/reports").ToString();
             List<string> _queryParameters = new List<string>();
             if (reportTypes != null)
             {
@@ -339,7 +339,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(amazonUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -371,7 +371,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<GetReportsResponse,GetReportsHeaders>();
+            var _result = new HttpOperationResponse<object,GetReportsHeaders>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -399,8 +399,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportsResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportsResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -418,8 +418,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportsResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportsResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -437,8 +437,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportsResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportsResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -456,8 +456,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportsResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportsResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -475,8 +475,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportsResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportsResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -494,8 +494,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportsResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportsResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -513,8 +513,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportsResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportsResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -532,8 +532,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportsResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportsResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -600,7 +600,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<CreateReportResponse,CreateReportHeaders>> CreateReportWithHttpMessagesAsync(CreateReportSpecification body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<object,CreateReportHeaders>> CreateReportWithHttpMessagesAsync(CreateReportSpecification body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (body == null)
             {
@@ -623,7 +623,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2020-09-04/reports").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2021-06-30/reports").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -658,7 +658,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(amazonUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -690,7 +690,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<CreateReportResponse,CreateReportHeaders>();
+            var _result = new HttpOperationResponse<object,CreateReportHeaders>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -718,8 +718,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -737,8 +737,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -756,8 +756,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -775,8 +775,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -794,8 +794,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -813,8 +813,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -832,8 +832,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -851,8 +851,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -923,7 +923,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<CancelReportResponse,CancelReportHeaders>> CancelReportWithHttpMessagesAsync(string reportId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<ErrorList,CancelReportHeaders>> CancelReportWithHttpMessagesAsync(string reportId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (reportId == null)
             {
@@ -942,7 +942,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2020-09-04/reports/{reportId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2021-06-30/reports/{reportId}").ToString();
             _url = _url.Replace("{reportId}", System.Uri.EscapeDataString(reportId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -972,7 +972,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(amazonUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1004,36 +1004,17 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<CancelReportResponse,CancelReportHeaders>();
+            var _result = new HttpOperationResponse<ErrorList,CancelReportHeaders>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportResponse>((int)_statusCode, _result.Body, _httpResponse);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
             // Deserialize Response
             if ((int)_statusCode == 400)
             {
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1051,8 +1032,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1070,8 +1051,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1089,8 +1070,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1108,8 +1089,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1127,8 +1108,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1146,8 +1127,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1165,8 +1146,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1236,7 +1217,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetReportResponse,GetReportHeaders>> GetReportWithHttpMessagesAsync(string reportId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<object,GetReportHeaders>> GetReportWithHttpMessagesAsync(string reportId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (reportId == null)
             {
@@ -1255,7 +1236,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2020-09-04/reports/{reportId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2021-06-30/reports/{reportId}").ToString();
             _url = _url.Replace("{reportId}", System.Uri.EscapeDataString(reportId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -1285,7 +1266,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(amazonUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1317,7 +1298,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<GetReportResponse,GetReportHeaders>();
+            var _result = new HttpOperationResponse<object,GetReportHeaders>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -1326,8 +1307,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<Report>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<Report>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1345,8 +1326,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1364,8 +1345,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1383,8 +1364,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1402,8 +1383,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1421,8 +1402,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1440,8 +1421,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1459,8 +1440,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1478,8 +1459,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1547,7 +1528,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetReportSchedulesResponse,GetReportSchedulesHeaders>> GetReportSchedulesWithHttpMessagesAsync(IList<string> reportTypes, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<object,GetReportSchedulesHeaders>> GetReportSchedulesWithHttpMessagesAsync(IList<string> reportTypes, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (reportTypes == null)
             {
@@ -1577,7 +1558,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2020-09-04/schedules").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2021-06-30/schedules").ToString();
             List<string> _queryParameters = new List<string>();
             if (reportTypes != null)
             {
@@ -1615,7 +1596,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(amazonUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1647,7 +1628,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<GetReportSchedulesResponse,GetReportSchedulesHeaders>();
+            var _result = new HttpOperationResponse<object,GetReportSchedulesHeaders>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -1656,8 +1637,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportSchedulesResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportSchedulesResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ReportScheduleList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ReportScheduleList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1675,8 +1656,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportSchedulesResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportSchedulesResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1694,8 +1675,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportSchedulesResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportSchedulesResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1713,8 +1694,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportSchedulesResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportSchedulesResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1732,8 +1713,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportSchedulesResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportSchedulesResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1751,8 +1732,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportSchedulesResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportSchedulesResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1770,8 +1751,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportSchedulesResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportSchedulesResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1789,8 +1770,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportSchedulesResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportSchedulesResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1808,8 +1789,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportSchedulesResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportSchedulesResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -1878,7 +1859,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<CreateReportScheduleResponse,CreateReportScheduleHeaders>> CreateReportScheduleWithHttpMessagesAsync(CreateReportScheduleSpecification body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<object,CreateReportScheduleHeaders>> CreateReportScheduleWithHttpMessagesAsync(CreateReportScheduleSpecification body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (body == null)
             {
@@ -1901,7 +1882,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2020-09-04/schedules").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2021-06-30/schedules").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -1936,7 +1917,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(amazonUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -1968,7 +1949,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<CreateReportScheduleResponse,CreateReportScheduleHeaders>();
+            var _result = new HttpOperationResponse<object,CreateReportScheduleHeaders>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -1996,8 +1977,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2015,8 +1996,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2034,8 +2015,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2053,8 +2034,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2072,8 +2053,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2091,8 +2072,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2110,8 +2091,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2129,8 +2110,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CreateReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CreateReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2199,7 +2180,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<CancelReportScheduleResponse,CancelReportScheduleHeaders>> CancelReportScheduleWithHttpMessagesAsync(string reportScheduleId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<ErrorList,CancelReportScheduleHeaders>> CancelReportScheduleWithHttpMessagesAsync(string reportScheduleId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (reportScheduleId == null)
             {
@@ -2218,7 +2199,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2020-09-04/schedules/{reportScheduleId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2021-06-30/schedules/{reportScheduleId}").ToString();
             _url = _url.Replace("{reportScheduleId}", System.Uri.EscapeDataString(reportScheduleId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2248,7 +2229,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(amazonUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -2280,36 +2261,17 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<CancelReportScheduleResponse,CancelReportScheduleHeaders>();
+            var _result = new HttpOperationResponse<ErrorList,CancelReportScheduleHeaders>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
-            }
             // Deserialize Response
             if ((int)_statusCode == 400)
             {
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2327,8 +2289,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2346,8 +2308,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2365,8 +2327,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2384,8 +2346,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2403,8 +2365,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2422,8 +2384,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2441,8 +2403,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<CancelReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<CancelReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2511,7 +2473,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetReportScheduleResponse,GetReportScheduleHeaders>> GetReportScheduleWithHttpMessagesAsync(string reportScheduleId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<object,GetReportScheduleHeaders>> GetReportScheduleWithHttpMessagesAsync(string reportScheduleId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (reportScheduleId == null)
             {
@@ -2530,7 +2492,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2020-09-04/schedules/{reportScheduleId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2021-06-30/schedules/{reportScheduleId}").ToString();
             _url = _url.Replace("{reportScheduleId}", System.Uri.EscapeDataString(reportScheduleId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2560,7 +2522,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(amazonUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -2592,7 +2554,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<GetReportScheduleResponse,GetReportScheduleHeaders>();
+            var _result = new HttpOperationResponse<object,GetReportScheduleHeaders>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -2601,8 +2563,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ReportSchedule>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ReportSchedule>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2620,8 +2582,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2639,8 +2601,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2658,8 +2620,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2677,8 +2639,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2696,8 +2658,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2715,8 +2677,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2734,8 +2696,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2753,8 +2715,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportScheduleResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportScheduleResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2788,8 +2750,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
 
         /// <summary>
         /// Returns the information required for retrieving a report document's
-        /// contents. This includes a presigned URL for the report document as well as
-        /// the information required to decrypt the document's contents.
+        /// contents.
         ///
         /// **Usage Plan:**
         ///
@@ -2824,7 +2785,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetReportDocumentResponse,GetReportDocumentHeaders>> GetReportDocumentWithHttpMessagesAsync(string reportDocumentId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<object,GetReportDocumentHeaders>> GetReportDocumentWithHttpMessagesAsync(string reportDocumentId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (reportDocumentId == null)
             {
@@ -2843,7 +2804,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2020-09-04/documents/{reportDocumentId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reports/2021-06-30/documents/{reportDocumentId}").ToString();
             _url = _url.Replace("{reportDocumentId}", System.Uri.EscapeDataString(reportDocumentId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2873,7 +2834,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(_sPAPIKeyPair, _httpRequest, _configuration, _tokenManagement);
+            await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareRequest(amazonUserKeyPair, _httpRequest, _configuration, _tokenManagement);
             _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -2905,7 +2866,7 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<GetReportDocumentResponse,GetReportDocumentHeaders>();
+            var _result = new HttpOperationResponse<object,GetReportDocumentHeaders>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -2914,8 +2875,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportDocumentResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportDocumentResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ReportDocument>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ReportDocument>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2933,8 +2894,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportDocumentResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportDocumentResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2952,8 +2913,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportDocumentResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportDocumentResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2971,8 +2932,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportDocumentResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportDocumentResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -2990,8 +2951,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportDocumentResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportDocumentResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -3009,8 +2970,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportDocumentResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportDocumentResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -3028,8 +2989,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportDocumentResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportDocumentResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -3047,8 +3008,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportDocumentResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportDocumentResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {
@@ -3066,8 +3027,8 @@ namespace IL.Library.Amazon.SPAPI.Reports
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<GetReportDocumentResponse>(_responseContent, DeserializationSettings);
-                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<GetReportDocumentResponse>((int)_statusCode, _result.Body, _httpResponse);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ErrorList>(_responseContent, DeserializationSettings);
+                    await IL.Library.Amazon.SPAPI.SharedRuntime.SPAPIInterceptor.PrepareResponse<ErrorList>((int)_statusCode, _result.Body, _httpResponse);
                 }
                 catch (JsonException ex)
                 {

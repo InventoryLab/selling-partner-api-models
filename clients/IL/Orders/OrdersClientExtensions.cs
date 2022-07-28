@@ -23,14 +23,18 @@ namespace IL.Library.Amazon.SPAPI.Orders
             /// narrow the list of orders returned. If NextToken is present, that will be
             /// used to retrieve the orders instead of other criteria.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 0.0055 | 20 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -38,6 +42,10 @@ namespace IL.Library.Amazon.SPAPI.Orders
             /// <param name='marketplaceIds'>
             /// A list of MarketplaceId values. Used to select orders that were placed in
             /// the specified marketplaces.
+            ///
+            /// See the [Selling Partner API Developer
+            /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md#marketplaceid-values)
+            /// for a complete list of marketplaceId values.
             /// </param>
             /// <param name='createdAfter'>
             /// A date used for selecting orders created after (or at) a specified time.
@@ -125,9 +133,20 @@ namespace IL.Library.Amazon.SPAPI.Orders
             /// A list of AmazonOrderId values. An AmazonOrderId is an Amazon-defined order
             /// identifier, in 3-7-7 format.
             /// </param>
-            public static GetOrdersResponse GetOrders(this IOrdersClient operations, IList<string> marketplaceIds, string createdAfter = default(string), string createdBefore = default(string), string lastUpdatedAfter = default(string), string lastUpdatedBefore = default(string), IList<string> orderStatuses = default(IList<string>), IList<string> fulfillmentChannels = default(IList<string>), IList<string> paymentMethods = default(IList<string>), string buyerEmail = default(string), string sellerOrderId = default(string), int? maxResultsPerPage = default(int?), IList<string> easyShipShipmentStatuses = default(IList<string>), string nextToken = default(string), IList<string> amazonOrderIds = default(IList<string>))
+            /// <param name='actualFulfillmentSupplySourceId'>
+            /// Denotes the recommended sourceId where the order should be fulfilled from.
+            /// </param>
+            /// <param name='isISPU'>
+            /// When true, this order is marked to be picked up from a store rather than
+            /// delivered.
+            /// </param>
+            /// <param name='storeChainStoreId'>
+            /// The store chain store identifier. Linked to a specific store in a store
+            /// chain.
+            /// </param>
+            public static GetOrdersResponse GetOrders(this IOrdersClient operations, IList<string> marketplaceIds, string createdAfter = default(string), string createdBefore = default(string), string lastUpdatedAfter = default(string), string lastUpdatedBefore = default(string), IList<string> orderStatuses = default(IList<string>), IList<string> fulfillmentChannels = default(IList<string>), IList<string> paymentMethods = default(IList<string>), string buyerEmail = default(string), string sellerOrderId = default(string), int? maxResultsPerPage = default(int?), IList<string> easyShipShipmentStatuses = default(IList<string>), string nextToken = default(string), IList<string> amazonOrderIds = default(IList<string>), string actualFulfillmentSupplySourceId = default(string), bool? isISPU = default(bool?), string storeChainStoreId = default(string))
             {
-                return operations.GetOrdersAsync(marketplaceIds, createdAfter, createdBefore, lastUpdatedAfter, lastUpdatedBefore, orderStatuses, fulfillmentChannels, paymentMethods, buyerEmail, sellerOrderId, maxResultsPerPage, easyShipShipmentStatuses, nextToken, amazonOrderIds).GetAwaiter().GetResult();
+                return operations.GetOrdersAsync(marketplaceIds, createdAfter, createdBefore, lastUpdatedAfter, lastUpdatedBefore, orderStatuses, fulfillmentChannels, paymentMethods, buyerEmail, sellerOrderId, maxResultsPerPage, easyShipShipmentStatuses, nextToken, amazonOrderIds, actualFulfillmentSupplySourceId, isISPU, storeChainStoreId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -136,14 +155,18 @@ namespace IL.Library.Amazon.SPAPI.Orders
             /// narrow the list of orders returned. If NextToken is present, that will be
             /// used to retrieve the orders instead of other criteria.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 0.0055 | 20 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -151,6 +174,10 @@ namespace IL.Library.Amazon.SPAPI.Orders
             /// <param name='marketplaceIds'>
             /// A list of MarketplaceId values. Used to select orders that were placed in
             /// the specified marketplaces.
+            ///
+            /// See the [Selling Partner API Developer
+            /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md#marketplaceid-values)
+            /// for a complete list of marketplaceId values.
             /// </param>
             /// <param name='createdAfter'>
             /// A date used for selecting orders created after (or at) a specified time.
@@ -238,12 +265,23 @@ namespace IL.Library.Amazon.SPAPI.Orders
             /// A list of AmazonOrderId values. An AmazonOrderId is an Amazon-defined order
             /// identifier, in 3-7-7 format.
             /// </param>
+            /// <param name='actualFulfillmentSupplySourceId'>
+            /// Denotes the recommended sourceId where the order should be fulfilled from.
+            /// </param>
+            /// <param name='isISPU'>
+            /// When true, this order is marked to be picked up from a store rather than
+            /// delivered.
+            /// </param>
+            /// <param name='storeChainStoreId'>
+            /// The store chain store identifier. Linked to a specific store in a store
+            /// chain.
+            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetOrdersResponse> GetOrdersAsync(this IOrdersClient operations, IList<string> marketplaceIds, string createdAfter = default(string), string createdBefore = default(string), string lastUpdatedAfter = default(string), string lastUpdatedBefore = default(string), IList<string> orderStatuses = default(IList<string>), IList<string> fulfillmentChannels = default(IList<string>), IList<string> paymentMethods = default(IList<string>), string buyerEmail = default(string), string sellerOrderId = default(string), int? maxResultsPerPage = default(int?), IList<string> easyShipShipmentStatuses = default(IList<string>), string nextToken = default(string), IList<string> amazonOrderIds = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<GetOrdersResponse> GetOrdersAsync(this IOrdersClient operations, IList<string> marketplaceIds, string createdAfter = default(string), string createdBefore = default(string), string lastUpdatedAfter = default(string), string lastUpdatedBefore = default(string), IList<string> orderStatuses = default(IList<string>), IList<string> fulfillmentChannels = default(IList<string>), IList<string> paymentMethods = default(IList<string>), string buyerEmail = default(string), string sellerOrderId = default(string), int? maxResultsPerPage = default(int?), IList<string> easyShipShipmentStatuses = default(IList<string>), string nextToken = default(string), IList<string> amazonOrderIds = default(IList<string>), string actualFulfillmentSupplySourceId = default(string), bool? isISPU = default(bool?), string storeChainStoreId = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetOrdersWithHttpMessagesAsync(marketplaceIds, createdAfter, createdBefore, lastUpdatedAfter, lastUpdatedBefore, orderStatuses, fulfillmentChannels, paymentMethods, buyerEmail, sellerOrderId, maxResultsPerPage, easyShipShipmentStatuses, nextToken, amazonOrderIds, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetOrdersWithHttpMessagesAsync(marketplaceIds, createdAfter, createdBefore, lastUpdatedAfter, lastUpdatedBefore, orderStatuses, fulfillmentChannels, paymentMethods, buyerEmail, sellerOrderId, maxResultsPerPage, easyShipShipmentStatuses, nextToken, amazonOrderIds, actualFulfillmentSupplySourceId, isISPU, storeChainStoreId, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -252,14 +290,18 @@ namespace IL.Library.Amazon.SPAPI.Orders
             /// <summary>
             /// Returns the order indicated by the specified order ID.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 0.0055 | 20 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -275,14 +317,18 @@ namespace IL.Library.Amazon.SPAPI.Orders
             /// <summary>
             /// Returns the order indicated by the specified order ID.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 0.0055 | 20 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -302,17 +348,26 @@ namespace IL.Library.Amazon.SPAPI.Orders
             }
 
             /// <summary>
-            /// Returns buyer information for the order indicated by the specified order
-            /// ID.
+            /// Returns buyer information for the specified order.
             ///
-            /// **Usage Plan:**
+            /// **Important.** We recommend using the getOrders operation to get buyer
+            /// information for an order, as the getOrderBuyerInfo operation is scheduled
+            /// for deprecation on January 12, 2022. For more information, see the [Tokens
+            /// API Use Case
+            /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md).
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// **Usage Plans:**
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 0.0055 | 20 |
+            /// |Selling partner specific| Variable | Variable |
+            ///
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -326,17 +381,26 @@ namespace IL.Library.Amazon.SPAPI.Orders
             }
 
             /// <summary>
-            /// Returns buyer information for the order indicated by the specified order
-            /// ID.
+            /// Returns buyer information for the specified order.
             ///
-            /// **Usage Plan:**
+            /// **Important.** We recommend using the getOrders operation to get buyer
+            /// information for an order, as the getOrderBuyerInfo operation is scheduled
+            /// for deprecation on January 12, 2022. For more information, see the [Tokens
+            /// API Use Case
+            /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md).
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// **Usage Plans:**
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 0.0055 | 20 |
+            /// |Selling partner specific| Variable | Variable |
+            ///
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -356,17 +420,26 @@ namespace IL.Library.Amazon.SPAPI.Orders
             }
 
             /// <summary>
-            /// Returns the shipping address for the order indicated by the specified order
-            /// ID.
+            /// Returns the shipping address for the specified order.
             ///
-            /// **Usage Plan:**
+            /// **Important.** We recommend using the getOrders operation to get shipping
+            /// address information for an order, as the getOrderAddress operation is
+            /// scheduled for deprecation on January 12, 2022. For more information, see
+            /// the [Tokens API Use Case
+            /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md).
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// **Usage Plans:**
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 0.0055 | 20 |
+            /// |Selling partner specific| Variable | Variable |
+            ///
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -380,17 +453,26 @@ namespace IL.Library.Amazon.SPAPI.Orders
             }
 
             /// <summary>
-            /// Returns the shipping address for the order indicated by the specified order
-            /// ID.
+            /// Returns the shipping address for the specified order.
             ///
-            /// **Usage Plan:**
+            /// **Important.** We recommend using the getOrders operation to get shipping
+            /// address information for an order, as the getOrderAddress operation is
+            /// scheduled for deprecation on January 12, 2022. For more information, see
+            /// the [Tokens API Use Case
+            /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md).
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// **Usage Plans:**
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 0.0055 | 20 |
+            /// |Selling partner specific| Variable | Variable |
+            ///
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -423,14 +505,18 @@ namespace IL.Library.Amazon.SPAPI.Orders
             /// returns information about pricing, taxes, shipping charges, gift status and
             /// promotions for the order items in the order.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 0.0055 | 20 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -460,14 +546,18 @@ namespace IL.Library.Amazon.SPAPI.Orders
             /// returns information about pricing, taxes, shipping charges, gift status and
             /// promotions for the order items in the order.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 0.0055 | 20 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -490,17 +580,26 @@ namespace IL.Library.Amazon.SPAPI.Orders
             }
 
             /// <summary>
-            /// Returns buyer information in the order items of the order indicated by the
-            /// specified order ID.
+            /// Returns buyer information for the order items in the specified order.
             ///
-            /// **Usage Plan:**
+            /// **Important.** We recommend using the getOrderItems operation to get buyer
+            /// information for the order items in an order, as the getOrderItemsBuyerInfo
+            /// operation is scheduled for deprecation on January 12, 2022. For more
+            /// information, see the [Tokens API Use Case
+            /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md).
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// **Usage Plans:**
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 0.0055 | 20 |
+            /// |Selling partner specific| Variable | Variable |
+            ///
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -517,17 +616,26 @@ namespace IL.Library.Amazon.SPAPI.Orders
             }
 
             /// <summary>
-            /// Returns buyer information in the order items of the order indicated by the
-            /// specified order ID.
+            /// Returns buyer information for the order items in the specified order.
             ///
-            /// **Usage Plan:**
+            /// **Important.** We recommend using the getOrderItems operation to get buyer
+            /// information for the order items in an order, as the getOrderItemsBuyerInfo
+            /// operation is scheduled for deprecation on January 12, 2022. For more
+            /// information, see the [Tokens API Use Case
+            /// Guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md).
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// **Usage Plans:**
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 0.0055 | 20 |
+            /// |Selling partner specific| Variable | Variable |
+            ///
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -544,6 +652,46 @@ namespace IL.Library.Amazon.SPAPI.Orders
             public static async Task<GetOrderItemsBuyerInfoResponse> GetOrderItemsBuyerInfoAsync(this IOrdersClient operations, string orderId, string nextToken = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetOrderItemsBuyerInfoWithHttpMessagesAsync(orderId, nextToken, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Update the shipment status.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='orderId'>
+            /// An Amazon-defined order identifier, in 3-7-7 format.
+            /// </param>
+            /// <param name='payload'>
+            /// Request to update the shipment status.
+            /// </param>
+            public static UpdateShipmentStatusErrorResponse UpdateShipmentStatus(this IOrdersClient operations, string orderId, UpdateShipmentStatusRequest payload)
+            {
+                return operations.UpdateShipmentStatusAsync(orderId, payload).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Update the shipment status.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='orderId'>
+            /// An Amazon-defined order identifier, in 3-7-7 format.
+            /// </param>
+            /// <param name='payload'>
+            /// Request to update the shipment status.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<UpdateShipmentStatusErrorResponse> UpdateShipmentStatusAsync(this IOrdersClient operations, string orderId, UpdateShipmentStatusRequest payload, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UpdateShipmentStatusWithHttpMessagesAsync(orderId, payload, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

@@ -31,12 +31,22 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// ListingPrice + Shipping - Points.</param>
         /// <param name="listingPrice">The price of the item.</param>
         /// <param name="shipping">The shipping cost.</param>
+        /// <param name="offerType">Indicates the type of customer that the
+        /// offer is valid for. Possible values include: 'B2C', 'B2B'</param>
+        /// <param name="quantityTier">Indicates at what quantity this price
+        /// becomes active.</param>
+        /// <param name="quantityDiscountType">Indicates the type of quantity
+        /// discount this price applies to. Possible values include:
+        /// 'QUANTITY_DISCOUNT'</param>
         /// <param name="points">The number of Amazon Points offered with the
         /// purchase of an item.</param>
-        public LowestPriceType(string condition, string fulfillmentChannel, MoneyType landedPrice, MoneyType listingPrice, MoneyType shipping, Points points = default(Points))
+        public LowestPriceType(string condition, string fulfillmentChannel, MoneyType landedPrice, MoneyType listingPrice, MoneyType shipping, string offerType = default(string), int? quantityTier = default(int?), string quantityDiscountType = default(string), Points points = default(Points))
         {
             Condition = condition;
             FulfillmentChannel = fulfillmentChannel;
+            OfferType = offerType;
+            QuantityTier = quantityTier;
+            QuantityDiscountType = quantityDiscountType;
             LandedPrice = landedPrice;
             ListingPrice = listingPrice;
             Shipping = shipping;
@@ -62,6 +72,26 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// </summary>
         [JsonProperty(PropertyName = "fulfillmentChannel")]
         public string FulfillmentChannel { get; set; }
+
+        /// <summary>
+        /// Gets or sets indicates the type of customer that the offer is valid
+        /// for. Possible values include: 'B2C', 'B2B'
+        /// </summary>
+        [JsonProperty(PropertyName = "offerType")]
+        public string OfferType { get; set; }
+
+        /// <summary>
+        /// Gets or sets indicates at what quantity this price becomes active.
+        /// </summary>
+        [JsonProperty(PropertyName = "quantityTier")]
+        public int? QuantityTier { get; set; }
+
+        /// <summary>
+        /// Gets or sets indicates the type of quantity discount this price
+        /// applies to. Possible values include: 'QUANTITY_DISCOUNT'
+        /// </summary>
+        [JsonProperty(PropertyName = "quantityDiscountType")]
+        public string QuantityDiscountType { get; set; }
 
         /// <summary>
         /// Gets or sets the value calculated by adding ListingPrice + Shipping

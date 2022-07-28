@@ -28,16 +28,17 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
         /// <summary>
         /// Initializes a new instance of the Item class.
         /// </summary>
-        public Item(string asin, IDictionary<string, object> attributes = default(IDictionary<string, object>), IList<ItemIdentifiersByMarketplace> identifiers = default(IList<ItemIdentifiersByMarketplace>), IList<ItemImagesByMarketplace> images = default(IList<ItemImagesByMarketplace>), IList<ItemProductTypeByMarketplace> productTypes = default(IList<ItemProductTypeByMarketplace>), IList<ItemSalesRanksByMarketplace> salesRanks = default(IList<ItemSalesRanksByMarketplace>), IList<ItemSummaryByMarketplace> summaries = default(IList<ItemSummaryByMarketplace>), IList<ItemVariationsByMarketplace> variations = default(IList<ItemVariationsByMarketplace>), IList<ItemVendorDetailsByMarketplace> vendorDetails = default(IList<ItemVendorDetailsByMarketplace>))
+        public Item(string asin, IDictionary<string, object> attributes = default(IDictionary<string, object>), IList<ItemDimensionsByMarketplace> dimensions = default(IList<ItemDimensionsByMarketplace>), IList<ItemIdentifiersByMarketplace> identifiers = default(IList<ItemIdentifiersByMarketplace>), IList<ItemImagesByMarketplace> images = default(IList<ItemImagesByMarketplace>), IList<ItemProductTypeByMarketplace> productTypes = default(IList<ItemProductTypeByMarketplace>), IList<ItemRelationshipsByMarketplace> relationships = default(IList<ItemRelationshipsByMarketplace>), IList<ItemSalesRanksByMarketplace> salesRanks = default(IList<ItemSalesRanksByMarketplace>), IList<ItemSummaryByMarketplace> summaries = default(IList<ItemSummaryByMarketplace>), IList<ItemVendorDetailsByMarketplace> vendorDetails = default(IList<ItemVendorDetailsByMarketplace>))
         {
             Asin = asin;
             Attributes = attributes;
+            Dimensions = dimensions;
             Identifiers = identifiers;
             Images = images;
             ProductTypes = productTypes;
+            Relationships = relationships;
             SalesRanks = salesRanks;
             Summaries = summaries;
-            Variations = variations;
             VendorDetails = vendorDetails;
             CustomInit();
         }
@@ -59,6 +60,11 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "dimensions")]
+        public IList<ItemDimensionsByMarketplace> Dimensions { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "identifiers")]
         public IList<ItemIdentifiersByMarketplace> Identifiers { get; set; }
 
@@ -74,6 +80,11 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "relationships")]
+        public IList<ItemRelationshipsByMarketplace> Relationships { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "salesRanks")]
         public IList<ItemSalesRanksByMarketplace> SalesRanks { get; set; }
 
@@ -81,11 +92,6 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
         /// </summary>
         [JsonProperty(PropertyName = "summaries")]
         public IList<ItemSummaryByMarketplace> Summaries { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "variations")]
-        public IList<ItemVariationsByMarketplace> Variations { get; set; }
 
         /// <summary>
         /// </summary>
@@ -104,9 +110,9 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Asin");
             }
-            if (Identifiers != null)
+            if (Dimensions != null)
             {
-                foreach (var element in Identifiers)
+                foreach (var element in Dimensions)
                 {
                     if (element != null)
                     {
@@ -114,9 +120,9 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
                     }
                 }
             }
-            if (Images != null)
+            if (Identifiers != null)
             {
-                foreach (var element1 in Images)
+                foreach (var element1 in Identifiers)
                 {
                     if (element1 != null)
                     {
@@ -124,9 +130,9 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
                     }
                 }
             }
-            if (SalesRanks != null)
+            if (Images != null)
             {
-                foreach (var element2 in SalesRanks)
+                foreach (var element2 in Images)
                 {
                     if (element2 != null)
                     {
@@ -134,9 +140,9 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
                     }
                 }
             }
-            if (Summaries != null)
+            if (Relationships != null)
             {
-                foreach (var element3 in Summaries)
+                foreach (var element3 in Relationships)
                 {
                     if (element3 != null)
                     {
@@ -144,9 +150,9 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
                     }
                 }
             }
-            if (Variations != null)
+            if (SalesRanks != null)
             {
-                foreach (var element4 in Variations)
+                foreach (var element4 in SalesRanks)
                 {
                     if (element4 != null)
                     {
@@ -154,13 +160,23 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
                     }
                 }
             }
-            if (VendorDetails != null)
+            if (Summaries != null)
             {
-                foreach (var element5 in VendorDetails)
+                foreach (var element5 in Summaries)
                 {
                     if (element5 != null)
                     {
                         element5.Validate();
+                    }
+                }
+            }
+            if (VendorDetails != null)
+            {
+                foreach (var element6 in VendorDetails)
+                {
+                    if (element6 != null)
+                    {
+                        element6.Validate();
                     }
                 }
             }

@@ -12,6 +12,9 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Detailed information about the report.
+    /// </summary>
     public partial class Report
     {
         /// <summary>
@@ -48,8 +51,8 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
         /// processing completed, in ISO 8601 date time format.</param>
         /// <param name="reportDocumentId">The identifier for the report
         /// document. Pass this into the getReportDocument operation to get the
-        /// information you will need to retrieve and decrypt the report
-        /// document's contents.</param>
+        /// information you will need to retrieve the report document's
+        /// contents.</param>
         public Report(string reportId, string reportType, System.DateTime createdTime, string processingStatus, IList<string> marketplaceIds = default(IList<string>), System.DateTime? dataStartTime = default(System.DateTime?), System.DateTime? dataEndTime = default(System.DateTime?), string reportScheduleId = default(string), System.DateTime? processingStartTime = default(System.DateTime?), System.DateTime? processingEndTime = default(System.DateTime?), string reportDocumentId = default(string))
         {
             MarketplaceIds = marketplaceIds;
@@ -142,7 +145,7 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
         /// <summary>
         /// Gets or sets the identifier for the report document. Pass this into
         /// the getReportDocument operation to get the information you will
-        /// need to retrieve and decrypt the report document's contents.
+        /// need to retrieve the report document's contents.
         /// </summary>
         [JsonProperty(PropertyName = "reportDocumentId")]
         public string ReportDocumentId { get; set; }

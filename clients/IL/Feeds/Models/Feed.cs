@@ -12,6 +12,9 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Detailed information about the feed.
+    /// </summary>
     public partial class Feed
     {
         /// <summary>

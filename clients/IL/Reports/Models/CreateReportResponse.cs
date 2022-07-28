@@ -6,13 +6,12 @@
 
 namespace IL.Library.Amazon.SPAPI.Reports.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// The response for the createReport operation.
+    /// Response schema.
     /// </summary>
     public partial class CreateReportResponse
     {
@@ -27,12 +26,11 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
         /// <summary>
         /// Initializes a new instance of the CreateReportResponse class.
         /// </summary>
-        /// <param name="payload">The payload for the createReport
-        /// operation.</param>
-        public CreateReportResponse(CreateReportResult payload = default(CreateReportResult), IList<Error> errors = default(IList<Error>))
+        /// <param name="reportId">The identifier for the report. This
+        /// identifier is unique only in combination with a seller ID.</param>
+        public CreateReportResponse(string reportId)
         {
-            Payload = payload;
-            Errors = errors;
+            ReportId = reportId;
             CustomInit();
         }
 
@@ -42,37 +40,23 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the payload for the createReport operation.
+        /// Gets or sets the identifier for the report. This identifier is
+        /// unique only in combination with a seller ID.
         /// </summary>
-        [JsonProperty(PropertyName = "payload")]
-        public CreateReportResult Payload { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "errors")]
-        public IList<Error> Errors { get; set; }
+        [JsonProperty(PropertyName = "reportId")]
+        public string ReportId { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
-            if (Payload != null)
+            if (ReportId == null)
             {
-                Payload.Validate();
-            }
-            if (Errors != null)
-            {
-                foreach (var element in Errors)
-                {
-                    if (element != null)
-                    {
-                        element.Validate();
-                    }
-                }
+                throw new ValidationException(ValidationRules.CannotBeNull, "ReportId");
             }
         }
     }

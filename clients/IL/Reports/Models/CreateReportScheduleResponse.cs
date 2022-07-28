@@ -6,13 +6,12 @@
 
 namespace IL.Library.Amazon.SPAPI.Reports.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// The response for the createReportSchedule operation.
+    /// Response schema.
     /// </summary>
     public partial class CreateReportScheduleResponse
     {
@@ -29,12 +28,12 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
         /// Initializes a new instance of the CreateReportScheduleResponse
         /// class.
         /// </summary>
-        /// <param name="payload">The payload for the createReportSchedule
-        /// operation.</param>
-        public CreateReportScheduleResponse(CreateReportScheduleResult payload = default(CreateReportScheduleResult), IList<Error> errors = default(IList<Error>))
+        /// <param name="reportScheduleId">The identifier for the report
+        /// schedule. This identifier is unique only in combination with a
+        /// seller ID.</param>
+        public CreateReportScheduleResponse(string reportScheduleId)
         {
-            Payload = payload;
-            Errors = errors;
+            ReportScheduleId = reportScheduleId;
             CustomInit();
         }
 
@@ -44,37 +43,23 @@ namespace IL.Library.Amazon.SPAPI.Reports.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the payload for the createReportSchedule operation.
+        /// Gets or sets the identifier for the report schedule. This
+        /// identifier is unique only in combination with a seller ID.
         /// </summary>
-        [JsonProperty(PropertyName = "payload")]
-        public CreateReportScheduleResult Payload { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "errors")]
-        public IList<Error> Errors { get; set; }
+        [JsonProperty(PropertyName = "reportScheduleId")]
+        public string ReportScheduleId { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
-            if (Payload != null)
+            if (ReportScheduleId == null)
             {
-                Payload.Validate();
-            }
-            if (Errors != null)
-            {
-                foreach (var element in Errors)
-                {
-                    if (element != null)
-                    {
-                        element.Validate();
-                    }
-                }
+                throw new ValidationException(ValidationRules.CannotBeNull, "ReportScheduleId");
             }
         }
     }

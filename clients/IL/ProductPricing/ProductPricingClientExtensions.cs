@@ -21,14 +21,18 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             /// Returns pricing information for a seller's offer listings based on seller
             /// SKU or ASIN.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 10 | 20 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -58,23 +62,31 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             /// Used, Collectible, Refurbished, Club. Possible values include: 'New',
             /// 'Used', 'Collectible', 'Refurbished', 'Club'
             /// </param>
-            public static GetPricingResponse GetPricing(this IProductPricingClient operations, string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), string itemCondition = default(string))
+            /// <param name='offerType'>
+            /// Indicates whether to request pricing information for the seller's B2C or
+            /// B2B offers. Default is B2C. Possible values include: 'B2C', 'B2B'
+            /// </param>
+            public static GetPricingResponse GetPricing(this IProductPricingClient operations, string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), string itemCondition = default(string), string offerType = default(string))
             {
-                return operations.GetPricingAsync(marketplaceId, itemType, asins, skus, itemCondition).GetAwaiter().GetResult();
+                return operations.GetPricingAsync(marketplaceId, itemType, asins, skus, itemCondition, offerType).GetAwaiter().GetResult();
             }
 
             /// <summary>
             /// Returns pricing information for a seller's offer listings based on seller
             /// SKU or ASIN.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 10 | 20 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -104,12 +116,16 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             /// Used, Collectible, Refurbished, Club. Possible values include: 'New',
             /// 'Used', 'Collectible', 'Refurbished', 'Club'
             /// </param>
+            /// <param name='offerType'>
+            /// Indicates whether to request pricing information for the seller's B2C or
+            /// B2B offers. Default is B2C. Possible values include: 'B2C', 'B2B'
+            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetPricingResponse> GetPricingAsync(this IProductPricingClient operations, string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), string itemCondition = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<GetPricingResponse> GetPricingAsync(this IProductPricingClient operations, string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), string itemCondition = default(string), string offerType = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetPricingWithHttpMessagesAsync(marketplaceId, itemType, asins, skus, itemCondition, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetPricingWithHttpMessagesAsync(marketplaceId, itemType, asins, skus, itemCondition, offerType, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -119,14 +135,18 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             /// Returns competitive pricing information for a seller's offer listings based
             /// on seller SKU or ASIN.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 10 | 20 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -151,23 +171,32 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             /// A list of up to twenty seller SKU values used to identify items in the
             /// given marketplace.
             /// </param>
-            public static GetPricingResponse GetCompetitivePricing(this IProductPricingClient operations, string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>))
+            /// <param name='customerType'>
+            /// Indicates whether to request pricing information from the point of view of
+            /// Consumer or Business buyers. Default is Consumer. Possible values include:
+            /// 'Consumer', 'Business'
+            /// </param>
+            public static GetPricingResponse GetCompetitivePricing(this IProductPricingClient operations, string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), string customerType = default(string))
             {
-                return operations.GetCompetitivePricingAsync(marketplaceId, itemType, asins, skus).GetAwaiter().GetResult();
+                return operations.GetCompetitivePricingAsync(marketplaceId, itemType, asins, skus, customerType).GetAwaiter().GetResult();
             }
 
             /// <summary>
             /// Returns competitive pricing information for a seller's offer listings based
             /// on seller SKU or ASIN.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 10 | 20 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -192,12 +221,17 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             /// A list of up to twenty seller SKU values used to identify items in the
             /// given marketplace.
             /// </param>
+            /// <param name='customerType'>
+            /// Indicates whether to request pricing information from the point of view of
+            /// Consumer or Business buyers. Default is Consumer. Possible values include:
+            /// 'Consumer', 'Business'
+            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetPricingResponse> GetCompetitivePricingAsync(this IProductPricingClient operations, string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<GetPricingResponse> GetCompetitivePricingAsync(this IProductPricingClient operations, string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), string customerType = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetCompetitivePricingWithHttpMessagesAsync(marketplaceId, itemType, asins, skus, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetCompetitivePricingWithHttpMessagesAsync(marketplaceId, itemType, asins, skus, customerType, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -206,14 +240,18 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             /// <summary>
             /// Returns the lowest priced offers for a single SKU listing.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 5 | 10 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -231,22 +269,30 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             /// Identifies an item in the given marketplace. SellerSKU is qualified by the
             /// seller's SellerId, which is included with every operation that you submit.
             /// </param>
-            public static GetOffersResponse GetListingOffers(this IProductPricingClient operations, string marketplaceId, string itemCondition, string sellerSKU)
+            /// <param name='customerType'>
+            /// Indicates whether to request Consumer or Business offers. Default is
+            /// Consumer. Possible values include: 'Consumer', 'Business'
+            /// </param>
+            public static GetOffersResponse GetListingOffers(this IProductPricingClient operations, string marketplaceId, string itemCondition, string sellerSKU, string customerType = default(string))
             {
-                return operations.GetListingOffersAsync(marketplaceId, itemCondition, sellerSKU).GetAwaiter().GetResult();
+                return operations.GetListingOffersAsync(marketplaceId, itemCondition, sellerSKU, customerType).GetAwaiter().GetResult();
             }
 
             /// <summary>
             /// Returns the lowest priced offers for a single SKU listing.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 5 | 10 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -264,12 +310,16 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             /// Identifies an item in the given marketplace. SellerSKU is qualified by the
             /// seller's SellerId, which is included with every operation that you submit.
             /// </param>
+            /// <param name='customerType'>
+            /// Indicates whether to request Consumer or Business offers. Default is
+            /// Consumer. Possible values include: 'Consumer', 'Business'
+            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetOffersResponse> GetListingOffersAsync(this IProductPricingClient operations, string marketplaceId, string itemCondition, string sellerSKU, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<GetOffersResponse> GetListingOffersAsync(this IProductPricingClient operations, string marketplaceId, string itemCondition, string sellerSKU, string customerType = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetListingOffersWithHttpMessagesAsync(marketplaceId, itemCondition, sellerSKU, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetListingOffersWithHttpMessagesAsync(marketplaceId, itemCondition, sellerSKU, customerType, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -278,14 +328,18 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             /// <summary>
             /// Returns the lowest priced offers for a single item based on ASIN.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 5 | 10 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -302,22 +356,30 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             /// <param name='asin'>
             /// The Amazon Standard Identification Number (ASIN) of the item.
             /// </param>
-            public static GetOffersResponse GetItemOffers(this IProductPricingClient operations, string marketplaceId, string itemCondition, string asin)
+            /// <param name='customerType'>
+            /// Indicates whether to request Consumer or Business offers. Default is
+            /// Consumer. Possible values include: 'Consumer', 'Business'
+            /// </param>
+            public static GetOffersResponse GetItemOffers(this IProductPricingClient operations, string marketplaceId, string itemCondition, string asin, string customerType = default(string))
             {
-                return operations.GetItemOffersAsync(marketplaceId, itemCondition, asin).GetAwaiter().GetResult();
+                return operations.GetItemOffersAsync(marketplaceId, itemCondition, asin, customerType).GetAwaiter().GetResult();
             }
 
             /// <summary>
             /// Returns the lowest priced offers for a single item based on ASIN.
             ///
-            /// **Usage Plan:**
+            /// **Usage Plans:**
             ///
-            /// | Rate (requests per second) | Burst |
-            /// | ---- | ---- |
-            /// | 1 | 1 |
+            /// | Plan type | Rate (requests per second) | Burst |
+            /// | ---- | ---- | ---- |
+            /// |Default| 5 | 10 |
+            /// |Selling partner specific| Variable | Variable |
             ///
-            /// For more information, see "Usage Plans and Rate Limits" in the Selling
-            /// Partner API documentation.
+            /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
+            /// limits that were applied to the requested operation. Rate limits for some
+            /// selling partners will vary from the default rate and burst shown in the
+            /// table above. For more information, see "Usage Plans and Rate Limits" in the
+            /// Selling Partner API documentation.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -334,12 +396,16 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
             /// <param name='asin'>
             /// The Amazon Standard Identification Number (ASIN) of the item.
             /// </param>
+            /// <param name='customerType'>
+            /// Indicates whether to request Consumer or Business offers. Default is
+            /// Consumer. Possible values include: 'Consumer', 'Business'
+            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetOffersResponse> GetItemOffersAsync(this IProductPricingClient operations, string marketplaceId, string itemCondition, string asin, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<GetOffersResponse> GetItemOffersAsync(this IProductPricingClient operations, string marketplaceId, string itemCondition, string asin, string customerType = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetItemOffersWithHttpMessagesAsync(marketplaceId, itemCondition, asin, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetItemOffersWithHttpMessagesAsync(marketplaceId, itemCondition, asin, customerType, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

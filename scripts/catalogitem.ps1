@@ -3,7 +3,7 @@ Import-Module .\modules\prepareresponse.psm1
 Import-Module .\modules\preparerequest.psm1
 Import-Module .\modules\factory.psm1
 
-$templatFile = '..\models\catalog-items-api-model\catalogItems_2020-12-01.json'
+$templatFile = '..\models\catalog-items-api-model\catalogItems_2022-04-01.json'
 $outputFolder = '..\clients\IL\CatalogItems'
 $namespace = 'IL.Library.Amazon.SPAPI.CatalogItems'
 $clientname = 'CatalogItemsClient'

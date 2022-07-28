@@ -140,14 +140,29 @@ namespace IL.Library.Amazon.SPAPI.Orders.Models
         /// instantly re-selling your items, ABEU becomes the seller of record,
         /// making your inventory available for sale to customers who would not
         /// otherwise purchase from a third-party seller.</param>
-        /// <param name="assignedShipFromLocationAddress">The recommended
+        /// <param name="defaultShipFromLocationAddress">The recommended
         /// location for the seller to ship the items from. It is calculated at
         /// checkout. The seller may or may not choose to ship from this
         /// location.</param>
+        /// <param name="buyerInvoicePreference">The buyer’s invoicing
+        /// preference. Possible values include: 'INDIVIDUAL',
+        /// 'BUSINESS'</param>
+        /// <param name="buyerTaxInformation">Contains the business invoice tax
+        /// information.</param>
         /// <param name="fulfillmentInstruction">Contains the instructions
         /// about the fulfillment like where should it be fulfilled
         /// from.</param>
-        public Order(string amazonOrderId, string purchaseDate, string lastUpdateDate, string orderStatus, string sellerOrderId = default(string), string fulfillmentChannel = default(string), string salesChannel = default(string), string orderChannel = default(string), string shipServiceLevel = default(string), Money orderTotal = default(Money), int? numberOfItemsShipped = default(int?), int? numberOfItemsUnshipped = default(int?), IList<PaymentExecutionDetailItem> paymentExecutionDetail = default(IList<PaymentExecutionDetailItem>), string paymentMethod = default(string), IList<string> paymentMethodDetails = default(IList<string>), string marketplaceId = default(string), string shipmentServiceLevelCategory = default(string), string easyShipShipmentStatus = default(string), string cbaDisplayableShippingLabel = default(string), string orderType = default(string), string earliestShipDate = default(string), string latestShipDate = default(string), string earliestDeliveryDate = default(string), string latestDeliveryDate = default(string), bool? isBusinessOrder = default(bool?), bool? isPrime = default(bool?), bool? isPremiumOrder = default(bool?), bool? isGlobalExpressEnabled = default(bool?), string replacedOrderId = default(string), bool? isReplacementOrder = default(bool?), string promiseResponseDueDate = default(string), bool? isEstimatedShipDateSet = default(bool?), bool? isSoldByAB = default(bool?), Address assignedShipFromLocationAddress = default(Address), FulfillmentInstruction fulfillmentInstruction = default(FulfillmentInstruction))
+        /// <param name="isISPU">When true, this order is marked to be picked
+        /// up from a store rather than delivered.</param>
+        /// <param name="marketplaceTaxInfo">Tax information about the
+        /// marketplace.</param>
+        /// <param name="sellerDisplayName">The seller’s friendly name
+        /// registered in the marketplace.</param>
+        /// <param name="automatedShippingSettings">Contains information
+        /// regarding the Shipping Settings Automaton program, such as whether
+        /// the order's shipping settings were generated automatically, and
+        /// what those settings are.</param>
+        public Order(string amazonOrderId, string purchaseDate, string lastUpdateDate, string orderStatus, string sellerOrderId = default(string), string fulfillmentChannel = default(string), string salesChannel = default(string), string orderChannel = default(string), string shipServiceLevel = default(string), Money orderTotal = default(Money), int? numberOfItemsShipped = default(int?), int? numberOfItemsUnshipped = default(int?), IList<PaymentExecutionDetailItem> paymentExecutionDetail = default(IList<PaymentExecutionDetailItem>), string paymentMethod = default(string), IList<string> paymentMethodDetails = default(IList<string>), string marketplaceId = default(string), string shipmentServiceLevelCategory = default(string), string easyShipShipmentStatus = default(string), string cbaDisplayableShippingLabel = default(string), string orderType = default(string), string earliestShipDate = default(string), string latestShipDate = default(string), string earliestDeliveryDate = default(string), string latestDeliveryDate = default(string), bool? isBusinessOrder = default(bool?), bool? isPrime = default(bool?), bool? isPremiumOrder = default(bool?), bool? isGlobalExpressEnabled = default(bool?), string replacedOrderId = default(string), bool? isReplacementOrder = default(bool?), string promiseResponseDueDate = default(string), bool? isEstimatedShipDateSet = default(bool?), bool? isSoldByAB = default(bool?), Address defaultShipFromLocationAddress = default(Address), string buyerInvoicePreference = default(string), BuyerTaxInformation buyerTaxInformation = default(BuyerTaxInformation), FulfillmentInstruction fulfillmentInstruction = default(FulfillmentInstruction), bool? isISPU = default(bool?), MarketplaceTaxInfo marketplaceTaxInfo = default(MarketplaceTaxInfo), string sellerDisplayName = default(string), Address shippingAddress = default(Address), BuyerInfo buyerInfo = default(BuyerInfo), AutomatedShippingSettings automatedShippingSettings = default(AutomatedShippingSettings))
         {
             AmazonOrderId = amazonOrderId;
             SellerOrderId = sellerOrderId;
@@ -182,8 +197,16 @@ namespace IL.Library.Amazon.SPAPI.Orders.Models
             PromiseResponseDueDate = promiseResponseDueDate;
             IsEstimatedShipDateSet = isEstimatedShipDateSet;
             IsSoldByAB = isSoldByAB;
-            AssignedShipFromLocationAddress = assignedShipFromLocationAddress;
+            DefaultShipFromLocationAddress = defaultShipFromLocationAddress;
+            BuyerInvoicePreference = buyerInvoicePreference;
+            BuyerTaxInformation = buyerTaxInformation;
             FulfillmentInstruction = fulfillmentInstruction;
+            IsISPU = isISPU;
+            MarketplaceTaxInfo = marketplaceTaxInfo;
+            SellerDisplayName = sellerDisplayName;
+            ShippingAddress = shippingAddress;
+            BuyerInfo = buyerInfo;
+            AutomatedShippingSettings = automatedShippingSettings;
             CustomInit();
         }
 
@@ -453,8 +476,21 @@ namespace IL.Library.Amazon.SPAPI.Orders.Models
         /// items from. It is calculated at checkout. The seller may or may not
         /// choose to ship from this location.
         /// </summary>
-        [JsonProperty(PropertyName = "AssignedShipFromLocationAddress")]
-        public Address AssignedShipFromLocationAddress { get; set; }
+        [JsonProperty(PropertyName = "DefaultShipFromLocationAddress")]
+        public Address DefaultShipFromLocationAddress { get; set; }
+
+        /// <summary>
+        /// Gets or sets the buyer’s invoicing preference. Possible values
+        /// include: 'INDIVIDUAL', 'BUSINESS'
+        /// </summary>
+        [JsonProperty(PropertyName = "BuyerInvoicePreference")]
+        public string BuyerInvoicePreference { get; set; }
+
+        /// <summary>
+        /// Gets or sets contains the business invoice tax information.
+        /// </summary>
+        [JsonProperty(PropertyName = "BuyerTaxInformation")]
+        public BuyerTaxInformation BuyerTaxInformation { get; set; }
 
         /// <summary>
         /// Gets or sets contains the instructions about the fulfillment like
@@ -462,6 +498,44 @@ namespace IL.Library.Amazon.SPAPI.Orders.Models
         /// </summary>
         [JsonProperty(PropertyName = "FulfillmentInstruction")]
         public FulfillmentInstruction FulfillmentInstruction { get; set; }
+
+        /// <summary>
+        /// Gets or sets when true, this order is marked to be picked up from a
+        /// store rather than delivered.
+        /// </summary>
+        [JsonProperty(PropertyName = "IsISPU")]
+        public bool? IsISPU { get; set; }
+
+        /// <summary>
+        /// Gets or sets tax information about the marketplace.
+        /// </summary>
+        [JsonProperty(PropertyName = "MarketplaceTaxInfo")]
+        public MarketplaceTaxInfo MarketplaceTaxInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the seller’s friendly name registered in the
+        /// marketplace.
+        /// </summary>
+        [JsonProperty(PropertyName = "SellerDisplayName")]
+        public string SellerDisplayName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ShippingAddress")]
+        public Address ShippingAddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BuyerInfo")]
+        public BuyerInfo BuyerInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets contains information regarding the Shipping Settings
+        /// Automaton program, such as whether the order's shipping settings
+        /// were generated automatically, and what those settings are.
+        /// </summary>
+        [JsonProperty(PropertyName = "AutomatedShippingSettings")]
+        public AutomatedShippingSettings AutomatedShippingSettings { get; set; }
 
         /// <summary>
         /// Validate the object.
@@ -497,9 +571,13 @@ namespace IL.Library.Amazon.SPAPI.Orders.Models
                     }
                 }
             }
-            if (AssignedShipFromLocationAddress != null)
+            if (DefaultShipFromLocationAddress != null)
             {
-                AssignedShipFromLocationAddress.Validate();
+                DefaultShipFromLocationAddress.Validate();
+            }
+            if (ShippingAddress != null)
+            {
+                ShippingAddress.Validate();
             }
         }
     }

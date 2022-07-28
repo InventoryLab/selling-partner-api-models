@@ -32,32 +32,32 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
         /// <param name="marketplaceId">Amazon marketplace identifier.</param>
         /// <param name="brandCode">Brand code associated with an Amazon
         /// catalog item.</param>
-        /// <param name="categoryCode">Product category associated with an
-        /// Amazon catalog item.</param>
         /// <param name="manufacturerCode">Manufacturer code associated with an
         /// Amazon catalog item.</param>
         /// <param name="manufacturerCodeParent">Parent vendor code of the
         /// manufacturer code.</param>
+        /// <param name="productCategory">Product category associated with an
+        /// Amazon catalog item.</param>
         /// <param name="productGroup">Product group associated with an Amazon
         /// catalog item.</param>
+        /// <param name="productSubcategory">Product subcategory associated
+        /// with an Amazon catalog item.</param>
         /// <param name="replenishmentCategory">Replenishment category
         /// associated with an Amazon catalog item. Possible values include:
         /// 'ALLOCATED', 'BASIC_REPLENISHMENT', 'IN_SEASON',
         /// 'LIMITED_REPLENISHMENT', 'MANUFACTURER_OUT_OF_STOCK',
         /// 'NEW_PRODUCT', 'NON_REPLENISHABLE', 'NON_STOCKUPABLE', 'OBSOLETE',
         /// 'PLANNED_REPLENISHMENT'</param>
-        /// <param name="subcategoryCode">Product subcategory associated with
-        /// an Amazon catalog item.</param>
-        public ItemVendorDetailsByMarketplace(string marketplaceId, string brandCode = default(string), string categoryCode = default(string), string manufacturerCode = default(string), string manufacturerCodeParent = default(string), string productGroup = default(string), string replenishmentCategory = default(string), string subcategoryCode = default(string))
+        public ItemVendorDetailsByMarketplace(string marketplaceId, string brandCode = default(string), string manufacturerCode = default(string), string manufacturerCodeParent = default(string), ItemVendorDetailsCategory productCategory = default(ItemVendorDetailsCategory), string productGroup = default(string), ItemVendorDetailsCategory productSubcategory = default(ItemVendorDetailsCategory), string replenishmentCategory = default(string))
         {
             MarketplaceId = marketplaceId;
             BrandCode = brandCode;
-            CategoryCode = categoryCode;
             ManufacturerCode = manufacturerCode;
             ManufacturerCodeParent = manufacturerCodeParent;
+            ProductCategory = productCategory;
             ProductGroup = productGroup;
+            ProductSubcategory = productSubcategory;
             ReplenishmentCategory = replenishmentCategory;
-            SubcategoryCode = subcategoryCode;
             CustomInit();
         }
 
@@ -79,13 +79,6 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
         public string BrandCode { get; set; }
 
         /// <summary>
-        /// Gets or sets product category associated with an Amazon catalog
-        /// item.
-        /// </summary>
-        [JsonProperty(PropertyName = "categoryCode")]
-        public string CategoryCode { get; set; }
-
-        /// <summary>
         /// Gets or sets manufacturer code associated with an Amazon catalog
         /// item.
         /// </summary>
@@ -99,10 +92,24 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
         public string ManufacturerCodeParent { get; set; }
 
         /// <summary>
+        /// Gets or sets product category associated with an Amazon catalog
+        /// item.
+        /// </summary>
+        [JsonProperty(PropertyName = "productCategory")]
+        public ItemVendorDetailsCategory ProductCategory { get; set; }
+
+        /// <summary>
         /// Gets or sets product group associated with an Amazon catalog item.
         /// </summary>
         [JsonProperty(PropertyName = "productGroup")]
         public string ProductGroup { get; set; }
+
+        /// <summary>
+        /// Gets or sets product subcategory associated with an Amazon catalog
+        /// item.
+        /// </summary>
+        [JsonProperty(PropertyName = "productSubcategory")]
+        public ItemVendorDetailsCategory ProductSubcategory { get; set; }
 
         /// <summary>
         /// Gets or sets replenishment category associated with an Amazon
@@ -113,13 +120,6 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
         /// </summary>
         [JsonProperty(PropertyName = "replenishmentCategory")]
         public string ReplenishmentCategory { get; set; }
-
-        /// <summary>
-        /// Gets or sets product subcategory associated with an Amazon catalog
-        /// item.
-        /// </summary>
-        [JsonProperty(PropertyName = "subcategoryCode")]
-        public string SubcategoryCode { get; set; }
 
         /// <summary>
         /// Validate the object.

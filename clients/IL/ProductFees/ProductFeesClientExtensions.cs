@@ -19,17 +19,21 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
             /// Returns the estimated fees for the item indicated by the specified seller
             /// SKU in the marketplace specified in the request body.
             ///
-            /// You can call getMyFeesEstimateForSKU for an item on behalf of a seller
-            /// before the seller sets the item's price. They can then take estimated fees
-            /// into account. With each fees estimate request, you must include an original
-            /// identifier. This identifier is included in the fees estimate so you can
-            /// correlate a fees estimate with the original request.
+            /// You can call getMyFeesEstimateForSKU for an item on behalf of a selling
+            /// partner before the selling partner sets the item's price. They can then
+            /// take estimated fees into account. With each fees estimate request, you must
+            /// include an original identifier. This identifier is included in the fees
+            /// estimate so you can correlate a fees estimate with the original request.
+            ///
+            /// **Note:** This value is only an estimate, actual costs may vary. Search
+            /// "fees" in [Seller Central](https://sellercentral.amazon.com/) and consult
+            /// the store-specific fee schedule for the most up-to-date information.
             ///
             /// **Usage Plans:**
             ///
             /// | Plan type | Rate (requests per second) | Burst |
             /// | ---- | ---- | ---- |
-            /// |Default| 1 | 1 |
+            /// |Default| 10 | 20 |
             /// |Selling partner specific| Variable | Variable |
             ///
             /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
@@ -57,17 +61,21 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
             /// Returns the estimated fees for the item indicated by the specified seller
             /// SKU in the marketplace specified in the request body.
             ///
-            /// You can call getMyFeesEstimateForSKU for an item on behalf of a seller
-            /// before the seller sets the item's price. They can then take estimated fees
-            /// into account. With each fees estimate request, you must include an original
-            /// identifier. This identifier is included in the fees estimate so you can
-            /// correlate a fees estimate with the original request.
+            /// You can call getMyFeesEstimateForSKU for an item on behalf of a selling
+            /// partner before the selling partner sets the item's price. They can then
+            /// take estimated fees into account. With each fees estimate request, you must
+            /// include an original identifier. This identifier is included in the fees
+            /// estimate so you can correlate a fees estimate with the original request.
+            ///
+            /// **Note:** This value is only an estimate, actual costs may vary. Search
+            /// "fees" in [Seller Central](https://sellercentral.amazon.com/) and consult
+            /// the store-specific fee schedule for the most up-to-date information.
             ///
             /// **Usage Plans:**
             ///
             /// | Plan type | Rate (requests per second) | Burst |
             /// | ---- | ---- | ---- |
-            /// |Default| 1 | 1 |
+            /// |Default| 10 | 20 |
             /// |Selling partner specific| Variable | Variable |
             ///
             /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
@@ -101,17 +109,21 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
             /// Returns the estimated fees for the item indicated by the specified Asin in
             /// the marketplace specified in the request body.
             ///
-            /// You can call getMyFeesEstimateForASIN for an item on behalf of a seller
-            /// before the seller sets the item's price. They can then take estimated fees
-            /// into account. With each product fees request, you must include an original
-            /// identifier. This identifier is included in the fees estimate so you can
-            /// correlate a fees estimate with the original request.
+            /// You can call getMyFeesEstimateForASIN for an item on behalf of a selling
+            /// partner before the selling partner sets the item's price. They can then
+            /// take estimated fees into account. With each product fees request, you must
+            /// include an original identifier. This identifier is included in the fees
+            /// estimate so you can correlate a fees estimate with the original request.
+            ///
+            /// **Note:** This value is only an estimate, actual costs may vary. Search
+            /// "fees" in [Seller Central](https://sellercentral.amazon.com/) and consult
+            /// the store-specific fee schedule for the most up-to-date information.
             ///
             /// **Usage Plans:**
             ///
             /// | Plan type | Rate (requests per second) | Burst |
             /// | ---- | ---- | ---- |
-            /// |Default| 1 | 1 |
+            /// |Default| 10 | 20 |
             /// |Selling partner specific| Variable | Variable |
             ///
             /// The x-amzn-RateLimit-Limit response header returns the usage plan rate
@@ -137,17 +149,21 @@ namespace IL.Library.Amazon.SPAPI.ProductFees
             /// Returns the estimated fees for the item indicated by the specified Asin in
             /// the marketplace specified in the request body.
             ///
-            /// You can call getMyFeesEstimateForASIN for an item on behalf of a seller
-            /// before the seller sets the item's price. They can then take estimated fees
-            /// into account. With each product fees request, you must include an original
-            /// identifier. This identifier is included in the fees estimate so you can
-            /// correlate a fees estimate with the original request.
+            /// You can call getMyFeesEstimateForASIN for an item on behalf of a selling
+            /// partner before the selling partner sets the item's price. They can then
+            /// take estimated fees into account. With each product fees request, you must
+            /// include an original identifier. This identifier is included in the fees
+            /// estimate so you can correlate a fees estimate with the original request.
+            ///
+            /// **Note:** This value is only an estimate, actual costs may vary. Search
+            /// "fees" in [Seller Central](https://sellercentral.amazon.com/) and consult
+            /// the store-specific fee schedule for the most up-to-date information.
             ///
             /// **Usage Plans:**
             ///
             /// | Plan type | Rate (requests per second) | Burst |
             /// | ---- | ---- | ---- |
-            /// |Default| 1 | 1 |
+            /// |Default| 10 | 20 |
             /// |Selling partner specific| Variable | Variable |
             ///
             /// The x-amzn-RateLimit-Limit response header returns the usage plan rate

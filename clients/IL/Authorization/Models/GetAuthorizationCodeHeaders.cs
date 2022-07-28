@@ -27,12 +27,15 @@ namespace IL.Library.Amazon.SPAPI.Authorization.Models
         /// Initializes a new instance of the GetAuthorizationCodeHeaders
         /// class.
         /// </summary>
+        /// <param name="xAmznRateLimitLimit">Your rate limit (requests per
+        /// second) for this operation.
+        /// _Note:_ For this status code, the rate limit header is deprecated
+        /// and no longer returned.</param>
         /// <param name="xAmznRequestId">Unique request reference ID.</param>
-        /// <param name="xAmznRequestId1">Unique request reference ID.</param>
-        public GetAuthorizationCodeHeaders(string xAmznRequestId = default(string), string xAmznRequestId1 = default(string))
+        public GetAuthorizationCodeHeaders(string xAmznRateLimitLimit = default(string), string xAmznRequestId = default(string))
         {
+            XAmznRateLimitLimit = xAmznRateLimitLimit;
             XAmznRequestId = xAmznRequestId;
-            XAmznRequestId1 = xAmznRequestId1;
             CustomInit();
         }
 
@@ -42,16 +45,19 @@ namespace IL.Library.Amazon.SPAPI.Authorization.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique request reference ID.
+        /// Gets or sets your rate limit (requests per second) for this
+        /// operation.
+        /// _Note:_ For this status code, the rate limit header is deprecated
+        /// and no longer returned.
         /// </summary>
-        [JsonProperty(PropertyName = "x-amzn-requestId")]
-        public string XAmznRequestId { get; set; }
+        [JsonProperty(PropertyName = "x-amzn-RateLimit-Limit")]
+        public string XAmznRateLimitLimit { get; set; }
 
         /// <summary>
         /// Gets or sets unique request reference ID.
         /// </summary>
         [JsonProperty(PropertyName = "x-amzn-RequestId")]
-        public string XAmznRequestId1 { get; set; }
+        public string XAmznRequestId { get; set; }
 
     }
 }

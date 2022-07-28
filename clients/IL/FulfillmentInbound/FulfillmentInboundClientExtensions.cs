@@ -242,8 +242,8 @@ namespace IL.Library.Amazon.SPAPI.FulfillmentInbound
             }
 
             /// <summary>
-            /// Adds, updates, or removes items from the inbound shipment identified by the
-            /// specified shipment identifier.
+            /// Updates or removes items from the inbound shipment identified by the
+            /// specified shipment identifier. Adding new items is not supported.
             ///
             /// **Usage Plan:**
             ///
@@ -269,8 +269,8 @@ namespace IL.Library.Amazon.SPAPI.FulfillmentInbound
             }
 
             /// <summary>
-            /// Adds, updates, or removes items from the inbound shipment identified by the
-            /// specified shipment identifier.
+            /// Updates or removes items from the inbound shipment identified by the
+            /// specified shipment identifier. Adding new items is not supported.
             ///
             /// **Usage Plan:**
             ///

@@ -40,14 +40,19 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// Returns pricing information for a seller's offer listings based on
         /// seller SKU or ASIN.
         ///
-        /// **Usage Plan:**
+        /// **Usage Plans:**
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 10 | 20 |
+        /// |Selling partner specific| Variable | Variable |
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the
-        /// Selling Partner API documentation.
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan
+        /// rate limits that were applied to the requested operation. Rate
+        /// limits for some selling partners will vary from the default rate
+        /// and burst shown in the table above. For more information, see
+        /// "Usage Plans and Rate Limits" in the Selling Partner API
+        /// documentation.
         /// </summary>
         /// <param name='marketplaceId'>
         /// A marketplace identifier. Specifies the marketplace for which
@@ -74,26 +79,36 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// values: New, Used, Collectible, Refurbished, Club. Possible values
         /// include: 'New', 'Used', 'Collectible', 'Refurbished', 'Club'
         /// </param>
+        /// <param name='offerType'>
+        /// Indicates whether to request pricing information for the seller's
+        /// B2C or B2B offers. Default is B2C. Possible values include: 'B2C',
+        /// 'B2B'
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<GetPricingResponse,GetPricingHeaders>> GetPricingWithHttpMessagesAsync(string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), string itemCondition = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GetPricingResponse,GetPricingHeaders>> GetPricingWithHttpMessagesAsync(string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), string itemCondition = default(string), string offerType = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns competitive pricing information for a seller's offer
         /// listings based on seller SKU or ASIN.
         ///
-        /// **Usage Plan:**
+        /// **Usage Plans:**
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 10 | 20 |
+        /// |Selling partner specific| Variable | Variable |
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the
-        /// Selling Partner API documentation.
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan
+        /// rate limits that were applied to the requested operation. Rate
+        /// limits for some selling partners will vary from the default rate
+        /// and burst shown in the table above. For more information, see
+        /// "Usage Plans and Rate Limits" in the Selling Partner API
+        /// documentation.
         /// </summary>
         /// <param name='marketplaceId'>
         /// A marketplace identifier. Specifies the marketplace for which
@@ -116,25 +131,35 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// A list of up to twenty seller SKU values used to identify items in
         /// the given marketplace.
         /// </param>
+        /// <param name='customerType'>
+        /// Indicates whether to request pricing information from the point of
+        /// view of Consumer or Business buyers. Default is Consumer. Possible
+        /// values include: 'Consumer', 'Business'
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<GetPricingResponse,GetCompetitivePricingHeaders>> GetCompetitivePricingWithHttpMessagesAsync(string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GetPricingResponse,GetCompetitivePricingHeaders>> GetCompetitivePricingWithHttpMessagesAsync(string marketplaceId, string itemType, IList<string> asins = default(IList<string>), IList<string> skus = default(IList<string>), string customerType = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns the lowest priced offers for a single SKU listing.
         ///
-        /// **Usage Plan:**
+        /// **Usage Plans:**
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 5 | 10 |
+        /// |Selling partner specific| Variable | Variable |
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the
-        /// Selling Partner API documentation.
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan
+        /// rate limits that were applied to the requested operation. Rate
+        /// limits for some selling partners will vary from the default rate
+        /// and burst shown in the table above. For more information, see
+        /// "Usage Plans and Rate Limits" in the Selling Partner API
+        /// documentation.
         /// </summary>
         /// <param name='marketplaceId'>
         /// A marketplace identifier. Specifies the marketplace for which
@@ -150,25 +175,34 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// by the seller's SellerId, which is included with every operation
         /// that you submit.
         /// </param>
+        /// <param name='customerType'>
+        /// Indicates whether to request Consumer or Business offers. Default
+        /// is Consumer. Possible values include: 'Consumer', 'Business'
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<GetOffersResponse,GetListingOffersHeaders>> GetListingOffersWithHttpMessagesAsync(string marketplaceId, string itemCondition, string sellerSKU, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GetOffersResponse,GetListingOffersHeaders>> GetListingOffersWithHttpMessagesAsync(string marketplaceId, string itemCondition, string sellerSKU, string customerType = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns the lowest priced offers for a single item based on ASIN.
         ///
-        /// **Usage Plan:**
+        /// **Usage Plans:**
         ///
-        /// | Rate (requests per second) | Burst |
-        /// | ---- | ---- |
-        /// | 1 | 1 |
+        /// | Plan type | Rate (requests per second) | Burst |
+        /// | ---- | ---- | ---- |
+        /// |Default| 5 | 10 |
+        /// |Selling partner specific| Variable | Variable |
         ///
-        /// For more information, see "Usage Plans and Rate Limits" in the
-        /// Selling Partner API documentation.
+        /// The x-amzn-RateLimit-Limit response header returns the usage plan
+        /// rate limits that were applied to the requested operation. Rate
+        /// limits for some selling partners will vary from the default rate
+        /// and burst shown in the table above. For more information, see
+        /// "Usage Plans and Rate Limits" in the Selling Partner API
+        /// documentation.
         /// </summary>
         /// <param name='marketplaceId'>
         /// A marketplace identifier. Specifies the marketplace for which
@@ -183,13 +217,17 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing
         /// <param name='asin'>
         /// The Amazon Standard Identification Number (ASIN) of the item.
         /// </param>
+        /// <param name='customerType'>
+        /// Indicates whether to request Consumer or Business offers. Default
+        /// is Consumer. Possible values include: 'Consumer', 'Business'
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<GetOffersResponse,GetItemOffersHeaders>> GetItemOffersWithHttpMessagesAsync(string marketplaceId, string itemCondition, string asin, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GetOffersResponse,GetItemOffersHeaders>> GetItemOffersWithHttpMessagesAsync(string marketplaceId, string itemCondition, string asin, string customerType = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

@@ -144,8 +144,9 @@ namespace IL.Library.Amazon.SPAPI.FulfillmentInbound
         Task<HttpOperationResponse<InboundShipmentResponse,CreateInboundShipmentHeaders>> CreateInboundShipmentWithHttpMessagesAsync(InboundShipmentRequest body, string shipmentId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Adds, updates, or removes items from the inbound shipment
-        /// identified by the specified shipment identifier.
+        /// Updates or removes items from the inbound shipment identified by
+        /// the specified shipment identifier. Adding new items is not
+        /// supported.
         ///
         /// **Usage Plan:**
         ///

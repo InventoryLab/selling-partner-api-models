@@ -6,9 +6,8 @@
 
 namespace IL.Library.Amazon.SPAPI.Feeds.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -27,10 +26,11 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
         /// <summary>
         /// Initializes a new instance of the CreateFeedResponse class.
         /// </summary>
-        public CreateFeedResponse(CreateFeedResult payload = default(CreateFeedResult), IList<Error> errors = default(IList<Error>))
+        /// <param name="feedId">The identifier for the feed. This identifier
+        /// is unique only in combination with a seller ID.</param>
+        public CreateFeedResponse(string feedId)
         {
-            Payload = payload;
-            Errors = errors;
+            FeedId = feedId;
             CustomInit();
         }
 
@@ -40,36 +40,23 @@ namespace IL.Library.Amazon.SPAPI.Feeds.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets the identifier for the feed. This identifier is unique
+        /// only in combination with a seller ID.
         /// </summary>
-        [JsonProperty(PropertyName = "payload")]
-        public CreateFeedResult Payload { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "errors")]
-        public IList<Error> Errors { get; set; }
+        [JsonProperty(PropertyName = "feedId")]
+        public string FeedId { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
-            if (Payload != null)
+            if (FeedId == null)
             {
-                Payload.Validate();
-            }
-            if (Errors != null)
-            {
-                foreach (var element in Errors)
-                {
-                    if (element != null)
-                    {
-                        element.Validate();
-                    }
-                }
+                throw new ValidationException(ValidationRules.CannotBeNull, "FeedId");
             }
         }
     }

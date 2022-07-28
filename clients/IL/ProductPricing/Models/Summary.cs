@@ -40,25 +40,34 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// <param name="buyBoxPrices">A list of item prices.</param>
         /// <param name="listPrice">The list price of the item as suggested by
         /// the manufacturer.</param>
+        /// <param name="competitivePriceThreshold">This price is based on
+        /// competitive prices from other retailers (excluding other Amazon
+        /// sellers). The offer may be ineligible for the Buy Box if the
+        /// seller's price + shipping (minus Amazon Points) is greater than
+        /// this competitive price.</param>
         /// <param name="suggestedLowerPricePlusShipping">The suggested lower
         /// price of the item, including shipping and Amazon Points. The
         /// suggested lower price is based on a range of factors, including
         /// historical selling prices, recent Buy Box-eligible prices, and
         /// input from customers for your products.</param>
+        /// <param name="salesRankings">A list that contains the sales rank of
+        /// the item in the given product categories.</param>
         /// <param name="buyBoxEligibleOffers">A list that contains the total
         /// number of offers that are eligible for the Buy Box for the given
         /// conditions and fulfillment channels.</param>
         /// <param name="offersAvailableTime">When the status is
         /// ActiveButTooSoonForProcessing, this is the time when the offers
         /// will be available for processing.</param>
-        public Summary(int totalOfferCount, IList<OfferCountType> numberOfOffers = default(IList<OfferCountType>), IList<LowestPriceType> lowestPrices = default(IList<LowestPriceType>), IList<BuyBoxPriceType> buyBoxPrices = default(IList<BuyBoxPriceType>), MoneyType listPrice = default(MoneyType), MoneyType suggestedLowerPricePlusShipping = default(MoneyType), IList<OfferCountType> buyBoxEligibleOffers = default(IList<OfferCountType>), System.DateTime? offersAvailableTime = default(System.DateTime?))
+        public Summary(int totalOfferCount, IList<OfferCountType> numberOfOffers = default(IList<OfferCountType>), IList<LowestPriceType> lowestPrices = default(IList<LowestPriceType>), IList<BuyBoxPriceType> buyBoxPrices = default(IList<BuyBoxPriceType>), MoneyType listPrice = default(MoneyType), MoneyType competitivePriceThreshold = default(MoneyType), MoneyType suggestedLowerPricePlusShipping = default(MoneyType), IList<SalesRankType> salesRankings = default(IList<SalesRankType>), IList<OfferCountType> buyBoxEligibleOffers = default(IList<OfferCountType>), System.DateTime? offersAvailableTime = default(System.DateTime?))
         {
             TotalOfferCount = totalOfferCount;
             NumberOfOffers = numberOfOffers;
             LowestPrices = lowestPrices;
             BuyBoxPrices = buyBoxPrices;
             ListPrice = listPrice;
+            CompetitivePriceThreshold = competitivePriceThreshold;
             SuggestedLowerPricePlusShipping = suggestedLowerPricePlusShipping;
+            SalesRankings = salesRankings;
             BuyBoxEligibleOffers = buyBoxEligibleOffers;
             OffersAvailableTime = offersAvailableTime;
             CustomInit();
@@ -103,6 +112,15 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         public MoneyType ListPrice { get; set; }
 
         /// <summary>
+        /// Gets or sets this price is based on competitive prices from other
+        /// retailers (excluding other Amazon sellers). The offer may be
+        /// ineligible for the Buy Box if the seller's price + shipping (minus
+        /// Amazon Points) is greater than this competitive price.
+        /// </summary>
+        [JsonProperty(PropertyName = "CompetitivePriceThreshold")]
+        public MoneyType CompetitivePriceThreshold { get; set; }
+
+        /// <summary>
         /// Gets or sets the suggested lower price of the item, including
         /// shipping and Amazon Points. The suggested lower price is based on a
         /// range of factors, including historical selling prices, recent Buy
@@ -110,6 +128,13 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
         /// </summary>
         [JsonProperty(PropertyName = "SuggestedLowerPricePlusShipping")]
         public MoneyType SuggestedLowerPricePlusShipping { get; set; }
+
+        /// <summary>
+        /// Gets or sets a list that contains the sales rank of the item in the
+        /// given product categories.
+        /// </summary>
+        [JsonProperty(PropertyName = "SalesRankings")]
+        public IList<SalesRankType> SalesRankings { get; set; }
 
         /// <summary>
         /// Gets or sets a list that contains the total number of offers that
@@ -151,6 +176,16 @@ namespace IL.Library.Amazon.SPAPI.ProductPricing.Models
                     if (element1 != null)
                     {
                         element1.Validate();
+                    }
+                }
+            }
+            if (SalesRankings != null)
+            {
+                foreach (var element2 in SalesRankings)
+                {
+                    if (element2 != null)
+                    {
+                        element2.Validate();
                     }
                 }
             }

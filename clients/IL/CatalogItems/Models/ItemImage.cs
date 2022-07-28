@@ -26,9 +26,9 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
         /// <summary>
         /// Initializes a new instance of the ItemImage class.
         /// </summary>
-        /// <param name="variant">Variant of the image, such as MAIN or PT01.
-        /// Possible values include: 'MAIN', 'PT01', 'PT02', 'PT03', 'PT04',
-        /// 'PT05', 'PT06', 'PT07', 'PT08', 'SWCH'</param>
+        /// <param name="variant">Variant of the image, such as `MAIN` or
+        /// `PT01`. Possible values include: 'MAIN', 'PT01', 'PT02', 'PT03',
+        /// 'PT04', 'PT05', 'PT06', 'PT07', 'PT08', 'SWCH'</param>
         /// <param name="link">Link, or URL, for the image.</param>
         /// <param name="height">Height of the image in pixels.</param>
         /// <param name="width">Width of the image in pixels.</param>
@@ -47,9 +47,9 @@ namespace IL.Library.Amazon.SPAPI.CatalogItems.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets variant of the image, such as MAIN or PT01. Possible
-        /// values include: 'MAIN', 'PT01', 'PT02', 'PT03', 'PT04', 'PT05',
-        /// 'PT06', 'PT07', 'PT08', 'SWCH'
+        /// Gets or sets variant of the image, such as `MAIN` or `PT01`.
+        /// Possible values include: 'MAIN', 'PT01', 'PT02', 'PT03', 'PT04',
+        /// 'PT05', 'PT06', 'PT07', 'PT08', 'SWCH'
         /// </summary>
         [JsonProperty(PropertyName = "variant")]
         public string Variant { get; set; }
